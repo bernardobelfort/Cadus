@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { User, Briefcase, UserCheck, ClipboardList, CheckCircle, ArrowRight, Smartphone, Clock, ShieldCheck, Users, Award, Building2, Heart } from 'lucide-react';
+import { User, Briefcase, UserCheck, ClipboardList, CheckCircle, ArrowRight, Smartphone, Clock, ShieldCheck } from 'lucide-react';
 import { motion } from 'framer-motion';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -98,30 +98,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Stats — Dinova inspired 2x2 grid */}
-      <section className="py-10 md:py-14 border-b border-border/50">
-        <div className="container max-w-3xl">
-          <motion.div
-            className="grid grid-cols-2 md:grid-cols-4 gap-0 divide-x divide-y md:divide-y-0 divide-border/50"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-          >
-            {[
-              { icon: <Users size={22} />, value: '500+', label: 'Pacientes cadastrados' },
-              { icon: <Building2 size={22} />, value: '3', label: 'Clínicas parceiras' },
-              { icon: <Award size={22} />, value: '2+', label: 'Anos de experiência' },
-              { icon: <Heart size={22} />, value: '100%', label: 'Gratuito' },
-            ].map((stat, i) => (
-              <motion.div key={i} className="stat-card" variants={fadeUp} custom={i}>
-                <div className="stat-icon">{stat.icon}</div>
-                <span className="stat-value">{stat.value}</span>
-                <span className="stat-label">{stat.label}</span>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
 
       {/* Como funciona — section label + title pattern */}
       <section className="py-14 sm:py-16 md:py-20 lg:py-28">
@@ -223,77 +199,6 @@ const Index = () => {
                 </motion.div>
               ))}
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Para quem — with section label */}
-      <section className="py-14 sm:py-16 md:py-20 lg:py-28 bg-muted/40 relative overflow-hidden">
-        <svg className="absolute -right-32 -top-32 w-[300px] md:w-[500px] h-[300px] md:h-[500px] opacity-[0.04]" viewBox="0 0 500 500" fill="none">
-          <path d="M400,280Q370,460,200,400Q30,340,80,200Q130,60,300,80Q470,100,400,280Z" fill="hsl(var(--primary))" />
-        </svg>
-
-        <div className="container relative z-10">
-          <motion.div
-            className="text-center mb-10 md:mb-16"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeUp}
-            custom={0}
-          >
-            <span className="section-label-pill">Nosso público</span>
-            <h2 className="section-title">
-              Para quem é o <span className="font-display font-800 text-primary">cadus<span className="text-highlight">.</span></span>
-            </h2>
-            <p className="section-subtitle max-w-md mx-auto">Cada perfil tem seu caminho. Escolha o seu.</p>
-          </motion.div>
-
-          <div className="grid gap-4 md:grid-cols-2 md:gap-8 max-w-4xl mx-auto">
-            {[
-              {
-                icon: <User size={24} className="text-primary-foreground" />,
-                iconBg: 'bg-gradient-to-br from-primary to-[#14919B]',
-                title: 'Para você, paciente',
-                desc: 'Preencha sua ficha pelo celular, antes de chegar na clínica.',
-                benefits: ['Cadastro fácil e rápido', 'Seu histórico sempre salvo', 'Controle do seu prontuário'],
-                accentColor: 'border-primary/20 hover:border-primary/40',
-                checkColor: 'text-primary',
-              },
-              {
-                icon: <Briefcase size={24} className="text-primary-foreground" />,
-                iconBg: 'bg-gradient-to-br from-secondary to-[#D4845A]',
-                title: 'Para profissionais e equipes',
-                desc: 'Profissionais, gestores e alunos — acesse os dados quando precisar.',
-                benefits: ['Dados a qualquer momento', 'Acesso de onde estiver', 'Gestão simples e completa'],
-                accentColor: 'border-secondary/20 hover:border-secondary/40',
-                checkColor: 'text-secondary',
-              },
-            ].map((card, i) => (
-              <motion.div
-                key={i}
-                className={`bg-card rounded-2xl p-6 md:p-8 shadow-sm border-2 ${card.accentColor} transition-all duration-300 hover:-translate-y-1 hover:shadow-lg text-center`}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                variants={fadeUp}
-                custom={i}
-              >
-                <div className={`w-14 h-14 md:w-16 md:h-16 rounded-2xl ${card.iconBg} flex items-center justify-center mx-auto mb-4 md:mb-6 shadow-lg`}>
-                  {card.icon}
-                </div>
-                <h3 className="font-display font-700 text-lg md:text-xl text-foreground mb-1.5 md:mb-2">{card.title}</h3>
-                <p className="text-muted-foreground text-[13px] md:text-sm mb-5 md:mb-6 leading-relaxed max-w-xs mx-auto">{card.desc}</p>
-                <div className="space-y-2.5 md:space-y-3 text-left max-w-[240px] mx-auto">
-                  {card.benefits.map((benefit) => (
-                    <div key={benefit} className="flex items-center gap-2.5">
-                      <CheckCircle size={16} className={`${card.checkColor} shrink-0`} />
-                      <span className="text-[13px] md:text-sm text-foreground font-body">{benefit}</span>
-                    </div>
-                  ))}
-                </div>
-              </motion.div>
-            ))}
           </div>
         </div>
       </section>
