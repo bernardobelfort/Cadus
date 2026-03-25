@@ -3,8 +3,11 @@ import { useSearchParams, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useRegistrationStore } from '@/store/registrationStore';
 import StepProfile from '@/components/registration/StepProfile';
-import StepPatientPersonal from '@/components/registration/StepPatientPersonal';
+import StepPatientIdentity from '@/components/registration/StepPatientIdentity';
+import StepPatientAbout from '@/components/registration/StepPatientAbout';
+import StepPatientContact from '@/components/registration/StepPatientContact';
 import StepPatientAddress from '@/components/registration/StepPatientAddress';
+import StepPatientSus from '@/components/registration/StepPatientSus';
 import StepPatientComplaint from '@/components/registration/StepPatientComplaint';
 import StepPatientAccess from '@/components/registration/StepPatientAccess';
 import StepProfPersonal from '@/components/registration/StepProfPersonal';
@@ -15,7 +18,7 @@ import Footer from '@/components/Footer';
 import { Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 
-const patientSteps = ['Perfil', 'Dados pessoais', 'Endereço', 'Queixa', 'Acesso'];
+const patientSteps = ['Perfil', 'Identidade', 'Sobre você', 'Contato', 'Endereço', 'SUS', 'Queixa', 'Acesso'];
 const profSteps = ['Perfil', 'Dados profissionais', 'Clínica', 'Acesso'];
 
 const Registration = () => {
@@ -65,10 +68,13 @@ const Registration = () => {
     if (currentStep === 1) return <StepProfile onNext={goNext} />;
     if (role === 'paciente') {
       switch (currentStep) {
-        case 2: return <StepPatientPersonal onNext={goNext} onBack={goBack} />;
-        case 3: return <StepPatientAddress onNext={goNext} onBack={goBack} />;
-        case 4: return <StepPatientComplaint onNext={goNext} onBack={goBack} />;
-        case 5: return <StepPatientAccess onNext={goNext} onBack={goBack} />;
+        case 2: return <StepPatientIdentity onNext={goNext} onBack={goBack} />;
+        case 3: return <StepPatientAbout onNext={goNext} onBack={goBack} />;
+        case 4: return <StepPatientContact onNext={goNext} onBack={goBack} />;
+        case 5: return <StepPatientAddress onNext={goNext} onBack={goBack} />;
+        case 6: return <StepPatientSus onNext={goNext} onBack={goBack} />;
+        case 7: return <StepPatientComplaint onNext={goNext} onBack={goBack} />;
+        case 8: return <StepPatientAccess onNext={goNext} onBack={goBack} />;
       }
     }
     if (role === 'profissional') {
@@ -83,7 +89,6 @@ const Registration = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
-      {/* Top bar */}
       <div className="sticky top-0 z-50 bg-card/95 backdrop-blur-md border-b border-border">
         <div className="container flex items-center justify-between h-14">
           <button onClick={goBack} className="btn-ghost text-sm gap-1 py-1 px-3">
@@ -97,10 +102,9 @@ const Registration = () => {
         </div>
       </div>
 
-      {/* Segmented progress */}
       <div className="w-full px-4 pt-4 pb-2">
         <div className="max-w-[580px] mx-auto">
-          <div className="flex gap-2">
+          <div className="flex gap-1.5">
             {steps.map((label, i) => (
               <div key={i} className="flex-1 flex flex-col items-center gap-1.5">
                 <div
@@ -108,7 +112,7 @@ const Registration = () => {
                     i + 1 <= currentStep ? 'bg-primary' : 'bg-border'
                   }`}
                 />
-                <span className={`text-[10px] font-body hidden sm:block transition-colors ${
+                <span className={`text-[9px] font-body hidden lg:block transition-colors ${
                   i + 1 <= currentStep ? 'text-primary font-600' : 'text-muted-foreground'
                 }`}>
                   {label}
@@ -119,7 +123,6 @@ const Registration = () => {
         </div>
       </div>
 
-      {/* Content */}
       <div className="flex-1 flex items-start md:items-center justify-center py-6 px-4">
         <div className="w-full max-w-[580px]">
           <AnimatePresence mode="wait" custom={direction}>
