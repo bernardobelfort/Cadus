@@ -18,7 +18,7 @@ const HeroIllustration = () => (
   <div className="relative w-full max-w-[520px] flex items-center justify-center py-8">
     {/* Blob 1 — large teal, centered behind cards */}
     <motion.svg
-      className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[420px] h-[420px] z-0"
+      className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[520px] h-[520px] z-0"
       viewBox="0 0 500 500"
       fill="none"
       animate={{ rotate: 360 }}
@@ -27,13 +27,13 @@ const HeroIllustration = () => (
       <path
         d="M400,280Q370,460,200,400Q30,340,80,200Q130,60,300,80Q470,100,400,280Z"
         fill="hsl(184, 78%, 22%)"
-        fillOpacity="0.10"
+        fillOpacity="0.22"
       />
     </motion.svg>
 
     {/* Blob 2 — amber accent, bottom-right */}
     <motion.svg
-      className="absolute -right-10 -bottom-4 w-[300px] h-[300px] z-0"
+      className="absolute -right-10 -bottom-4 w-[380px] h-[380px] z-0"
       viewBox="0 0 500 500"
       fill="none"
       animate={{ rotate: -360 }}
@@ -42,7 +42,7 @@ const HeroIllustration = () => (
       <path
         d="M420,300Q380,480,200,420Q20,360,60,200Q100,40,280,60Q460,80,420,300Z"
         fill="hsl(25, 76%, 63%)"
-        fillOpacity="0.12"
+        fillOpacity="0.25"
       />
     </motion.svg>
 
@@ -57,7 +57,7 @@ const HeroIllustration = () => (
       <path
         d="M380,260Q340,420,200,380Q60,340,100,200Q140,60,300,100Q460,140,380,260Z"
         fill="hsl(184, 60%, 35%)"
-        fillOpacity="0.09"
+        fillOpacity="0.18"
       />
     </motion.svg>
 
@@ -69,7 +69,7 @@ const HeroIllustration = () => (
       animate={{ scale: [1, 1.15, 1], rotate: 180 }}
       transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
     >
-      <circle cx="250" cy="250" r="200" fill="hsl(184, 78%, 22%)" fillOpacity="0.06" />
+      <circle cx="250" cy="250" r="200" fill="hsl(184, 78%, 22%)" fillOpacity="0.14" />
     </motion.svg>
 
     {/* Illustration */}
@@ -310,7 +310,7 @@ const Index = () => {
               Seus dados, antes da consulta<span className="text-highlight">.</span>
             </h2>
             <p className="text-primary-foreground/70 mt-3 text-lg font-body max-w-md mx-auto">
-              Cadastre-se agora e chegue na clínica já conhecido.
+              Cadastre-se agora e chegue na clínica pronto para ser atendido.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 mt-10 justify-center">
               <Link
