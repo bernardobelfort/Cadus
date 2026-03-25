@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useRegistrationStore } from '@/store/registrationStore';
-import { FileHeart, ArrowRight, ArrowLeft, Check } from 'lucide-react';
+import { FileHeart, ArrowRight, ArrowLeft, Check, CreditCard } from 'lucide-react';
 
-interface Props { onNext: () => void; onBack: () => void; }
+interface Props { onNext: () => void; onBack: () => void; stepNumber?: number; totalSteps?: number; }
 
 const comoChegouOptions = [
   'Encaminhado pelo SUS',
@@ -11,7 +11,7 @@ const comoChegouOptions = [
   'Outro',
 ];
 
-const StepPatientSus = ({ onNext, onBack }: Props) => {
+const StepPatientSus = ({ onNext, onBack, stepNumber, totalSteps }: Props) => {
   const { patientData, updatePatientData } = useRegistrationStore();
   const [error, setError] = useState('');
 
@@ -26,26 +26,32 @@ const StepPatientSus = ({ onNext, onBack }: Props) => {
 
   return (
     <div className="card-cadus">
-      <div className="text-center mb-8">
-        <div className="icon-hero icon-hero-blue">
-          <FileHeart size={32} className="text-blue-600" />
+      <div className="step-header">
+        <div className="icon-hero">
+          <FileHeart size={26} />
         </div>
-        <h2 className="text-2xl md:text-3xl font-display font-800 text-foreground tracking-tight">
-          Informações do SUS
-        </h2>
-        <p className="text-muted-foreground/70 mt-2 font-body">Dados complementares do seu atendimento.</p>
+        <h2>Informações do SUS</h2>
+        <p>Dados opcionais para pacientes do sistema público</p>
+        {stepNumber && totalSteps && (
+          <div className="step-badge">Etapa {stepNumber} de {totalSteps}</div>
+        )}
       </div>
+
+      <div className="step-divider" />
 
       <div className="space-y-5">
         <div>
           <label className="label-cadus">Cartão SUS (opcional)</label>
-          <input
-            className="input-cadus"
-            value={patientData.cartaoSus || ''}
-            onChange={(e) => updatePatientData({ cartaoSus: e.target.value.replace(/\D/g, '').slice(0, 15) })}
-            placeholder="Número do Cartão SUS"
-            inputMode="numeric"
-          />
+          <div className="relative">
+            <CreditCard size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground/40" />
+            <input
+              className="input-cadus pl-12"
+              value={patientData.cartaoSus || ''}
+              onChange={(e) => updatePatientData({ cartaoSus: e.target.value.replace(/\D/g, '').slice(0, 15) })}
+              placeholder="Número do Cartão SUS"
+              inputMode="numeric"
+            />
+          </div>
         </div>
 
         <div>
@@ -56,9 +62,7 @@ const StepPatientSus = ({ onNext, onBack }: Props) => {
                 key={opt}
                 type="button"
                 onClick={() => updatePatientData({ comoChegou: opt })}
-                className={`selection-card text-sm !py-3 ${
-                  patientData.comoChegou === opt ? 'selection-card-active' : ''
-                }`}
+                className={`selection-card text-sm !py-3 ${patientData.comoChegou === opt ? 'selection-card-active' : ''}`}
               >
                 {patientData.comoChegou === opt && (
                   <div className="absolute top-2 right-2 w-4 h-4 rounded-full bg-primary flex items-center justify-center">

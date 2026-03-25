@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useRegistrationStore } from '@/store/registrationStore';
 import { Building2, ArrowLeft, ArrowRight, Info } from 'lucide-react';
 
-interface Props { onNext: () => void; onBack: () => void; }
+interface Props { onNext: () => void; onBack: () => void; stepNumber?: number; totalSteps?: number; }
 
 const clinics = [
   'Clínica de Fonoaudiologia UFPE',
@@ -13,7 +13,7 @@ const clinics = [
 ];
 const roles = ['Docente', 'Residente', 'Estagiário', 'Coordenador', 'Outro'];
 
-const StepProfClinic = ({ onNext, onBack }: Props) => {
+const StepProfClinic = ({ onNext, onBack, stepNumber, totalSteps }: Props) => {
   const { professionalData, updateProfessionalData } = useRegistrationStore();
   const [errors, setErrors] = useState<Record<string, string>>({});
 
@@ -27,15 +27,18 @@ const StepProfClinic = ({ onNext, onBack }: Props) => {
 
   return (
     <div className="card-cadus">
-      <div className="text-center mb-8">
-        <div className="icon-hero icon-hero-blue">
-          <Building2 size={32} className="text-blue-600" />
+      <div className="step-header">
+        <div className="icon-hero">
+          <Building2 size={26} />
         </div>
-        <h2 className="text-2xl md:text-3xl font-display font-800 text-foreground tracking-tight">
-          Sua clínica
-        </h2>
-        <p className="text-muted-foreground/70 mt-2 font-body">Selecione a clínica onde você vai usar o Cadus.</p>
+        <h2>Sua clínica</h2>
+        <p>Selecione onde você atuará no Cadus</p>
+        {stepNumber && totalSteps && (
+          <div className="step-badge">Etapa {stepNumber} de {totalSteps}</div>
+        )}
       </div>
+
+      <div className="step-divider" />
 
       <div className="space-y-4">
         <div>

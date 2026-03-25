@@ -89,7 +89,7 @@
 @layer components {
   /* ===== CARD ===== */
   .card-cadus {
-    @apply bg-card rounded-3xl p-8 md:p-10 relative;
+    @apply bg-card rounded-3xl p-6 md:p-8 relative;
     border: 1px solid rgba(255,255,255,0.7);
     box-shadow:
       0 0 0 1px rgba(0,0,0,0.03),
@@ -112,38 +112,39 @@
 
   /* ===== ICON HERO ===== */
   .icon-hero {
-    @apply w-[72px] h-[72px] rounded-[22px] flex items-center justify-center mx-auto mb-6 relative;
+    @apply w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-5 relative;
+    background: linear-gradient(145deg, hsl(184, 78%, 28%), hsl(184, 78%, 18%));
+    box-shadow: 0 6px 20px rgba(13, 92, 99, 0.25), inset 0 1px 0 rgba(255,255,255,0.15);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
 
-  .icon-hero-teal {
-    background: linear-gradient(145deg, hsl(184, 45%, 90%), hsl(184, 40%, 82%));
-    box-shadow: 0 8px 28px rgba(13, 92, 99, 0.15), inset 0 1px 0 rgba(255,255,255,0.5);
+  .icon-hero svg {
+    color: white !important;
   }
 
-  .icon-hero-blue {
-    background: linear-gradient(145deg, hsl(215, 45%, 92%), hsl(215, 40%, 84%));
-    box-shadow: 0 8px 28px rgba(37, 99, 235, 0.12), inset 0 1px 0 rgba(255,255,255,0.5);
+  /* ===== STEP HEADER ===== */
+  .step-header {
+    @apply text-center mb-6;
   }
 
-  .icon-hero-violet {
-    background: linear-gradient(145deg, hsl(270, 40%, 93%), hsl(270, 35%, 86%));
-    box-shadow: 0 8px 28px rgba(139, 92, 246, 0.12), inset 0 1px 0 rgba(255,255,255,0.5);
+  .step-header h2 {
+    @apply text-2xl font-display font-800 text-foreground tracking-tight;
   }
 
-  .icon-hero-amber {
-    background: linear-gradient(145deg, hsl(35, 65%, 93%), hsl(35, 55%, 85%));
-    box-shadow: 0 8px 28px rgba(217, 119, 6, 0.12), inset 0 1px 0 rgba(255,255,255,0.5);
+  .step-header p {
+    @apply text-sm text-muted-foreground mt-1.5 font-body;
   }
 
-  .icon-hero-rose {
-    background: linear-gradient(145deg, hsl(350, 50%, 93%), hsl(350, 40%, 86%));
-    box-shadow: 0 8px 28px rgba(225, 29, 72, 0.12), inset 0 1px 0 rgba(255,255,255,0.5);
+  .step-badge {
+    @apply inline-flex items-center gap-1.5 text-xs font-display font-600 text-primary/60 mt-3;
+    letter-spacing: 0.02em;
   }
 
-  .icon-hero-emerald {
-    background: linear-gradient(145deg, hsl(160, 45%, 91%), hsl(160, 40%, 83%));
-    box-shadow: 0 8px 28px rgba(5, 150, 105, 0.12), inset 0 1px 0 rgba(255,255,255,0.5);
+  /* ===== DIVIDER ===== */
+  .step-divider {
+    @apply w-12 h-0.5 mx-auto mb-6 rounded-full;
+    background: linear-gradient(90deg, hsl(184, 78%, 28%), hsl(184, 60%, 50%));
+    opacity: 0.3;
   }
 
   /* ===== INPUT ===== */

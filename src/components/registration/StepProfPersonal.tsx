@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import { useRegistrationStore } from '@/store/registrationStore';
 import { formatCPF, formatPhone, validateCPF } from '@/lib/masks';
-import { Stethoscope, ArrowLeft, ArrowRight } from 'lucide-react';
+import { Stethoscope, ArrowLeft, ArrowRight, UserRound, Hash, Phone, Mail } from 'lucide-react';
 
-interface Props { onNext: () => void; onBack: () => void; }
+interface Props { onNext: () => void; onBack: () => void; stepNumber?: number; totalSteps?: number; }
 
 const councils = ['CRM', 'CRFa', 'CREFITO', 'CRP', 'CRN', 'Outro'];
 
-const StepProfPersonal = ({ onNext, onBack }: Props) => {
+const StepProfPersonal = ({ onNext, onBack, stepNumber, totalSteps }: Props) => {
   const { professionalData, updateProfessionalData } = useRegistrationStore();
   const [errors, setErrors] = useState<Record<string, string>>({});
 
@@ -25,25 +25,34 @@ const StepProfPersonal = ({ onNext, onBack }: Props) => {
 
   return (
     <div className="card-cadus">
-      <div className="text-center mb-8">
-        <div className="icon-hero icon-hero-teal">
-          <Stethoscope size={32} className="text-primary" />
+      <div className="step-header">
+        <div className="icon-hero">
+          <Stethoscope size={26} />
         </div>
-        <h2 className="text-2xl md:text-3xl font-display font-800 text-foreground tracking-tight">
-          Seus dados profissionais
-        </h2>
-        <p className="text-muted-foreground/70 mt-2 font-body">Preencha seus dados para o cadastro profissional.</p>
+        <h2>Seus dados profissionais</h2>
+        <p>Dados para validação do seu registro profissional</p>
+        {stepNumber && totalSteps && (
+          <div className="step-badge">Etapa {stepNumber} de {totalSteps}</div>
+        )}
       </div>
+
+      <div className="step-divider" />
 
       <div className="space-y-4">
         <div>
           <label className="label-cadus">Nome completo *</label>
-          <input className="input-cadus" value={professionalData.nome || ''} onChange={(e) => updateProfessionalData({ nome: e.target.value })} placeholder="Seu nome completo" />
+          <div className="relative">
+            <UserRound size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground/40" />
+            <input className="input-cadus pl-12" value={professionalData.nome || ''} onChange={(e) => updateProfessionalData({ nome: e.target.value })} placeholder="Seu nome completo" />
+          </div>
           {errors.nome && <p className="error-text">{errors.nome}</p>}
         </div>
         <div>
           <label className="label-cadus">CPF *</label>
-          <input className="input-cadus" value={professionalData.cpf || ''} onChange={(e) => updateProfessionalData({ cpf: formatCPF(e.target.value) })} placeholder="000.000.000-00" inputMode="numeric" />
+          <div className="relative">
+            <Hash size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground/40" />
+            <input className="input-cadus pl-12" value={professionalData.cpf || ''} onChange={(e) => updateProfessionalData({ cpf: formatCPF(e.target.value) })} placeholder="000.000.000-00" inputMode="numeric" />
+          </div>
           {errors.cpf && <p className="error-text">{errors.cpf}</p>}
         </div>
         <div>
@@ -65,12 +74,18 @@ const StepProfPersonal = ({ onNext, onBack }: Props) => {
         </div>
         <div>
           <label className="label-cadus">Telefone profissional *</label>
-          <input className="input-cadus" value={professionalData.telefone || ''} onChange={(e) => updateProfessionalData({ telefone: formatPhone(e.target.value) })} placeholder="(00) 00000-0000" inputMode="tel" />
+          <div className="relative">
+            <Phone size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground/40" />
+            <input className="input-cadus pl-12" value={professionalData.telefone || ''} onChange={(e) => updateProfessionalData({ telefone: formatPhone(e.target.value) })} placeholder="(00) 00000-0000" inputMode="tel" />
+          </div>
           {errors.telefone && <p className="error-text">{errors.telefone}</p>}
         </div>
         <div>
           <label className="label-cadus">E-mail profissional *</label>
-          <input type="email" className="input-cadus" value={professionalData.email || ''} onChange={(e) => updateProfessionalData({ email: e.target.value })} placeholder="seu@email.com" />
+          <div className="relative">
+            <Mail size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground/40" />
+            <input type="email" className="input-cadus pl-12" value={professionalData.email || ''} onChange={(e) => updateProfessionalData({ email: e.target.value })} placeholder="seu@email.com" />
+          </div>
           {errors.email && <p className="error-text">{errors.email}</p>}
         </div>
       </div>
