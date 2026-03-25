@@ -37,6 +37,12 @@ export const validateCPF = (cpf: string): boolean => {
   return rest === parseInt(digits[10]);
 };
 
+export const formatName = (name: string): string =>
+  name.replace(/\b\w/g, c => c.toUpperCase()).replace(/\B\w/g, c => c.toLowerCase());
+
+export const getFirstName = (name: string): string =>
+  formatName((name || '').trim().split(' ')[0]);
+
 export const fetchAddress = async (cep: string) => {
   const digits = cep.replace(/\D/g, '');
   if (digits.length !== 8) return null;
