@@ -295,7 +295,7 @@ const Index = () => {
                 iconBg: 'bg-gradient-to-br from-primary to-[#14919B]',
                 title: 'Para você, paciente',
                 desc: 'Preencha sua ficha pelo celular, antes de chegar na clínica. Sem papel, sem fila.',
-                benefits: ['Cadastro pelo celular', 'Dados sempre salvos', 'Atualiza quando quiser'],
+                benefits: ['Cadastro fácil e rápido', 'Seu histórico sempre salvo', 'Controle do seu prontuário'],
                 accentColor: 'border-primary/20 hover:border-primary/40',
                 checkColor: 'text-primary',
               },
