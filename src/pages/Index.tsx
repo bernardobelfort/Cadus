@@ -3,7 +3,7 @@ import { User, Briefcase, UserCheck, ClipboardList, CheckCircle, ArrowRight, Sma
 import { motion } from 'framer-motion';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-
+import heroIllustration from '@/assets/hero-illustration.png';
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
   visible: (i: number) => ({
