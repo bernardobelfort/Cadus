@@ -59,12 +59,29 @@ const StepPatientGender = ({ onNext, onBack }: Props) => {
         <h2 className="text-2xl md:text-3xl font-display font-800 text-foreground tracking-tight">
           Como você se identifica?
         </h2>
+        <p className="text-muted-foreground mt-2 font-body">Essa informação nos ajuda a personalizar seu atendimento.</p>
       </div>
 
       <div className="space-y-5">
         <div>
-          <div className="grid grid-cols-2 gap-2">
-            {genderOptions.map((opt) => (
+          <div className="grid grid-cols-2 gap-3">
+            {genderOptions.slice(0, 2).map((opt) => (
+              <button
+                key={opt}
+                type="button"
+                onClick={() => handleSelectGenero(opt)}
+                className={`px-4 py-3 rounded-xl border-2 text-sm font-body font-500 transition-all duration-200 ${
+                  selectedGenero === opt
+                    ? 'border-primary bg-accent text-foreground shadow-sm'
+                    : 'border-border text-muted-foreground hover:border-primary/30 hover:bg-accent/50'
+                }`}
+              >
+                {opt}
+              </button>
+            ))}
+          </div>
+          <div className="grid grid-cols-2 gap-3 mt-4">
+            {genderOptions.slice(2).map((opt) => (
               <button
                 key={opt}
                 type="button"
