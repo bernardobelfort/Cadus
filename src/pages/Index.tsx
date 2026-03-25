@@ -18,7 +18,7 @@ const HeroIllustration = () => (
   <div className="relative w-full max-w-[520px] flex items-center justify-center py-8">
     {/* Blob 1 — large teal, centered behind cards */}
     <motion.svg
-      className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[420px] h-[420px] z-0"
+      className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[520px] h-[520px] z-0"
       viewBox="0 0 500 500"
       fill="none"
       animate={{ rotate: 360 }}
