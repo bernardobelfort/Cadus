@@ -1,49 +1,55 @@
 
 
-## Redesign da Seção "Como funciona?"
+## Redesign da Seção "Para quem é o cadus."
 
-### Mudanças
+### Problema atual
+- Cards simples demais com barra lateral colorida (padrão template)
+- Tags/chips espalhadas sem simetria, tamanhos irregulares
+- Sem hierarquia visual forte entre os dois perfis
+- Layout genérico de "2 cards lado a lado"
 
-**1. Título → "Como funciona?" (com interrogação)**
-
-**2. Layout horizontal tipo timeline/trajeto**
-
-Em vez do layout vertical simples com linha fina, criar uma **timeline horizontal** no desktop (vertical no mobile) com uma linha curva/pontilhada conectando os 3 passos — como uma trajetória real:
+### Nova abordagem: Cards premium simétricos com layout estruturado
 
 ```text
-Desktop:
-  ┌──────┐       ┌──────┐       ┌──────┐
-  │  01  │ ───── │  02  │ ───── │  03  │
-  │ icon │  dot  │ icon │  dot  │ icon │
-  └──────┘  line └──────┘  line └──────┘
-   título         título         título
-   descrição      descrição      descrição
+┌─────────────────────────────────────────────────────────┐
+│          Para quem é o cadus.                            │
+│          (subtítulo elegante)                            │
+│                                                          │
+│  ┌──────────────────────┐  ┌──────────────────────────┐  │
+│  │     🟢 ícone         │  │     🟠 ícone             │  │
+│  │                      │  │                          │  │
+│  │  Para você, paciente │  │  Para profissionais      │  │
+│  │                      │  │  e equipes               │  │
+│  │  Descrição curta     │  │  Descrição curta         │  │
+│  │                      │  │                          │  │
+│  │  ✓ Benefício 1       │  │  ✓ Benefício 1           │  │
+│  │  ✓ Benefício 2       │  │  ✓ Benefício 2           │  │
+│  │  ✓ Benefício 3       │  │  ✓ Benefício 3           │  │
+│  └──────────────────────┘  └──────────────────────────┘  │
+└─────────────────────────────────────────────────────────┘
 ```
 
-- 3 colunas no desktop (`grid md:grid-cols-3`), stack vertical no mobile
-- Cada step: círculo grande com ícone (gradiente teal sutil) + número sobreposto translúcido no fundo
-- **Linha conectora**: SVG horizontal com tracejado animado entre os steps (dash-offset animation) — a linha "desenha" conforme o scroll entra na viewport
-- No mobile: linha vertical pontilhada entre os cards
+### Mudanças concretas
 
-**3. Cards elevados para cada step**
+**1. Cards completamente redesenhados**
+- Remover barra lateral colorida (genérica)
+- Ícone centralizado no topo do card dentro de um círculo grande (64x64) com gradiente suave
+- Título e descrição centralizados
+- Benefícios em **lista vertical alinhada** (não chips/tags espalhados), cada um com ícone CheckCircle alinhado, texto à direita, tudo simétrico
+- Hover com elevação suave e borda sutil colorida (teal para paciente, amber para profissional)
+- Padding generoso e igual nos dois cards
 
-Em vez de texto solto, cada step vive dentro de um card com:
-- Fundo branco, `rounded-2xl`, sombra suave
-- Círculo do ícone com gradiente `from-primary to-[#14919B]` e glow sutil
-- Número grande (`text-6xl`) em opacidade baixa (5%) atrás do card como watermark
-- Hover: card sobe levemente (`hover:-translate-y-1`) com sombra mais forte
+**2. Simetria perfeita**
+- Ambos os cards com exatamente a mesma estrutura, mesma altura, mesmos espaçamentos
+- 3 benefícios em cada, todos com o mesmo formato: ícone + texto em linha, alinhados à esquerda dentro do card centralizado
+- `grid md:grid-cols-2 gap-8` com cards de altura igual
 
-**4. Animações**
+**3. Subtítulo adicionado**
+- Abaixo do título "Para quem é o cadus.", adicionar um subtítulo: "Cada perfil tem seu caminho. Escolha o seu."
 
-- Cada card entra com `fadeUp` staggered (já existe)
-- A linha conectora SVG anima com `pathLength` do framer-motion (desenha de 0→1 ao entrar na viewport)
-- Ícones dos steps pulsam sutilmente no hover
-
-### Textos (mantidos)
-- Passo 01: "Escolha seu perfil" — mesma descrição
-- Passo 02: "Preencha seus dados" — mesma descrição  
-- Passo 03: "Tudo pronto" — mesma descrição
+**4. Decoração de fundo refinada**
+- Manter SVG decorativo mas com formas mais orgânicas (blob sutil em vez de círculos concêntricos)
 
 ### Arquivo a editar
-- `src/pages/Index.tsx` — reescrever seção "Como funciona" (linhas 145-207)
+- `src/pages/Index.tsx` — reescrever seção "Para quem" (linhas 248-325)
 
