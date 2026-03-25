@@ -3,7 +3,8 @@ import { useSearchParams, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useRegistrationStore } from '@/store/registrationStore';
 import StepProfile from '@/components/registration/StepProfile';
-import StepPatientIdentity from '@/components/registration/StepPatientIdentity';
+import StepPatientName from '@/components/registration/StepPatientName';
+import StepPatientCPF from '@/components/registration/StepPatientCPF';
 import StepPatientAbout from '@/components/registration/StepPatientAbout';
 import StepPatientContact from '@/components/registration/StepPatientContact';
 import StepPatientAddress from '@/components/registration/StepPatientAddress';
@@ -14,12 +15,11 @@ import StepProfPersonal from '@/components/registration/StepProfPersonal';
 import StepProfClinic from '@/components/registration/StepProfClinic';
 import StepProfAccess from '@/components/registration/StepProfAccess';
 import SuccessScreen from '@/components/registration/SuccessScreen';
-import Footer from '@/components/Footer';
 import { Link } from 'react-router-dom';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, X } from 'lucide-react';
 
-const patientSteps = ['Perfil', 'Identidade', 'Sobre você', 'Contato', 'Endereço', 'SUS', 'Queixa', 'Acesso'];
-const profSteps = ['Perfil', 'Dados profissionais', 'Clínica', 'Acesso'];
+const patientSteps = 9;
+const profSteps = 4;
 
 const Registration = () => {
   const [searchParams] = useSearchParams();
@@ -36,8 +36,7 @@ const Registration = () => {
     }
   }, []);
 
-  const steps = role === 'profissional' ? profSteps : patientSteps;
-  const totalSteps = steps.length;
+  const totalSteps = role === 'profissional' ? profSteps : patientSteps;
 
   const goNext = () => {
     setDirection(1);
@@ -68,13 +67,14 @@ const Registration = () => {
     if (currentStep === 1) return <StepProfile onNext={goNext} />;
     if (role === 'paciente') {
       switch (currentStep) {
-        case 2: return <StepPatientIdentity onNext={goNext} onBack={goBack} />;
-        case 3: return <StepPatientAbout onNext={goNext} onBack={goBack} />;
-        case 4: return <StepPatientContact onNext={goNext} onBack={goBack} />;
-        case 5: return <StepPatientAddress onNext={goNext} onBack={goBack} />;
-        case 6: return <StepPatientSus onNext={goNext} onBack={goBack} />;
-        case 7: return <StepPatientComplaint onNext={goNext} onBack={goBack} />;
-        case 8: return <StepPatientAccess onNext={goNext} onBack={goBack} />;
+        case 2: return <StepPatientName onNext={goNext} onBack={goBack} />;
+        case 3: return <StepPatientCPF onNext={goNext} onBack={goBack} />;
+        case 4: return <StepPatientAbout onNext={goNext} onBack={goBack} />;
+        case 5: return <StepPatientContact onNext={goNext} onBack={goBack} />;
+        case 6: return <StepPatientAddress onNext={goNext} onBack={goBack} />;
+        case 7: return <StepPatientSus onNext={goNext} onBack={goBack} />;
+        case 8: return <StepPatientComplaint onNext={goNext} onBack={goBack} />;
+        case 9: return <StepPatientAccess onNext={goNext} onBack={goBack} />;
       }
     }
     if (role === 'profissional') {
@@ -87,60 +87,49 @@ const Registration = () => {
     return null;
   };
 
+  const progress = (currentStep / totalSteps) * 100;
+
   return (
-    <div className="min-h-screen flex flex-col bg-background">
-      <div className="sticky top-0 z-50 bg-card/95 backdrop-blur-md border-b border-border">
+    <div className="min-h-screen flex flex-col" style={{ background: 'radial-gradient(ellipse at 50% 0%, hsl(184 40% 96%) 0%, hsl(210 11% 97%) 70%)' }}>
+      {/* Minimal header */}
+      <div className="sticky top-0 z-50 bg-card/80 backdrop-blur-sm border-b border-border/50">
         <div className="container flex items-center justify-between h-14">
-          <button onClick={goBack} className="btn-ghost text-sm gap-1 py-1 px-3">
-            <ArrowLeft size={18} />
-            Voltar
+          <button onClick={goBack} className="text-muted-foreground hover:text-foreground transition-colors p-2 -ml-2">
+            <ArrowLeft size={20} />
           </button>
-          <Link to="/" className="font-display font-800 text-primary text-lg tracking-tight">cadus<span className="text-highlight">.</span></Link>
-          <span className="text-sm text-muted-foreground font-body font-500">
+          <Link to="/" className="font-display font-800 text-primary text-lg tracking-tight">
+            cadus<span className="text-highlight">.</span>
+          </Link>
+          <span className="text-sm text-muted-foreground font-body tabular-nums">
             {currentStep}/{totalSteps}
           </span>
         </div>
-      </div>
-
-      <div className="w-full px-4 pt-4 pb-2">
-        <div className="max-w-[580px] mx-auto">
-          <div className="flex gap-1.5">
-            {steps.map((label, i) => (
-              <div key={i} className="flex-1 flex flex-col items-center gap-1.5">
-                <div
-                  className={`w-full h-1.5 rounded-full transition-all duration-300 ${
-                    i + 1 <= currentStep ? 'bg-primary' : 'bg-border'
-                  }`}
-                />
-                <span className={`text-[9px] font-body hidden lg:block transition-colors ${
-                  i + 1 <= currentStep ? 'text-primary font-600' : 'text-muted-foreground'
-                }`}>
-                  {label}
-                </span>
-              </div>
-            ))}
-          </div>
+        {/* Thin progress bar */}
+        <div className="h-1 bg-border/50">
+          <div
+            className="h-full bg-primary transition-all duration-500 ease-out rounded-r-full"
+            style={{ width: `${progress}%` }}
+          />
         </div>
       </div>
 
-      <div className="flex-1 flex items-start md:items-center justify-center py-6 px-4">
-        <div className="w-full max-w-[580px]">
+      {/* Content */}
+      <div className="flex-1 flex items-start md:items-center justify-center py-8 px-4">
+        <div className="w-full max-w-[480px]">
           <AnimatePresence mode="wait" custom={direction}>
             <motion.div
               key={`${role}-${currentStep}`}
               custom={direction}
-              initial={{ opacity: 0, x: direction * 40 }}
+              initial={{ opacity: 0, x: direction * 30 }}
               animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: direction * -40 }}
-              transition={{ duration: 0.3, ease: 'easeInOut' }}
+              exit={{ opacity: 0, x: direction * -30 }}
+              transition={{ duration: 0.25, ease: 'easeOut' }}
             >
               {renderStep()}
             </motion.div>
           </AnimatePresence>
         </div>
       </div>
-
-      <Footer />
     </div>
   );
 };

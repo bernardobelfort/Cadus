@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useRegistrationStore } from '@/store/registrationStore';
-import { ArrowLeft, Check, Eye, EyeOff, Loader2 } from 'lucide-react';
+import { Lock, ArrowLeft, Check, Eye, EyeOff, Loader2 } from 'lucide-react';
 
 interface Props { onNext: () => void; onBack: () => void; }
 
@@ -37,9 +37,16 @@ const StepPatientAccess = ({ onNext, onBack }: Props) => {
   };
 
   return (
-    <div className="card-cadus">
-      <h2 className="text-xl font-display font-800 text-foreground">Crie seu acesso ao Cadus.</h2>
-      <p className="text-muted-foreground text-sm mt-1 mb-6">Você vai usar esses dados para entrar no sistema.</p>
+    <div className="card-cadus p-8 md:p-10">
+      <div className="text-center mb-8">
+        <div className="w-16 h-16 rounded-2xl bg-accent flex items-center justify-center mx-auto mb-5">
+          <Lock size={32} className="text-primary" />
+        </div>
+        <h2 className="text-2xl md:text-3xl font-display font-800 text-foreground tracking-tight">
+          Crie seu acesso
+        </h2>
+        <p className="text-muted-foreground mt-2 font-body">Falta pouco! Crie sua senha para entrar no Cadus.</p>
+      </div>
 
       <div className="space-y-4">
         <div>
@@ -97,12 +104,13 @@ const StepPatientAccess = ({ onNext, onBack }: Props) => {
         {errors.terms && <p className="error-text">{errors.terms}</p>}
       </div>
 
-      <div className="flex gap-3 mt-8">
-        <button onClick={onBack} className="btn-outline flex-1" disabled={loading}><ArrowLeft size={18} /> Voltar</button>
-        <button onClick={handleSubmit} disabled={loading} className="btn-primary flex-1">
-          {loading ? <><Loader2 size={18} className="animate-spin" /> Criando seu cadastro...</> : <><Check size={18} /> Criar minha conta</>}
-        </button>
-      </div>
+      <button onClick={handleSubmit} disabled={loading} className="btn-primary w-full mt-8">
+        {loading ? <><Loader2 size={18} className="animate-spin" /> Criando seu cadastro...</> : <><Check size={18} /> Criar minha conta</>}
+      </button>
+
+      <button onClick={onBack} disabled={loading} className="w-full mt-3 text-sm text-muted-foreground hover:text-foreground transition-colors flex items-center justify-center gap-1 font-body">
+        <ArrowLeft size={16} /> Voltar
+      </button>
     </div>
   );
 };

@@ -1,5 +1,5 @@
 import { useRegistrationStore } from '@/store/registrationStore';
-import { ArrowLeft, ArrowRight } from 'lucide-react';
+import { FileHeart, ArrowRight, ArrowLeft } from 'lucide-react';
 
 interface Props { onNext: () => void; onBack: () => void; }
 
@@ -7,13 +7,20 @@ const StepPatientSus = ({ onNext, onBack }: Props) => {
   const { patientData, updatePatientData } = useRegistrationStore();
 
   return (
-    <div className="card-cadus">
-      <h2 className="text-xl font-display font-800 text-foreground">Informações do SUS</h2>
-      <p className="text-muted-foreground text-sm mt-1 mb-6">Quase lá! Só mais algumas informações.</p>
+    <div className="card-cadus p-8 md:p-10">
+      <div className="text-center mb-8">
+        <div className="w-16 h-16 rounded-2xl bg-accent flex items-center justify-center mx-auto mb-5">
+          <FileHeart size={32} className="text-primary" />
+        </div>
+        <h2 className="text-2xl md:text-3xl font-display font-800 text-foreground tracking-tight">
+          Informações do SUS
+        </h2>
+        <p className="text-muted-foreground mt-2 font-body">Quase lá! Só mais algumas informações.</p>
+      </div>
 
       <div className="space-y-4">
         <div>
-          <label className="label-cadus">Número do seu Cartão SUS (se tiver)</label>
+          <label className="label-cadus">Número do Cartão SUS (se tiver)</label>
           <input
             className="input-cadus"
             value={patientData.cartaoSus || ''}
@@ -77,14 +84,13 @@ const StepPatientSus = ({ onNext, onBack }: Props) => {
         </div>
       </div>
 
-      <div className="flex gap-3 mt-8">
-        <button onClick={onBack} className="btn-outline flex-1">
-          <ArrowLeft size={18} /> Voltar
-        </button>
-        <button onClick={onNext} className="btn-primary flex-1">
-          Continuar <ArrowRight size={18} />
-        </button>
-      </div>
+      <button onClick={onNext} className="btn-primary w-full mt-8">
+        Continuar <ArrowRight size={18} />
+      </button>
+
+      <button onClick={onBack} className="w-full mt-3 text-sm text-muted-foreground hover:text-foreground transition-colors flex items-center justify-center gap-1 font-body">
+        <ArrowLeft size={16} /> Voltar
+      </button>
     </div>
   );
 };
