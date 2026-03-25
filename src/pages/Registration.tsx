@@ -18,7 +18,7 @@ import SuccessScreen from '@/components/registration/SuccessScreen';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, X } from 'lucide-react';
 
-const patientSteps = 9;
+const patientSteps = 10;
 const profSteps = 4;
 
 const Registration = () => {
