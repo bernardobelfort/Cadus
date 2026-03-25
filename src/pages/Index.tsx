@@ -98,30 +98,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Stats — Dinova inspired 2x2 grid */}
-      <section className="py-10 md:py-14 border-b border-border/50">
-        <div className="container max-w-3xl">
-          <motion.div
-            className="grid grid-cols-2 md:grid-cols-4 gap-0 divide-x divide-y md:divide-y-0 divide-border/50"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-          >
-            {[
-              { icon: <Users size={22} />, value: '500+', label: 'Pacientes cadastrados' },
-              { icon: <Building2 size={22} />, value: '3', label: 'Clínicas parceiras' },
-              { icon: <Award size={22} />, value: '2+', label: 'Anos de experiência' },
-              { icon: <Heart size={22} />, value: '100%', label: 'Gratuito' },
-            ].map((stat, i) => (
-              <motion.div key={i} className="stat-card" variants={fadeUp} custom={i}>
-                <div className="stat-icon">{stat.icon}</div>
-                <span className="stat-value">{stat.value}</span>
-                <span className="stat-label">{stat.label}</span>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
 
       {/* Como funciona — section label + title pattern */}
       <section className="py-14 sm:py-16 md:py-20 lg:py-28">
