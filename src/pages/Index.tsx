@@ -69,7 +69,7 @@ const HeroIllustration = () => (
       animate={{ scale: [1, 1.15, 1], rotate: 180 }}
       transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
     >
-      <circle cx="250" cy="250" r="200" fill="hsl(184, 78%, 22%)" fillOpacity="0.06" />
+      <circle cx="250" cy="250" r="200" fill="hsl(184, 78%, 22%)" fillOpacity="0.14" />
     </motion.svg>
 
     {/* Illustration */}
