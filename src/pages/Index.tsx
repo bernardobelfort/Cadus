@@ -17,19 +17,17 @@ const fadeUp = {
 const HeroIllustration = () => (
   <div className="relative w-full max-w-[520px] flex items-center justify-center py-8">
     {/* Blob 1 — large teal, centered behind cards */}
-    <motion.svg
+    <svg
       className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[520px] h-[520px] z-0"
       viewBox="0 0 500 500"
       fill="none"
-      animate={{ rotate: 360 }}
-      transition={{ duration: 35, repeat: Infinity, ease: "linear" }}
     >
       <path
         d="M400,280Q370,460,200,400Q30,340,80,200Q130,60,300,80Q470,100,400,280Z"
         fill="hsl(184, 78%, 22%)"
         fillOpacity="0.22"
       />
-    </motion.svg>
+    </svg>
 
     {/* Blob 2 — amber accent, bottom-right */}
     <motion.svg
