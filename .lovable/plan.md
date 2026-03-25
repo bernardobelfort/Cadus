@@ -1,43 +1,81 @@
 
 
-## Redesign Premium do StepProfile
+## Redesign Completo do Formulario de Cadastro
 
-### Problemas atuais (visto no screenshot)
-- Cards genéricos e sem vida: bordas cinza fracas, fundo branco plano, zero personalidade
-- Emojis (❤️ 🩺) ao lado do título parecem amadores e baratos
-- Ícones pequenos (w-12 h-12) sem impacto visual
-- Chevron genérico à direita sem propósito claro
-- Card externo (card-cadus) adiciona uma camada desnecessária que achata tudo
-- Sem diferenciação visual entre as duas opções — parecem a mesma coisa
+### Problemas identificados (via screenshot e codigo)
 
-### Novo design
+1. **Cores dos icones inconsistentes**: cada step usa uma cor diferente (teal, blue, violet, amber, rose, emerald) — parece aleatorio, nao intencional
+2. **Subtextos genericos e quebram em 2 linhas**: "Queremos saber como te chamar", "Precisamos saber sua data de nascimento" — nao agregam valor e as vezes ocupam 2 linhas desnecessariamente
+3. **Design monotono**: todos os steps sao identicos — icone redondo, titulo, subtexto, input, botao. Zero diferenciacao visual
+4. **Falta contexto de progresso**: usuario nao sabe em que etapa esta (ex: "Etapa 3 de 10")
+5. **Card muito grande e vazio** em steps simples (nome, CPF) — muito espaco branco sem proposito
+6. **Icones no hero sao palidos** — backgrounds pastel com icone quase invisivel
 
-**Layout**: Remover o card-cadus wrapper externo. Dois cards grandes empilhados verticalmente, cada um com identidade visual própria e forte.
+### O que NAO sera modificado
+- StepProfile (primeira pagina) — esta OK
+- Animacoes de transicao entre paginas — esta OK
+- Logica de validacao e store
 
-**Card Paciente (teal)**:
-- Ícone grande (`w-16 h-16`) com gradiente teal vibrante e glow sutil, centralizado no topo do card
-- Ícone: `Heart` (lucide) dentro do círculo — não emoji
-- Background: gradiente suave `from-primary/5 to-transparent`
-- Borda: `border-2 border-primary/20`, no hover `border-primary/50` com sombra teal
-- Título "Sou Paciente" em bold, descrição abaixo
-- Layout vertical centralizado (ícone → título → descrição)
-- Seleção: borda primary sólida, background `bg-primary/8`, checkmark animado no canto
+### Plano de mudancas
 
-**Card Profissional (amber/secondary)**:
-- Mesmo layout, ícone `Stethoscope` com gradiente amber
-- Background: gradiente suave `from-secondary/5 to-transparent`
-- Borda: `border-2 border-secondary/20`, hover `border-secondary/50` com sombra amber
+**1. Padronizacao visual — cor unica nos icones hero**
+- Todos os icon-hero usarao `icon-hero-teal` (cor primaria do sistema) em vez de cores diferentes por step
+- Isso cria identidade visual consistente e profissional
+- Os icones dentro usarao `text-primary` uniformemente
 
-**Interações**:
-- Hover: `scale-[1.02]`, sombra elevada colorida, borda mais visível
-- Seleção: scale volta ao normal, borda sólida, checkmark com bounce
-- Auto-advance mantido (350ms)
+**2. Subtextos reescritos — uteis, informativos, 1 linha**
+Cada step tera um subtexto que realmente ajuda o usuario:
+- Nome: "Digite nome e sobrenome como no documento"
+- CPF: "Usado como login seguro na plataforma"
+- Nascimento: "Necessario para o prontuario clinico"
+- Genero: "Informacao importante para seu atendimento"
+- Contato: "Enviaremos lembretes de consulta por WhatsApp"
+- Endereco: "O CEP preenche automaticamente rua e bairro"
+- SUS: "Dados opcionais para pacientes do SUS"
+- Queixa: "Ajuda o profissional a se preparar para o atendimento"
+- Acesso: "Ultima etapa — seu CPF sera o login"
 
-**Header**: Título sem wrapper card — diretamente no topo com tipografia grande e "Cadus" em primary
+**3. Indicador de etapa visivel**
+- Adicionar badge discreto abaixo do subtexto: "Etapa 3 de 10" em texto pequeno com cor muted
+- Isso da contexto e senso de progresso alem da barra
 
-### Resultado
-Cards com personalidade, ícones lucide grandes e bonitos (sem emojis), cores distintas entre paciente e profissional, interações ricas.
+**4. Redesign do card e layout dos steps**
+- Reduzir padding do card de `p-8 md:p-10` para `p-6 md:p-8` — mais compacto
+- Icon hero: reduzir de 72px para 56px — mais proporcionado
+- Adicionar um micro-detalhe visual: linha decorativa sutil (2px, gradiente teal) entre o header e o conteudo do formulario
+- Titulo: manter `text-2xl` (remover `md:text-3xl` que causa assimetria em telas medias)
 
-### Arquivo
-- `src/components/registration/StepProfile.tsx`
+**5. Inputs mais sofisticados**
+- Adicionar icone inline dentro dos inputs principais (UserRound no nome, Hash no CPF, Calendar na data, Phone no telefone) — posicionado a esquerda com `pl-12`
+- Isso da contexto visual ao campo sem precisar de label em alguns casos
+
+**6. Botao Continuar — adicionar numero da proxima etapa**
+- Em vez de apenas "Continuar →", mostrar contexto: botao permanece "Continuar" mas sem mudanca (ja esta bom)
+
+**7. Steps profissionais — mesma padronizacao**
+- StepProfPersonal, StepProfClinic, StepProfAccess: padronizar para usar `icon-hero-teal` e subtextos uteis
+- StepProfPersonal subtexto: "Dados para validacao do seu registro profissional"
+- StepProfClinic subtexto: "Selecione onde voce atuara no Cadus"
+
+**8. SuccessScreen — pequeno refinamento**
+- Manter confetti e animacoes, apenas alinhar com o novo padding/sizing
+
+### Arquivos editados
+- `src/index.css` (ajustar icon-hero size, card padding, adicionar classe decorativa)
+- `src/components/registration/StepPatientName.tsx`
+- `src/components/registration/StepPatientCPF.tsx`
+- `src/components/registration/StepPatientBirthdate.tsx`
+- `src/components/registration/StepPatientGender.tsx`
+- `src/components/registration/StepPatientContact.tsx`
+- `src/components/registration/StepPatientAddress.tsx`
+- `src/components/registration/StepPatientSus.tsx`
+- `src/components/registration/StepPatientComplaint.tsx`
+- `src/components/registration/StepPatientAccess.tsx`
+- `src/components/registration/StepProfPersonal.tsx`
+- `src/components/registration/StepProfClinic.tsx`
+- `src/components/registration/StepProfAccess.tsx`
+- `src/pages/Registration.tsx` (passar stepNumber/totalSteps como props)
+
+### Resultado esperado
+Formulario com identidade visual coesa (teal uniforme), subtextos uteis em 1 linha, indicador de etapa, inputs com icones contextuais, proporcoes mais equilibradas. Profissional e original.
 
