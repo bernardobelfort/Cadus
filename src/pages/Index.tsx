@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { User, Briefcase, UserCheck, ClipboardList, CheckCircle, ArrowRight, Smartphone, Clock, ShieldCheck } from 'lucide-react';
+import { User, Briefcase, UserCheck, ClipboardList, CheckCircle, ArrowRight, Smartphone, Clock, ShieldCheck, Users, Award, Building2, Heart } from 'lucide-react';
 import { motion } from 'framer-motion';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -16,32 +16,20 @@ const fadeUp = {
 
 /* Hero illustration with organic blob shapes */
 const HeroIllustration = () => (
-  <div className="relative w-full max-w-[280px] sm:max-w-[360px] md:max-w-[520px] flex items-center justify-center py-4 md:py-8">
-    {/* Blob 1 — large teal */}
-    <svg className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[280px] sm:w-[360px] md:w-[520px] h-[280px] sm:h-[360px] md:h-[520px] z-0" viewBox="0 0 500 500" fill="none">
+  <div className="relative w-full max-w-[260px] sm:max-w-[320px] md:max-w-[480px] flex items-center justify-center py-2 md:py-6">
+    <svg className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[260px] sm:w-[320px] md:w-[480px] h-[260px] sm:h-[320px] md:h-[480px] z-0" viewBox="0 0 500 500" fill="none">
       <path d="M400,280Q370,460,200,400Q30,340,80,200Q130,60,300,80Q470,100,400,280Z" fill="hsl(184, 78%, 22%)" fillOpacity="0.22" />
     </svg>
-
-    {/* Blob 2 — amber accent */}
-    <svg className="absolute -right-4 md:-right-10 -bottom-2 md:-bottom-4 w-[200px] sm:w-[280px] md:w-[380px] h-[200px] sm:h-[280px] md:h-[380px] z-0" viewBox="0 0 500 500" fill="none">
+    <svg className="absolute -right-2 md:-right-8 -bottom-1 md:-bottom-3 w-[180px] sm:w-[240px] md:w-[340px] h-[180px] sm:h-[240px] md:h-[340px] z-0" viewBox="0 0 500 500" fill="none">
       <path d="M420,300Q380,480,200,420Q20,360,60,200Q100,40,280,60Q460,80,420,300Z" fill="hsl(25, 76%, 63%)" fillOpacity="0.25" />
     </svg>
-
-    {/* Blob 3 — teal vibrante */}
-    <svg className="absolute -left-3 md:-left-6 -top-1 md:-top-2 w-[140px] sm:w-[200px] md:w-[260px] h-[140px] sm:h-[200px] md:h-[260px] z-0" viewBox="0 0 500 500" fill="none">
+    <svg className="absolute -left-2 md:-left-4 -top-1 w-[120px] sm:w-[170px] md:w-[220px] h-[120px] sm:h-[170px] md:h-[220px] z-0" viewBox="0 0 500 500" fill="none">
       <path d="M380,260Q340,420,200,380Q60,340,100,200Q140,60,300,100Q460,140,380,260Z" fill="hsl(184, 60%, 35%)" fillOpacity="0.18" />
     </svg>
-
-    {/* Blob 4 — small dot */}
-    <svg className="absolute right-2 md:right-4 top-1 md:top-2 w-[80px] md:w-[140px] h-[80px] md:h-[140px] z-0" viewBox="0 0 500 500" fill="none">
-      <circle cx="250" cy="250" r="200" fill="hsl(184, 78%, 22%)" fillOpacity="0.14" />
-    </svg>
-
-    {/* Illustration */}
     <img
       src={heroIllustration}
       alt="Pessoas diversas conectadas digitalmente ao sistema Cadus"
-      className="relative z-10 w-full max-w-[240px] sm:max-w-[320px] md:max-w-[480px] h-auto drop-shadow-xl"
+      className="relative z-10 w-full max-w-[220px] sm:max-w-[280px] md:max-w-[440px] h-auto drop-shadow-xl"
     />
   </div>
 );
@@ -51,10 +39,10 @@ const Index = () => {
     <div className="min-h-screen flex flex-col">
       <Navbar />
 
-      {/* Hero — mobile-first */}
-      <section className="hero-gradient py-12 sm:py-16 md:py-20 lg:py-28">
+      {/* Hero — mobile-first, Dinova-inspired: centered, impactful */}
+      <section className="hero-gradient py-14 sm:py-16 md:py-20 lg:py-28">
         <div className="container relative z-10">
-          <div className="flex flex-col items-center gap-6 md:flex-row md:gap-8 lg:gap-12">
+          <div className="flex flex-col items-center gap-8 md:flex-row md:gap-10 lg:gap-14">
             <motion.div
               className="flex-1 text-center md:text-left"
               initial="hidden"
@@ -62,33 +50,36 @@ const Index = () => {
               variants={fadeUp}
               custom={0}
             >
-              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-[3.5rem] font-display font-800 text-primary-foreground leading-[1.1] tracking-tight">
+              <h1 className="text-[1.65rem] leading-[1.15] sm:text-3xl md:text-4xl lg:text-[3.5rem] font-display font-800 text-primary-foreground tracking-tight">
                 Seus dados prontos
                 <br />
                 <span className="text-highlight">antes</span> da consulta.
               </h1>
-              <p className="text-primary-foreground/80 mt-4 md:mt-5 text-base md:text-lg lg:text-xl max-w-lg mx-auto md:mx-0 font-body leading-relaxed">
+              <p className="text-primary-foreground/80 mt-4 text-[15px] md:text-lg lg:text-xl max-w-lg mx-auto md:mx-0 font-body leading-relaxed">
                 Preencha seu cadastro pelo celular, no seu tempo. Quando chegar
                 na clínica, já sabem quem você é.
               </p>
-              <div className="flex flex-col w-full sm:flex-row sm:w-auto gap-3 mt-8 md:mt-10 justify-center md:justify-start">
+
+              {/* CTAs — stacked on mobile, prominent */}
+              <div className="flex flex-col gap-3 mt-8 md:mt-10 md:flex-row md:gap-4">
                 <Link
                   to="/cadastro?role=paciente"
-                  className="inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-full bg-card text-primary font-display font-700 text-[15px] md:text-base transition-all duration-200 hover:shadow-lg hover:scale-[1.02] min-h-[50px]"
+                  className="flex items-center justify-center gap-2.5 px-7 py-4 rounded-full bg-card text-primary font-display font-700 text-[15px] md:text-base transition-all duration-200 hover:shadow-lg hover:scale-[1.02] min-h-[52px] shadow-md"
                 >
                   <User size={20} />
                   Sou Paciente
                 </Link>
                 <Link
                   to="/cadastro?role=profissional"
-                  className="inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-full border-2 border-primary-foreground/30 text-primary-foreground font-display font-700 text-[15px] md:text-base transition-all duration-200 hover:bg-primary-foreground/10 min-h-[50px]"
+                  className="flex items-center justify-center gap-2.5 px-7 py-4 rounded-full border-2 border-primary-foreground/30 text-primary-foreground font-display font-700 text-[15px] md:text-base transition-all duration-200 hover:bg-primary-foreground/10 min-h-[52px]"
                 >
                   <Briefcase size={20} />
                   Sou Profissional
                 </Link>
               </div>
 
-              <div className="flex items-center justify-center md:justify-start gap-4 md:gap-6 mt-6 md:mt-8 text-primary-foreground/60 text-[12px] md:text-sm font-body">
+              {/* Trust badges */}
+              <div className="flex items-center justify-center md:justify-start gap-5 mt-6 text-primary-foreground/60 text-[12px] md:text-sm font-body">
                 <span className="flex items-center gap-1.5"><Smartphone size={14} /> Pelo celular</span>
                 <span className="flex items-center gap-1.5"><Clock size={14} /> 5 minutos</span>
                 <span className="flex items-center gap-1.5"><ShieldCheck size={14} /> Dados seguros</span>
@@ -107,8 +98,33 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Como funciona? */}
-      <section className="py-12 sm:py-16 md:py-20 lg:py-28">
+      {/* Stats — Dinova inspired 2x2 grid */}
+      <section className="py-10 md:py-14 border-b border-border/50">
+        <div className="container max-w-3xl">
+          <motion.div
+            className="grid grid-cols-2 md:grid-cols-4 gap-0 divide-x divide-y md:divide-y-0 divide-border/50"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
+            {[
+              { icon: <Users size={22} />, value: '500+', label: 'Pacientes cadastrados' },
+              { icon: <Building2 size={22} />, value: '3', label: 'Clínicas parceiras' },
+              { icon: <Award size={22} />, value: '2+', label: 'Anos de experiência' },
+              { icon: <Heart size={22} />, value: '100%', label: 'Gratuito' },
+            ].map((stat, i) => (
+              <motion.div key={i} className="stat-card" variants={fadeUp} custom={i}>
+                <div className="stat-icon">{stat.icon}</div>
+                <span className="stat-value">{stat.value}</span>
+                <span className="stat-label">{stat.label}</span>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Como funciona — section label + title pattern */}
+      <section className="py-14 sm:py-16 md:py-20 lg:py-28">
         <div className="container max-w-5xl">
           <motion.div
             className="text-center mb-10 md:mb-16"
@@ -118,6 +134,7 @@ const Index = () => {
             variants={fadeUp}
             custom={0}
           >
+            <span className="section-label-pill">Passo a passo</span>
             <h2 className="section-title">Como funciona?</h2>
             <p className="section-subtitle max-w-md mx-auto">Três passos simples. Sem complicação.</p>
           </motion.div>
@@ -150,7 +167,7 @@ const Index = () => {
             {/* Linha conectora vertical — mobile */}
             <div className="absolute left-[28px] top-[60px] bottom-[60px] w-px border-l-2 border-dashed border-primary/20 md:hidden z-0" />
 
-            <div className="grid md:grid-cols-3 gap-6 md:gap-6 relative z-10">
+            <div className="grid md:grid-cols-3 gap-5 md:gap-6 relative z-10">
               {[
                 {
                   num: '01',
@@ -210,14 +227,10 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Para quem */}
-      <section className="py-12 sm:py-16 md:py-20 lg:py-28 bg-muted/40 relative overflow-hidden">
-        {/* Decorative blobs */}
+      {/* Para quem — with section label */}
+      <section className="py-14 sm:py-16 md:py-20 lg:py-28 bg-muted/40 relative overflow-hidden">
         <svg className="absolute -right-32 -top-32 w-[300px] md:w-[500px] h-[300px] md:h-[500px] opacity-[0.04]" viewBox="0 0 500 500" fill="none">
           <path d="M400,280Q370,460,200,400Q30,340,80,200Q130,60,300,80Q470,100,400,280Z" fill="hsl(var(--primary))" />
-        </svg>
-        <svg className="absolute -left-24 -bottom-24 w-[200px] md:w-[350px] h-[200px] md:h-[350px] opacity-[0.03]" viewBox="0 0 500 500" fill="none">
-          <path d="M420,300Q380,480,200,420Q20,360,60,200Q100,40,280,60Q460,80,420,300Z" fill="hsl(var(--secondary))" />
         </svg>
 
         <div className="container relative z-10">
@@ -229,6 +242,7 @@ const Index = () => {
             variants={fadeUp}
             custom={0}
           >
+            <span className="section-label-pill">Nosso público</span>
             <h2 className="section-title">
               Para quem é o <span className="font-display font-800 text-primary">cadus<span className="text-highlight">.</span></span>
             </h2>
@@ -238,8 +252,7 @@ const Index = () => {
           <div className="grid gap-4 md:grid-cols-2 md:gap-8 max-w-4xl mx-auto">
             {[
               {
-                icon: <User size={24} className="text-primary-foreground md:hidden" />,
-                iconLg: <User size={28} className="text-primary-foreground hidden md:block" />,
+                icon: <User size={24} className="text-primary-foreground" />,
                 iconBg: 'bg-gradient-to-br from-primary to-[#14919B]',
                 title: 'Para você, paciente',
                 desc: 'Preencha sua ficha pelo celular, antes de chegar na clínica.',
@@ -248,8 +261,7 @@ const Index = () => {
                 checkColor: 'text-primary',
               },
               {
-                icon: <Briefcase size={24} className="text-primary-foreground md:hidden" />,
-                iconLg: <Briefcase size={28} className="text-primary-foreground hidden md:block" />,
+                icon: <Briefcase size={24} className="text-primary-foreground" />,
                 iconBg: 'bg-gradient-to-br from-secondary to-[#D4845A]',
                 title: 'Para profissionais e equipes',
                 desc: 'Profissionais, gestores e alunos — acesse os dados quando precisar.',
@@ -260,7 +272,7 @@ const Index = () => {
             ].map((card, i) => (
               <motion.div
                 key={i}
-                className={`bg-card rounded-2xl p-6 md:p-8 lg:p-10 shadow-sm border-2 ${card.accentColor} transition-all duration-300 hover:-translate-y-1 hover:shadow-lg text-center`}
+                className={`bg-card rounded-2xl p-6 md:p-8 shadow-sm border-2 ${card.accentColor} transition-all duration-300 hover:-translate-y-1 hover:shadow-lg text-center`}
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true }}
@@ -269,13 +281,12 @@ const Index = () => {
               >
                 <div className={`w-14 h-14 md:w-16 md:h-16 rounded-2xl ${card.iconBg} flex items-center justify-center mx-auto mb-4 md:mb-6 shadow-lg`}>
                   {card.icon}
-                  {card.iconLg}
                 </div>
                 <h3 className="font-display font-700 text-lg md:text-xl text-foreground mb-1.5 md:mb-2">{card.title}</h3>
                 <p className="text-muted-foreground text-[13px] md:text-sm mb-5 md:mb-6 leading-relaxed max-w-xs mx-auto">{card.desc}</p>
                 <div className="space-y-2.5 md:space-y-3 text-left max-w-[240px] mx-auto">
                   {card.benefits.map((benefit) => (
-                    <div key={benefit} className="flex items-center gap-2.5 md:gap-3">
+                    <div key={benefit} className="flex items-center gap-2.5">
                       <CheckCircle size={16} className={`${card.checkColor} shrink-0`} />
                       <span className="text-[13px] md:text-sm text-foreground font-body">{benefit}</span>
                     </div>
@@ -289,12 +300,8 @@ const Index = () => {
 
       {/* CTA Final */}
       <section className="cta-gradient py-16 sm:py-20 md:py-24 lg:py-32 relative overflow-hidden">
-        {/* Blobs */}
         <svg className="absolute -left-10 md:-left-20 -bottom-10 md:-bottom-20 w-[250px] md:w-[450px] h-[250px] md:h-[450px] z-0" viewBox="0 0 500 500" fill="none">
           <path d="M400,280Q370,460,200,400Q30,340,80,200Q130,60,300,80Q470,100,400,280Z" fill="white" fillOpacity="0.07" />
-        </svg>
-        <svg className="absolute -right-8 md:-right-16 -top-8 md:-top-16 w-[200px] md:w-[380px] h-[200px] md:h-[380px] z-0" viewBox="0 0 500 500" fill="none">
-          <path d="M420,300Q380,480,200,420Q20,360,60,200Q100,40,280,60Q460,80,420,300Z" fill="hsl(25, 76%, 63%)" fillOpacity="0.12" />
         </svg>
 
         <div className="container text-center relative z-20">
@@ -305,7 +312,10 @@ const Index = () => {
             variants={fadeUp}
             custom={0}
           >
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-display font-800 text-primary-foreground tracking-tight leading-tight">
+            <span className="section-label-pill" style={{ background: 'rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.8)', borderColor: 'rgba(255,255,255,0.15)' }}>
+              Comece agora
+            </span>
+            <h2 className="text-[1.65rem] leading-tight sm:text-3xl md:text-4xl lg:text-5xl font-display font-800 text-primary-foreground tracking-tight">
               Seus dados, antes da consulta<span className="text-highlight">.</span>
             </h2>
           </motion.div>
@@ -316,12 +326,12 @@ const Index = () => {
             variants={fadeUp}
             custom={1}
           >
-            <p className="text-primary-foreground/70 mt-3 md:mt-4 text-base md:text-lg font-body max-w-2xl mx-auto">
+            <p className="text-primary-foreground/70 mt-3 md:mt-4 text-[15px] md:text-lg font-body max-w-2xl mx-auto">
               Cadastre-se agora e chegue na clínica pronto para ser atendido.
             </p>
           </motion.div>
           <motion.div
-            className="flex flex-col w-full sm:flex-row sm:w-auto gap-3 mt-8 md:mt-10 justify-center"
+            className="flex flex-col gap-3 mt-8 md:mt-10 md:flex-row md:gap-4 justify-center"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
@@ -330,14 +340,14 @@ const Index = () => {
           >
             <Link
               to="/cadastro?role=paciente"
-              className="inline-flex items-center justify-center gap-2 px-7 py-3.5 md:px-9 md:py-4 rounded-full bg-card text-primary font-display font-700 text-[15px] md:text-base transition-all duration-200 hover:scale-[1.02] shadow-[0_0_30px_rgba(255,255,255,0.12)] hover:shadow-[0_0_40px_rgba(255,255,255,0.2)] min-h-[50px]"
+              className="flex items-center justify-center gap-2 px-7 py-4 md:px-9 rounded-full bg-card text-primary font-display font-700 text-[15px] md:text-base transition-all duration-200 hover:scale-[1.02] shadow-[0_0_30px_rgba(255,255,255,0.12)] hover:shadow-[0_0_40px_rgba(255,255,255,0.2)] min-h-[52px]"
             >
               <User size={18} />
               Cadastro de Paciente
             </Link>
             <Link
               to="/cadastro?role=profissional"
-              className="inline-flex items-center justify-center gap-2 px-7 py-3.5 md:px-9 md:py-4 rounded-full border-2 border-primary-foreground/30 text-primary-foreground font-display font-700 text-[15px] md:text-base transition-all duration-200 hover:bg-primary-foreground/10 min-h-[50px]"
+              className="flex items-center justify-center gap-2 px-7 py-4 md:px-9 rounded-full border-2 border-primary-foreground/30 text-primary-foreground font-display font-700 text-[15px] md:text-base transition-all duration-200 hover:bg-primary-foreground/10 min-h-[52px]"
             >
               <Briefcase size={18} />
               Cadastro de Profissional

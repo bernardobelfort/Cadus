@@ -1,13 +1,13 @@
-import { Plus, Shield, Lock, FileCheck } from 'lucide-react';
+import { Plus, Shield, Lock, FileCheck, Mail, Phone, MapPin } from 'lucide-react';
 
 const Footer = () => (
   <footer className="bg-card mt-auto">
     {/* Conteúdo principal */}
     <div className="border-t border-border pt-8 pb-6 md:pt-14 md:pb-10">
       <div className="container">
-        <div className="grid grid-cols-1 gap-8 text-center md:grid-cols-4 md:gap-8 md:text-left">
-          {/* Coluna 1 — Marca */}
-          <div className="flex flex-col items-center md:items-start gap-2">
+        <div className="flex flex-col gap-8 md:grid md:grid-cols-4 md:gap-8">
+          {/* Marca — always centered on mobile */}
+          <div className="flex flex-col items-center md:items-start gap-2 text-center md:text-left">
             <span className="font-display font-800 text-primary text-lg md:text-xl tracking-tight">
               cadus<span className="text-secondary">.</span>
             </span>
@@ -16,74 +16,72 @@ const Footer = () => (
               <br />
               Simples assim.
             </span>
-            <span className="text-[11px] md:text-xs text-muted-foreground/70 mt-2 md:mt-3">
+            <span className="text-[11px] md:text-xs text-muted-foreground/70 mt-1">
               Desenvolvido pelo CIn — UFPE
             </span>
           </div>
 
-          {/* Coluna 2 — Informações */}
-          <div className="flex flex-col items-center md:items-start gap-2.5 md:gap-3">
-            <span className="font-display font-700 text-[11px] md:text-xs text-foreground tracking-[0.15em] uppercase mb-0.5 md:mb-1">
+          {/* Links — Dinova style: clean list */}
+          <div className="flex flex-col items-center md:items-start gap-2.5">
+            <span className="font-display font-700 text-[11px] md:text-xs text-foreground tracking-[0.15em] uppercase mb-0.5">
               Informações
             </span>
-            <a href="#" className="text-[13px] md:text-sm text-muted-foreground hover:text-foreground transition-colors min-h-[44px] md:min-h-0 flex items-center">
+            <a href="#" className="text-[13px] md:text-sm text-muted-foreground hover:text-foreground transition-colors py-1.5 min-h-[44px] md:min-h-0 flex items-center">
               Política de Privacidade
             </a>
-            <a href="#" className="text-[13px] md:text-sm text-muted-foreground hover:text-foreground transition-colors min-h-[44px] md:min-h-0 flex items-center">
+            <a href="#" className="text-[13px] md:text-sm text-muted-foreground hover:text-foreground transition-colors py-1.5 min-h-[44px] md:min-h-0 flex items-center">
               Termos de Uso
             </a>
           </div>
 
-          {/* Coluna 3 — Clínicas */}
-          <div className="flex flex-col items-center md:items-start gap-2.5 md:gap-3">
-            <span className="font-display font-700 text-[11px] md:text-xs text-foreground tracking-[0.15em] uppercase mb-0.5 md:mb-1">
+          {/* Clínicas */}
+          <div className="flex flex-col items-center md:items-start gap-2.5">
+            <span className="font-display font-700 text-[11px] md:text-xs text-foreground tracking-[0.15em] uppercase mb-0.5">
               Clínicas
             </span>
-            <a href="#" className="text-[13px] md:text-sm text-muted-foreground hover:text-foreground transition-colors min-h-[44px] md:min-h-0 flex items-center">
+            <a href="#" className="text-[13px] md:text-sm text-muted-foreground hover:text-foreground transition-colors py-1.5 min-h-[44px] md:min-h-0 flex items-center">
               Clínicas Parceiras
             </a>
-            <a href="#" className="text-[13px] md:text-sm text-muted-foreground hover:text-foreground transition-colors min-h-[44px] md:min-h-0 flex items-center">
+            <a href="#" className="text-[13px] md:text-sm text-muted-foreground hover:text-foreground transition-colors py-1.5 min-h-[44px] md:min-h-0 flex items-center">
               Fale com as Clínicas
             </a>
           </div>
 
-          {/* Coluna 4 — Para Clínicas */}
-          <div className="flex flex-col items-center md:items-start gap-2.5 md:gap-3">
-            <span className="font-display font-700 text-[11px] md:text-xs text-foreground tracking-[0.15em] uppercase mb-0.5 md:mb-1">
-              Para Clínicas
+          {/* Contato — Dinova style with icons */}
+          <div className="flex flex-col items-center md:items-start gap-2.5">
+            <span className="font-display font-700 text-[11px] md:text-xs text-foreground tracking-[0.15em] uppercase mb-0.5">
+              Contato
             </span>
-            <a
-              href="#"
-              className="inline-flex items-center gap-1.5 text-[13px] md:text-sm text-primary font-600 hover:text-primary/80 transition-colors min-h-[44px] md:min-h-0"
-            >
-              <Plus size={15} />
-              Adicionar nova Clínica
+            <a href="#" className="inline-flex items-center gap-2 text-[13px] md:text-sm text-muted-foreground hover:text-foreground transition-colors py-1.5 min-h-[44px] md:min-h-0">
+              <Mail size={15} className="text-primary shrink-0" />
+              contato@cadus.com.br
+            </a>
+            <a href="#" className="inline-flex items-center gap-2 text-[13px] md:text-sm text-muted-foreground hover:text-foreground transition-colors py-1.5 min-h-[44px] md:min-h-0">
+              <MapPin size={15} className="text-primary shrink-0" />
+              Recife, PE — Brasil
             </a>
           </div>
         </div>
       </div>
     </div>
 
-    {/* Barra inferior */}
+    {/* Barra inferior — simplified */}
     <div className="border-t border-border py-4 md:py-5">
-      <div className="container flex flex-col items-center gap-3 md:flex-row md:justify-between md:gap-4">
-        {/* Badges de confiança */}
-        <div className="flex items-center gap-4 md:gap-6">
+      <div className="container flex flex-col items-center gap-3 md:flex-row md:justify-between">
+        <div className="flex items-center gap-4">
           <span className="inline-flex items-center gap-1.5 text-[11px] md:text-xs text-muted-foreground">
             <Shield size={14} className="text-primary" />
-            Cadastro seguro
+            Seguro
           </span>
           <span className="inline-flex items-center gap-1.5 text-[11px] md:text-xs text-muted-foreground">
             <Lock size={14} className="text-primary" />
-            Dados protegidos
+            Protegido
           </span>
           <span className="inline-flex items-center gap-1.5 text-[11px] md:text-xs text-muted-foreground">
             <FileCheck size={14} className="text-primary" />
             LGPD
           </span>
         </div>
-
-        {/* Copyright */}
         <span className="text-[11px] md:text-xs text-muted-foreground/60">
           © 2026 cadus. Todos os direitos reservados.
         </span>
