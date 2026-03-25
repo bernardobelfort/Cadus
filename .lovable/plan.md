@@ -1,54 +1,31 @@
 
 
-## Separar Data de Nascimento e Criar Tela de Identidade de Gênero Inclusiva
+## Simplificar Tela de Gênero
 
-### Mudanças
+### Mudanças em `src/components/registration/StepPatientGender.tsx`
 
-**1. Separar StepPatientAbout em duas telas**
-
-**Tela 4 — StepPatientBirthdate (nova)**
-- Ícone `Calendar` centralizado
-- Título: `"{nome}, quando você nasceu?"`
-- Apenas o campo de data de nascimento
-- Clean, rápido, uma pergunta só
-
-**Tela 5 — StepPatientGender (nova)**
-- Ícone `Heart` centralizado
-- Título: `"Como você se identifica?"`
-- Subtítulo: `"Queremos que você se sinta acolhido(a) aqui."`
-
-**Opções de gênero (baseado em pesquisa de boas práticas inclusivas):**
-
-Grid 2 colunas com as opções:
-- Mulher cisgênero
-- Homem cisgênero
-- Mulher transgênero
-- Homem transgênero
-- Não-binário
-- Genderqueer
-- Genderfluid
-- Agênero
-- Intersexo
-- Dois-espíritos
+**Opções simplificadas (4 apenas):**
+- Masculino
+- Feminino
+- Outro
 - Prefiro não informar
-- Outro (abre campo de texto livre)
 
-**Lógica condicional — pronome e nome social:**
-- Se a pessoa selecionar **Mulher cisgênero** ou **Homem cisgênero** → segue direto, sem perguntas extras
-- Se selecionar **qualquer outra opção** → aparece animado:
-  - "Qual pronome você prefere?" (Ela/Dela, Ele/Dele, Elu/Delu, Outro com campo livre)
-  - "Nome social (opcional)" — campo de texto para como prefere ser chamado
+**Lógica condicional:**
 
-**2. Atualizar Registration.tsx**
-- `patientSteps = 10` (era 9, agora tem birthdate + gender separados)
-- Inserir `StepPatientBirthdate` no case 4 e `StepPatientGender` no case 5
-- Deslocar os demais steps (Contact→6, Address→7, SUS→8, Complaint→9, Access→10)
+1. **Masculino / Feminino** → nenhum campo extra, segue direto
+2. **Outro** → aparece campo de texto "Como você se identifica?" + campos de pronome (Ela/Dela, Ele/Dele, Elu/Delu, Outro) + campo "Nome social (opcional)"
+3. **Prefiro não informar** → aparece campos de pronome + campo "Nome social (opcional)" (sem o campo de texto de gênero)
 
-**3. Remover StepPatientAbout.tsx** (substituído pelos dois novos)
+**Remover:**
+- Lista de 12 gêneros (cisgênero, transgênero, genderqueer, etc.)
+- Subtítulo "Queremos que você se sinta acolhido(a) aqui."
 
-### Arquivos
-- **Criar** `src/components/registration/StepPatientBirthdate.tsx`
-- **Criar** `src/components/registration/StepPatientGender.tsx`
-- **Remover** `src/components/registration/StepPatientAbout.tsx`
-- **Editar** `src/pages/Registration.tsx` — atualizar steps e imports
+**Manter:**
+- Ícone Heart centralizado
+- Título "Como você se identifica?"
+- Animação `animate-in fade-in` nos campos condicionais
+- Botões Continuar/Voltar no padrão atual
+
+### Arquivo a editar
+- `src/components/registration/StepPatientGender.tsx`
 
