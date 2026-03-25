@@ -389,7 +389,7 @@ const Index = () => {
             variants={fadeUp}
             custom={1}
           >
-            <p className="text-primary-foreground/70 mt-4 text-lg font-body max-w-lg mx-auto">
+            <p className="text-primary-foreground/70 mt-4 text-lg font-body max-w-2xl mx-auto">
               Cadastre-se agora e chegue na clínica pronto para ser atendido.
             </p>
           </motion.div>
