@@ -14,7 +14,7 @@ const StepPatientPersonal = ({ onNext, onBack }: Props) => {
     if (!patientData.nome?.trim()) e.nome = 'Por favor, informe seu nome completo.';
     if (!patientData.cpf || !validateCPF(patientData.cpf)) e.cpf = 'Por favor, informe um CPF válido.';
     if (!patientData.dataNascimento) e.dataNascimento = 'Por favor, informe sua data de nascimento.';
-    if (!patientData.sexo) e.sexo = 'Por favor, selecione uma opção.';
+    if (!patientData.genero) e.genero = 'Por favor, selecione uma opção.';
     if (!patientData.telefone || patientData.telefone.replace(/\D/g, '').length < 10)
       e.telefone = 'Por favor, informe um telefone válido.';
     setErrors(e);
