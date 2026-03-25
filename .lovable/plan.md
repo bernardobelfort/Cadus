@@ -1,21 +1,24 @@
 
 
-## Atualizar benefícios da seção "Para quem é o cadus."
+## Correções na seção "Para quem é o cadus."
 
-### Mudanças nos textos dos benefícios
+### Mudanças em `src/pages/Index.tsx`
 
-**Paciente** (linha 298):
-- ~~Cadastro pelo celular~~ → `Cadastro fácil e rápido`
-- ~~Dados sempre salvos~~ → `Seu histórico sempre salvo`
-- ~~Atualiza quando quiser~~ → `Controle do seu prontuário`
+**1. Linha 306 — Descrição do profissional**
+- `'Profissionais, gestores e alunos, acesse os dados antes do atendimento.'`
+- → `'Profissionais, gestores e alunos, acesse os dados quando precisar.'`
 
-**Profissional** (linha 307):
-- ~~Dados antes da consulta~~ → `Dados a qualquer momento`
-- ~~Acesso em qualquer lugar~~ → `Acesso de onde estiver`
-- ~~Sem retrabalho~~ → `Tudo organizado em um só lugar`
+**2. Linha 307 — Terceiro benefício do profissional**
+- `'Tudo organizado em um só lugar'` (vago, 2 linhas, assimétrico)
+- → `'Gestão simples e completa'` (5 palavras, 1 linha, simétrico com os demais)
 
-Os textos ficam simétricos em tamanho (todos entre 4-6 palavras), bem alinhados visualmente.
+Comparação de simetria final:
 
-### Arquivo a editar
-- `src/pages/Index.tsx` — linhas 298 e 307, apenas os arrays de `benefits`
+| Paciente | Profissional |
+|---|---|
+| Cadastro fácil e rápido | Dados a qualquer momento |
+| Seu histórico sempre salvo | Acesso de onde estiver |
+| Controle do seu prontuário | Gestão simples e completa |
+
+Todos entre 4-5 palavras, uma linha cada.
 
