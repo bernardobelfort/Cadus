@@ -17,60 +17,52 @@ const fadeUp = {
 const HeroIllustration = () => (
   <div className="relative w-full max-w-[520px] flex items-center justify-center py-8">
     {/* Blob 1 — large teal, centered behind cards */}
-    <motion.svg
+    <svg
       className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[520px] h-[520px] z-0"
       viewBox="0 0 500 500"
       fill="none"
-      animate={{ rotate: 360 }}
-      transition={{ duration: 35, repeat: Infinity, ease: "linear" }}
     >
       <path
         d="M400,280Q370,460,200,400Q30,340,80,200Q130,60,300,80Q470,100,400,280Z"
         fill="hsl(184, 78%, 22%)"
         fillOpacity="0.22"
       />
-    </motion.svg>
+    </svg>
 
     {/* Blob 2 — amber accent, bottom-right */}
-    <motion.svg
+    <svg
       className="absolute -right-10 -bottom-4 w-[380px] h-[380px] z-0"
       viewBox="0 0 500 500"
       fill="none"
-      animate={{ rotate: -360 }}
-      transition={{ duration: 28, repeat: Infinity, ease: "linear" }}
     >
       <path
         d="M420,300Q380,480,200,420Q20,360,60,200Q100,40,280,60Q460,80,420,300Z"
         fill="hsl(25, 76%, 63%)"
         fillOpacity="0.25"
       />
-    </motion.svg>
+    </svg>
 
     {/* Blob 3 — teal vibrante, top-left */}
-    <motion.svg
+    <svg
       className="absolute -left-6 -top-2 w-[260px] h-[260px] z-0"
       viewBox="0 0 500 500"
       fill="none"
-      animate={{ scale: [0.92, 1.08, 0.92] }}
-      transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
     >
       <path
         d="M380,260Q340,420,200,380Q60,340,100,200Q140,60,300,100Q460,140,380,260Z"
         fill="hsl(184, 60%, 35%)"
         fillOpacity="0.18"
       />
-    </motion.svg>
+    </svg>
 
     {/* Blob 4 — small teal dot, accent */}
-    <motion.svg
+    <svg
       className="absolute right-4 top-2 w-[140px] h-[140px] z-0"
       viewBox="0 0 500 500"
       fill="none"
-      animate={{ scale: [1, 1.15, 1], rotate: 180 }}
-      transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
     >
       <circle cx="250" cy="250" r="200" fill="hsl(184, 78%, 22%)" fillOpacity="0.14" />
-    </motion.svg>
+    </svg>
 
     {/* Illustration */}
     <img
@@ -248,30 +240,26 @@ const Index = () => {
       {/* Para quem — cards premium simétricos */}
       <section className="py-20 md:py-28 bg-muted/40 relative overflow-hidden">
         {/* Blob decorativo orgânico */}
-        <motion.svg
+        <svg
           className="absolute -right-32 -top-32 w-[500px] h-[500px] opacity-[0.04]"
           viewBox="0 0 500 500"
           fill="none"
-          animate={{ rotate: 360 }}
-          transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
         >
           <path
             d="M400,280Q370,460,200,400Q30,340,80,200Q130,60,300,80Q470,100,400,280Z"
             fill="hsl(var(--primary))"
           />
-        </motion.svg>
-        <motion.svg
+        </svg>
+        <svg
           className="absolute -left-24 -bottom-24 w-[350px] h-[350px] opacity-[0.03]"
           viewBox="0 0 500 500"
           fill="none"
-          animate={{ rotate: -360 }}
-          transition={{ duration: 35, repeat: Infinity, ease: "linear" }}
         >
           <path
             d="M420,300Q380,480,200,420Q20,360,60,200Q100,40,280,60Q460,80,420,300Z"
             fill="hsl(var(--secondary))"
           />
-        </motion.svg>
+        </svg>
 
         <div className="container relative z-10">
           <motion.div
@@ -340,34 +328,30 @@ const Index = () => {
       {/* CTA Final */}
       <section className="cta-gradient py-24 md:py-32 relative overflow-hidden">
         {/* Blob orgânico 1 — teal grande */}
-        <motion.svg
+        <svg
           className="absolute -left-20 -bottom-20 w-[450px] h-[450px] z-0"
           viewBox="0 0 500 500"
           fill="none"
-          animate={{ rotate: 360 }}
-          transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
         >
           <path
             d="M400,280Q370,460,200,400Q30,340,80,200Q130,60,300,80Q470,100,400,280Z"
             fill="white"
             fillOpacity="0.07"
           />
-        </motion.svg>
+        </svg>
 
         {/* Blob orgânico 2 — amber direita */}
-        <motion.svg
+        <svg
           className="absolute -right-16 -top-16 w-[380px] h-[380px] z-0"
           viewBox="0 0 500 500"
           fill="none"
-          animate={{ rotate: -360 }}
-          transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
         >
           <path
             d="M420,300Q380,480,200,420Q20,360,60,200Q100,40,280,60Q460,80,420,300Z"
             fill="hsl(25, 76%, 63%)"
             fillOpacity="0.12"
           />
-        </motion.svg>
+        </svg>
 
 
         <div className="container text-center relative z-20">
