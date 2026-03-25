@@ -59,7 +59,7 @@ const StepPatientGender = ({ onNext, onBack }: Props) => {
         <h2 className="text-2xl md:text-3xl font-display font-800 text-foreground tracking-tight">
           Como você se identifica?
         </h2>
-        <p className="text-muted-foreground mt-2 font-body">Essa informação nos ajuda a personalizar seu atendimento.</p>
+        <p className="text-muted-foreground mt-2 font-body">Selecione a opção que melhor te representa.</p>
       </div>
 
       <div className="space-y-5">
