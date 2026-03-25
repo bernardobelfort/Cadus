@@ -1,55 +1,21 @@
 
 
-## Redesign da Seção "Para quem é o cadus."
+## Atualizar benefícios da seção "Para quem é o cadus."
 
-### Problema atual
-- Cards simples demais com barra lateral colorida (padrão template)
-- Tags/chips espalhadas sem simetria, tamanhos irregulares
-- Sem hierarquia visual forte entre os dois perfis
-- Layout genérico de "2 cards lado a lado"
+### Mudanças nos textos dos benefícios
 
-### Nova abordagem: Cards premium simétricos com layout estruturado
+**Paciente** (linha 298):
+- ~~Cadastro pelo celular~~ → `Cadastro fácil e rápido`
+- ~~Dados sempre salvos~~ → `Seu histórico sempre salvo`
+- ~~Atualiza quando quiser~~ → `Controle do seu prontuário`
 
-```text
-┌─────────────────────────────────────────────────────────┐
-│          Para quem é o cadus.                            │
-│          (subtítulo elegante)                            │
-│                                                          │
-│  ┌──────────────────────┐  ┌──────────────────────────┐  │
-│  │     🟢 ícone         │  │     🟠 ícone             │  │
-│  │                      │  │                          │  │
-│  │  Para você, paciente │  │  Para profissionais      │  │
-│  │                      │  │  e equipes               │  │
-│  │  Descrição curta     │  │  Descrição curta         │  │
-│  │                      │  │                          │  │
-│  │  ✓ Benefício 1       │  │  ✓ Benefício 1           │  │
-│  │  ✓ Benefício 2       │  │  ✓ Benefício 2           │  │
-│  │  ✓ Benefício 3       │  │  ✓ Benefício 3           │  │
-│  └──────────────────────┘  └──────────────────────────┘  │
-└─────────────────────────────────────────────────────────┘
-```
+**Profissional** (linha 307):
+- ~~Dados antes da consulta~~ → `Dados a qualquer momento`
+- ~~Acesso em qualquer lugar~~ → `Acesso de onde estiver`
+- ~~Sem retrabalho~~ → `Tudo organizado em um só lugar`
 
-### Mudanças concretas
-
-**1. Cards completamente redesenhados**
-- Remover barra lateral colorida (genérica)
-- Ícone centralizado no topo do card dentro de um círculo grande (64x64) com gradiente suave
-- Título e descrição centralizados
-- Benefícios em **lista vertical alinhada** (não chips/tags espalhados), cada um com ícone CheckCircle alinhado, texto à direita, tudo simétrico
-- Hover com elevação suave e borda sutil colorida (teal para paciente, amber para profissional)
-- Padding generoso e igual nos dois cards
-
-**2. Simetria perfeita**
-- Ambos os cards com exatamente a mesma estrutura, mesma altura, mesmos espaçamentos
-- 3 benefícios em cada, todos com o mesmo formato: ícone + texto em linha, alinhados à esquerda dentro do card centralizado
-- `grid md:grid-cols-2 gap-8` com cards de altura igual
-
-**3. Subtítulo adicionado**
-- Abaixo do título "Para quem é o cadus.", adicionar um subtítulo: "Cada perfil tem seu caminho. Escolha o seu."
-
-**4. Decoração de fundo refinada**
-- Manter SVG decorativo mas com formas mais orgânicas (blob sutil em vez de círculos concêntricos)
+Os textos ficam simétricos em tamanho (todos entre 4-6 palavras), bem alinhados visualmente.
 
 ### Arquivo a editar
-- `src/pages/Index.tsx` — reescrever seção "Para quem" (linhas 248-325)
+- `src/pages/Index.tsx` — linhas 298 e 307, apenas os arrays de `benefits`
 
