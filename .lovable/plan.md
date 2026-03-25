@@ -1,24 +1,43 @@
 
 
-## Redesign do StepProfile — Cards mais compactos e elegantes
+## Redesign Premium do StepProfile
 
-### Problema
-Os cards de Paciente e Profissional estão esticados verticalmente com muito espaço vazio (minHeight 210px + padding excessivo), resultando em aparência genérica e desproporcional.
+### Problemas atuais (visto no screenshot)
+- Cards genéricos e sem vida: bordas cinza fracas, fundo branco plano, zero personalidade
+- Emojis (❤️ 🩺) ao lado do título parecem amadores e baratos
+- Ícones pequenos (w-12 h-12) sem impacto visual
+- Chevron genérico à direita sem propósito claro
+- Card externo (card-cadus) adiciona uma camada desnecessária que achata tudo
+- Sem diferenciação visual entre as duas opções — parecem a mesma coisa
 
-### Mudanças em `src/components/registration/StepProfile.tsx`
+### Novo design
 
-1. **Remover `minHeight: 210px`** — deixar o conteúdo definir a altura naturalmente
-2. **Layout mais compacto**: reduzir padding de `p-6` para `p-5`, icon-hero menor e inline com texto
-3. **Redesign dos cards**: layout horizontal (ícone à esquerda, texto à direita) em vez de vertical empilhado — mais moderno e menos esticado
-4. **Hover mais rico**: gradiente de fundo sutil, sombra com glow colorido (teal para paciente, amber para profissional)
-5. **Borda inferior colorida** quando selecionado (accent bar de 3px) em vez de apenas mudar a borda inteira
-6. **Micro-interação**: seta desliza para a direita no hover
-7. **Mudar grid para `flex flex-col gap-3`** — cards empilhados verticalmente (mais estreitos e proporcionais) em vez de lado a lado onde ficam largos demais
-8. **Adicionar emoji/badge visual** discreto ("🩺" para profissional, "❤️" para paciente) como diferenciador
+**Layout**: Remover o card-cadus wrapper externo. Dois cards grandes empilhados verticalmente, cada um com identidade visual própria e forte.
 
-### Resultado esperado
-Cards compactos, proporcionais, com layout horizontal (ícone + texto lado a lado), empilhados verticalmente, sem espaço vazio excessivo. Visual limpo e premium.
+**Card Paciente (teal)**:
+- Ícone grande (`w-16 h-16`) com gradiente teal vibrante e glow sutil, centralizado no topo do card
+- Ícone: `Heart` (lucide) dentro do círculo — não emoji
+- Background: gradiente suave `from-primary/5 to-transparent`
+- Borda: `border-2 border-primary/20`, no hover `border-primary/50` com sombra teal
+- Título "Sou Paciente" em bold, descrição abaixo
+- Layout vertical centralizado (ícone → título → descrição)
+- Seleção: borda primary sólida, background `bg-primary/8`, checkmark animado no canto
 
-### Arquivo editado
+**Card Profissional (amber/secondary)**:
+- Mesmo layout, ícone `Stethoscope` com gradiente amber
+- Background: gradiente suave `from-secondary/5 to-transparent`
+- Borda: `border-2 border-secondary/20`, hover `border-secondary/50` com sombra amber
+
+**Interações**:
+- Hover: `scale-[1.02]`, sombra elevada colorida, borda mais visível
+- Seleção: scale volta ao normal, borda sólida, checkmark com bounce
+- Auto-advance mantido (350ms)
+
+**Header**: Título sem wrapper card — diretamente no topo com tipografia grande e "Cadus" em primary
+
+### Resultado
+Cards com personalidade, ícones lucide grandes e bonitos (sem emojis), cores distintas entre paciente e profissional, interações ricas.
+
+### Arquivo
 - `src/components/registration/StepProfile.tsx`
 
