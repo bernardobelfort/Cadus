@@ -2,9 +2,9 @@ import { useState } from 'react';
 import { useRegistrationStore } from '@/store/registrationStore';
 import { Lock, ArrowLeft, Check, Eye, EyeOff, Loader2, ShieldCheck } from 'lucide-react';
 
-interface Props { onNext: () => void; onBack: () => void; }
+interface Props { onNext: () => void; onBack: () => void; stepNumber?: number; totalSteps?: number; }
 
-const StepProfAccess = ({ onNext, onBack }: Props) => {
+const StepProfAccess = ({ onNext, onBack, stepNumber, totalSteps }: Props) => {
   const { professionalData, updateProfessionalData, completeRegistration } = useRegistrationStore();
   const [confirmSenha, setConfirmSenha] = useState('');
   const [showPass, setShowPass] = useState(false);
@@ -42,15 +42,18 @@ const StepProfAccess = ({ onNext, onBack }: Props) => {
 
   return (
     <div className="card-cadus">
-      <div className="text-center mb-8">
-        <div className="icon-hero icon-hero-teal">
-          <Lock size={32} className="text-primary" />
+      <div className="step-header">
+        <div className="icon-hero">
+          <Lock size={26} />
         </div>
-        <h2 className="text-2xl md:text-3xl font-display font-800 text-foreground tracking-tight">
-          Crie seu acesso
-        </h2>
-        <p className="text-muted-foreground/70 mt-2 font-body">Você vai usar esses dados para entrar.</p>
+        <h2>Crie seu acesso</h2>
+        <p>Última etapa — defina uma senha segura</p>
+        {stepNumber && totalSteps && (
+          <div className="step-badge">Etapa {stepNumber} de {totalSteps}</div>
+        )}
       </div>
+
+      <div className="step-divider" />
 
       <div className="space-y-5">
         <div>
@@ -71,20 +74,11 @@ const StepProfAccess = ({ onNext, onBack }: Props) => {
               <div className="flex items-center gap-2 mb-3">
                 <div className="flex gap-1.5 flex-1">
                   {[1, 2, 3].map((i) => (
-                    <div
-                      key={i}
-                      className="h-1.5 flex-1 rounded-full transition-all duration-500"
-                      style={{
-                        background: strength >= i
-                          ? i === 1 ? 'hsl(0, 72%, 51%)' : i === 2 ? 'hsl(40, 90%, 50%)' : 'hsl(160, 60%, 40%)'
-                          : 'hsl(220, 13%, 91%)'
-                      }}
-                    />
+                    <div key={i} className="h-1.5 flex-1 rounded-full transition-all duration-500"
+                      style={{ background: strength >= i ? i === 1 ? 'hsl(0, 72%, 51%)' : i === 2 ? 'hsl(40, 90%, 50%)' : 'hsl(160, 60%, 40%)' : 'hsl(220, 13%, 91%)' }} />
                   ))}
                 </div>
-                {strengthLabel && (
-                  <span className={`text-xs font-display font-600 ${strengthColor}`}>{strengthLabel}</span>
-                )}
+                {strengthLabel && <span className={`text-xs font-display font-600 ${strengthColor}`}>{strengthLabel}</span>}
               </div>
               <div className="space-y-1.5">
                 {[
@@ -110,19 +104,9 @@ const StepProfAccess = ({ onNext, onBack }: Props) => {
           {errors.confirm && <p className="error-text">{errors.confirm}</p>}
         </div>
 
-        {/* Terms toggle card */}
-        <button
-          type="button"
-          onClick={() => setAccepted(!accepted)}
-          className={`w-full text-left rounded-2xl border-2 p-4 flex items-start gap-3 transition-all duration-300 ${
-            accepted
-              ? 'border-primary bg-accent'
-              : 'border-border/60 bg-card hover:border-primary/30'
-          }`}
-        >
-          <div className={`w-5 h-5 rounded-md flex-shrink-0 mt-0.5 flex items-center justify-center transition-all ${
-            accepted ? 'bg-primary' : 'border-2 border-border'
-          }`}>
+        <button type="button" onClick={() => setAccepted(!accepted)}
+          className={`w-full text-left rounded-2xl border-2 p-4 flex items-start gap-3 transition-all duration-300 ${accepted ? 'border-primary bg-accent' : 'border-border/60 bg-card hover:border-primary/30'}`}>
+          <div className={`w-5 h-5 rounded-md flex-shrink-0 mt-0.5 flex items-center justify-center transition-all ${accepted ? 'bg-primary' : 'border-2 border-border'}`}>
             {accepted && <Check size={12} className="text-primary-foreground" />}
           </div>
           <span className="text-sm text-muted-foreground leading-relaxed font-body">
@@ -133,11 +117,7 @@ const StepProfAccess = ({ onNext, onBack }: Props) => {
       </div>
 
       <button onClick={handleSubmit} disabled={loading} className="btn-primary w-full mt-8 group">
-        {loading ? (
-          <><Loader2 size={18} className="animate-spin" /> Enviando...</>
-        ) : (
-          <><ShieldCheck size={18} /> Finalizar cadastro</>
-        )}
+        {loading ? <><Loader2 size={18} className="animate-spin" /> Enviando...</> : <><ShieldCheck size={18} /> Finalizar cadastro</>}
       </button>
 
       <button onClick={onBack} disabled={loading} className="btn-back">

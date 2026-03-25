@@ -3,9 +3,9 @@ import { useRegistrationStore } from '@/store/registrationStore';
 import { getFirstName } from '@/lib/masks';
 import { Calendar, ArrowRight, ArrowLeft } from 'lucide-react';
 
-interface Props { onNext: () => void; onBack: () => void; }
+interface Props { onNext: () => void; onBack: () => void; stepNumber?: number; totalSteps?: number; }
 
-const StepPatientBirthdate = ({ onNext, onBack }: Props) => {
+const StepPatientBirthdate = ({ onNext, onBack, stepNumber, totalSteps }: Props) => {
   const { patientData, updatePatientData } = useRegistrationStore();
   const [error, setError] = useState('');
   const firstName = getFirstName(patientData.nome || '');
@@ -21,24 +21,30 @@ const StepPatientBirthdate = ({ onNext, onBack }: Props) => {
 
   return (
     <div className="card-cadus">
-      <div className="text-center mb-8">
-        <div className="icon-hero icon-hero-violet">
-          <Calendar size={32} className="text-violet-600" />
+      <div className="step-header">
+        <div className="icon-hero">
+          <Calendar size={26} />
         </div>
-        <h2 className="text-2xl md:text-3xl font-display font-800 text-foreground tracking-tight">
-          {firstName ? `${firstName}, quando você nasceu?` : 'Quando você nasceu?'}
-        </h2>
-        <p className="text-muted-foreground/70 mt-2 font-body">Precisamos saber sua data de nascimento.</p>
+        <h2>{firstName ? `${firstName}, quando você nasceu?` : 'Quando você nasceu?'}</h2>
+        <p>Necessário para o prontuário clínico</p>
+        {stepNumber && totalSteps && (
+          <div className="step-badge">Etapa {stepNumber} de {totalSteps}</div>
+        )}
       </div>
+
+      <div className="step-divider" />
 
       <div>
         <label className="label-cadus">Data de nascimento *</label>
-        <input
-          type="date"
-          className="input-cadus"
-          value={patientData.dataNascimento || ''}
-          onChange={(e) => updatePatientData({ dataNascimento: e.target.value })}
-        />
+        <div className="relative">
+          <Calendar size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground/40" />
+          <input
+            type="date"
+            className="input-cadus pl-12"
+            value={patientData.dataNascimento || ''}
+            onChange={(e) => updatePatientData({ dataNascimento: e.target.value })}
+          />
+        </div>
         {error && <p className="error-text mt-2">{error}</p>}
       </div>
 

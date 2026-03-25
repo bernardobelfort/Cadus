@@ -3,9 +3,9 @@ import { useRegistrationStore } from '@/store/registrationStore';
 import { formatCEP, fetchAddress, getFirstName } from '@/lib/masks';
 import { MapPin, ArrowRight, ArrowLeft, Loader2 } from 'lucide-react';
 
-interface Props { onNext: () => void; onBack: () => void; }
+interface Props { onNext: () => void; onBack: () => void; stepNumber?: number; totalSteps?: number; }
 
-const StepPatientAddress = ({ onNext, onBack }: Props) => {
+const StepPatientAddress = ({ onNext, onBack, stepNumber, totalSteps }: Props) => {
   const { patientData, updatePatientData } = useRegistrationStore();
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [loadingCep, setLoadingCep] = useState(false);
@@ -35,22 +35,26 @@ const StepPatientAddress = ({ onNext, onBack }: Props) => {
 
   return (
     <div className="card-cadus">
-      <div className="text-center mb-8">
-        <div className="icon-hero icon-hero-amber">
-          <MapPin size={32} className="text-amber-600" />
+      <div className="step-header">
+        <div className="icon-hero">
+          <MapPin size={26} />
         </div>
-        <h2 className="text-2xl md:text-3xl font-display font-800 text-foreground tracking-tight">
-          {firstName ? `${firstName}, onde você mora?` : 'Onde você mora?'}
-        </h2>
-        <p className="text-muted-foreground/70 mt-2 font-body">Digite seu CEP e preenchemos o resto.</p>
+        <h2>{firstName ? `${firstName}, onde você mora?` : 'Onde você mora?'}</h2>
+        <p>O CEP preenche automaticamente rua e bairro</p>
+        {stepNumber && totalSteps && (
+          <div className="step-badge">Etapa {stepNumber} de {totalSteps}</div>
+        )}
       </div>
+
+      <div className="step-divider" />
 
       <div className="space-y-4">
         <div>
           <label className="label-cadus">CEP *</label>
           <div className="relative">
+            <MapPin size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground/40" />
             <input
-              className="input-cadus"
+              className="input-cadus pl-12"
               value={patientData.cep || ''}
               onChange={(e) => handleCep(e.target.value)}
               placeholder="00000-000"
@@ -72,22 +76,12 @@ const StepPatientAddress = ({ onNext, onBack }: Props) => {
             <div className="grid grid-cols-2 gap-3">
               <div>
                 <label className="label-cadus">Número *</label>
-                <input
-                  className="input-cadus"
-                  value={patientData.numero || ''}
-                  onChange={(e) => updatePatientData({ numero: e.target.value })}
-                  placeholder="Nº"
-                />
+                <input className="input-cadus" value={patientData.numero || ''} onChange={(e) => updatePatientData({ numero: e.target.value })} placeholder="Nº" />
                 {errors.numero && <p className="error-text">{errors.numero}</p>}
               </div>
               <div>
                 <label className="label-cadus">Complemento</label>
-                <input
-                  className="input-cadus"
-                  value={patientData.complemento || ''}
-                  onChange={(e) => updatePatientData({ complemento: e.target.value })}
-                  placeholder="Apto, bloco..."
-                />
+                <input className="input-cadus" value={patientData.complemento || ''} onChange={(e) => updatePatientData({ complemento: e.target.value })} placeholder="Apto, bloco..." />
               </div>
             </div>
           </div>

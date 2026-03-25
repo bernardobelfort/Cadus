@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { useRegistrationStore } from '@/store/registrationStore';
 import { formatCPF, validateCPF, getFirstName } from '@/lib/masks';
-import { ShieldCheck, ArrowRight, ArrowLeft, Lock } from 'lucide-react';
+import { ShieldCheck, ArrowRight, ArrowLeft, Lock, Hash } from 'lucide-react';
 
-interface Props { onNext: () => void; onBack: () => void; }
+interface Props { onNext: () => void; onBack: () => void; stepNumber?: number; totalSteps?: number; }
 
-const StepPatientCPF = ({ onNext, onBack }: Props) => {
+const StepPatientCPF = ({ onNext, onBack, stepNumber, totalSteps }: Props) => {
   const { patientData, updatePatientData } = useRegistrationStore();
   const [error, setError] = useState('');
   const firstName = getFirstName(patientData.nome || '');
@@ -21,29 +21,33 @@ const StepPatientCPF = ({ onNext, onBack }: Props) => {
 
   return (
     <div className="card-cadus">
-      <div className="text-center mb-8">
-        <div className="icon-hero icon-hero-blue">
-          <ShieldCheck size={32} className="text-blue-600" />
+      <div className="step-header">
+        <div className="icon-hero">
+          <ShieldCheck size={26} />
         </div>
-        <h2 className="text-2xl md:text-3xl font-display font-800 text-foreground tracking-tight">
-          Olá, {firstName}!
-        </h2>
-        <p className="text-muted-foreground/70 mt-2 font-body">
-          Agora precisamos do seu CPF para sua segurança.
-        </p>
+        <h2>{firstName ? `${firstName}, informe seu CPF` : 'Informe seu CPF'}</h2>
+        <p>Será usado como login seguro na plataforma</p>
+        {stepNumber && totalSteps && (
+          <div className="step-badge">Etapa {stepNumber} de {totalSteps}</div>
+        )}
       </div>
 
+      <div className="step-divider" />
+
       <div>
-        <input
-          className="input-cadus text-center text-lg tracking-wide"
-          value={patientData.cpf || ''}
-          onChange={(e) => updatePatientData({ cpf: formatCPF(e.target.value) })}
-          placeholder="000.000.000-00"
-          inputMode="numeric"
-          autoFocus
-        />
+        <div className="relative">
+          <Hash size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground/40" />
+          <input
+            className="input-cadus pl-12 text-center text-lg tracking-wide"
+            value={patientData.cpf || ''}
+            onChange={(e) => updatePatientData({ cpf: formatCPF(e.target.value) })}
+            placeholder="000.000.000-00"
+            inputMode="numeric"
+            autoFocus
+          />
+        </div>
         {error && <p className="error-text text-center mt-2">{error}</p>}
-        <div className="flex items-center justify-center gap-1.5 mt-4 text-xs text-muted-foreground/60">
+        <div className="flex items-center justify-center gap-1.5 mt-4 text-xs text-muted-foreground/50">
           <Lock size={12} />
           <span>Seus dados estão protegidos</span>
         </div>

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useRegistrationStore } from '@/store/registrationStore';
 import { Heart, ArrowRight, ArrowLeft, Check } from 'lucide-react';
 
-interface Props { onNext: () => void; onBack: () => void; }
+interface Props { onNext: () => void; onBack: () => void; stepNumber?: number; totalSteps?: number; }
 
 const genderOptions = [
   { label: 'Feminino', icon: '♀' },
@@ -14,7 +14,7 @@ const genderSecondary = [
 ];
 const pronomeOptions = ['Ela/Dela', 'Ele/Dele', 'Elu/Delu', 'Outro'];
 
-const StepPatientGender = ({ onNext, onBack }: Props) => {
+const StepPatientGender = ({ onNext, onBack, stepNumber, totalSteps }: Props) => {
   const { patientData, updatePatientData } = useRegistrationStore();
   const [error, setError] = useState('');
   const [generoOutro, setGeneroOutro] = useState('');
@@ -61,15 +61,18 @@ const StepPatientGender = ({ onNext, onBack }: Props) => {
 
   return (
     <div className="card-cadus">
-      <div className="text-center mb-8">
-        <div className="icon-hero icon-hero-rose">
-          <Heart size={32} className="text-rose-500" />
+      <div className="step-header">
+        <div className="icon-hero">
+          <Heart size={26} />
         </div>
-        <h2 className="text-2xl md:text-3xl font-display font-800 text-foreground tracking-tight">
-          Como você se identifica?
-        </h2>
-        <p className="text-muted-foreground/70 mt-2 font-body">Selecione a opção que melhor te representa.</p>
+        <h2>Como você se identifica?</h2>
+        <p>Informação importante para seu atendimento</p>
+        {stepNumber && totalSteps && (
+          <div className="step-badge">Etapa {stepNumber} de {totalSteps}</div>
+        )}
       </div>
+
+      <div className="step-divider" />
 
       <div className="space-y-5">
         <div>
@@ -91,7 +94,6 @@ const StepPatientGender = ({ onNext, onBack }: Props) => {
             ))}
           </div>
 
-          {/* Separator */}
           <div className="flex items-center gap-3 my-5">
             <div className="flex-1 h-px bg-border/60" />
             <span className="text-xs text-muted-foreground/50 font-body">ou</span>
@@ -121,12 +123,7 @@ const StepPatientGender = ({ onNext, onBack }: Props) => {
         {showGenderInput && (
           <div className="animate-in fade-in slide-in-from-top-2 duration-300">
             <label className="label-cadus">Como você se identifica?</label>
-            <input
-              className="input-cadus"
-              value={generoOutro}
-              onChange={(e) => setGeneroOutro(e.target.value)}
-              placeholder="Digite aqui..."
-            />
+            <input className="input-cadus" value={generoOutro} onChange={(e) => setGeneroOutro(e.target.value)} placeholder="Digite aqui..." />
           </div>
         )}
 
@@ -136,34 +133,19 @@ const StepPatientGender = ({ onNext, onBack }: Props) => {
               <label className="label-cadus">Qual pronome você prefere? (opcional)</label>
               <div className="grid grid-cols-2 gap-2.5">
                 {pronomeOptions.map((opt) => (
-                  <button
-                    key={opt}
-                    type="button"
-                    onClick={() => updatePatientData({ pronome: opt })}
-                    className={`selection-card text-sm !py-3 ${patientData.pronome === opt ? 'selection-card-active' : ''}`}
-                  >
+                  <button key={opt} type="button" onClick={() => updatePatientData({ pronome: opt })}
+                    className={`selection-card text-sm !py-3 ${patientData.pronome === opt ? 'selection-card-active' : ''}`}>
                     {opt}
                   </button>
                 ))}
               </div>
               {patientData.pronome === 'Outro' && (
-                <input
-                  className="input-cadus mt-2.5"
-                  value={pronomeOutro}
-                  onChange={(e) => setPronomeOutro(e.target.value)}
-                  placeholder="Qual pronome?"
-                />
+                <input className="input-cadus mt-2.5" value={pronomeOutro} onChange={(e) => setPronomeOutro(e.target.value)} placeholder="Qual pronome?" />
               )}
             </div>
-
             <div>
               <label className="label-cadus">Nome social (opcional)</label>
-              <input
-                className="input-cadus"
-                value={patientData.nomeSocial || ''}
-                onChange={(e) => updatePatientData({ nomeSocial: e.target.value })}
-                placeholder="Como prefere ser chamado?"
-              />
+              <input className="input-cadus" value={patientData.nomeSocial || ''} onChange={(e) => updatePatientData({ nomeSocial: e.target.value })} placeholder="Como prefere ser chamado?" />
               <p className="text-xs text-muted-foreground/60 mt-1.5">Se preferir ser chamado de outro nome, informe aqui.</p>
             </div>
           </div>

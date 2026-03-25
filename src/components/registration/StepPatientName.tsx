@@ -3,9 +3,9 @@ import { useRegistrationStore } from '@/store/registrationStore';
 import { formatName } from '@/lib/masks';
 import { UserRound, ArrowRight, ArrowLeft } from 'lucide-react';
 
-interface Props { onNext: () => void; onBack: () => void; }
+interface Props { onNext: () => void; onBack: () => void; stepNumber?: number; totalSteps?: number; }
 
-const StepPatientName = ({ onNext, onBack }: Props) => {
+const StepPatientName = ({ onNext, onBack, stepNumber, totalSteps }: Props) => {
   const { patientData, updatePatientData } = useRegistrationStore();
   const [error, setError] = useState('');
 
@@ -24,26 +24,30 @@ const StepPatientName = ({ onNext, onBack }: Props) => {
 
   return (
     <div className="card-cadus">
-      <div className="text-center mb-8">
-        <div className="icon-hero icon-hero-teal">
-          <UserRound size={32} className="text-primary" />
+      <div className="step-header">
+        <div className="icon-hero">
+          <UserRound size={26} />
         </div>
-        <h2 className="text-2xl md:text-3xl font-display font-800 text-foreground tracking-tight">
-          Como você se chama?
-        </h2>
-        <p className="text-muted-foreground/70 mt-2 font-body">
-          Queremos saber como te chamar.
-        </p>
+        <h2>Como você se chama?</h2>
+        <p>Nome e sobrenome como no documento de identidade</p>
+        {stepNumber && totalSteps && (
+          <div className="step-badge">Etapa {stepNumber} de {totalSteps}</div>
+        )}
       </div>
 
+      <div className="step-divider" />
+
       <div>
-        <input
-          className="input-cadus text-center text-lg"
-          value={patientData.nome || ''}
-          onChange={(e) => handleChange(e.target.value)}
-          placeholder="Seu nome completo"
-          autoFocus
-        />
+        <div className="relative">
+          <UserRound size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground/40" />
+          <input
+            className="input-cadus pl-12 text-center text-lg"
+            value={patientData.nome || ''}
+            onChange={(e) => handleChange(e.target.value)}
+            placeholder="Seu nome completo"
+            autoFocus
+          />
+        </div>
         {error && <p className="error-text text-center mt-2">{error}</p>}
       </div>
 
