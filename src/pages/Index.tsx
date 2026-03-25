@@ -304,7 +304,7 @@ const Index = () => {
                 iconBg: 'bg-gradient-to-br from-secondary to-[#D4845A]',
                 title: 'Para profissionais e equipes',
                 desc: 'Profissionais, gestores e alunos, acesse os dados antes do atendimento.',
-                benefits: ['Dados antes da consulta', 'Acesso em qualquer lugar', 'Sem retrabalho'],
+                benefits: ['Dados a qualquer momento', 'Acesso de onde estiver', 'Tudo organizado em um só lugar'],
                 accentColor: 'border-secondary/20 hover:border-secondary/40',
                 checkColor: 'text-secondary',
               },
