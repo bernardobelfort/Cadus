@@ -193,7 +193,7 @@ const Index = () => {
             variants={fadeUp}
             custom={0}
           >
-            Para quem é o Cadus
+            Para quem é o <span className="font-display font-800 text-primary">cadus<span className="text-highlight">.</span></span>
           </motion.h2>
 
           <div className="grid md:grid-cols-2 gap-6 md:gap-8">
