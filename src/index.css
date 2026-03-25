@@ -88,8 +88,12 @@
 
 @layer components {
   .card-cadus {
-    @apply bg-card rounded-3xl p-8 md:p-10;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.04), 0 8px 32px rgba(0,0,0,0.06);
+    @apply bg-card/95 backdrop-blur-xl rounded-3xl p-8 md:p-10;
+    box-shadow:
+      0 0 0 1px rgba(255,255,255,0.6),
+      0 2px 4px rgba(0,0,0,0.02),
+      0 4px 16px rgba(0,0,0,0.04),
+      0 12px 48px rgba(0,0,0,0.08);
   }
 
   .card-cadus-hover {
@@ -103,16 +107,30 @@
   }
 
   .input-cadus {
-    @apply w-full px-4 py-3 rounded-xl border border-input bg-card text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent transition-all duration-200;
+    @apply w-full px-5 py-3.5 rounded-2xl border border-input bg-card text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-ring/40 focus:border-primary/30 transition-all duration-300;
     font-size: 16px;
-    min-height: 48px;
+    min-height: 52px;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.04);
+  }
+
+  .input-cadus:focus {
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.04), 0 0 0 3px rgba(13,92,99,0.08);
   }
 
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full text-primary-foreground font-display font-700 text-base transition-all duration-200 hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed;
-    background: linear-gradient(135deg, hsl(184, 78%, 22%) 0%, hsl(184, 75%, 30%) 100%);
-    box-shadow: 0 4px 14px rgba(13, 92, 99, 0.25);
-    min-height: 52px;
+    @apply inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full text-primary-foreground font-display font-700 text-base transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:opacity-40 disabled:cursor-not-allowed;
+    background: linear-gradient(145deg, hsl(184, 78%, 26%) 0%, hsl(184, 78%, 20%) 100%);
+    box-shadow: 0 4px 14px rgba(13, 92, 99, 0.3), 0 1px 3px rgba(13, 92, 99, 0.2);
+    min-height: 56px;
+  }
+
+  .btn-primary:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(13, 92, 99, 0.35), 0 2px 6px rgba(13, 92, 99, 0.25);
+  }
+
+  .btn-primary:active:not(:disabled) {
+    transform: translateY(0);
   }
 
   .btn-secondary {
