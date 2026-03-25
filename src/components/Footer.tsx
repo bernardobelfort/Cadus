@@ -12,7 +12,7 @@ const Footer = () => (
         </div>
       </div>
       <p className="text-xs text-muted-foreground text-center mt-6">
-        Desenvolvido para clínicas-escola da UFPE/NUTES
+        Plataforma de cadastro digital para clínicas-escola
       </p>
     </div>
   </footer>

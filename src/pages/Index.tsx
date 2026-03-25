@@ -1,18 +1,55 @@
 import { Link } from 'react-router-dom';
-import { User, Stethoscope, UserCheck, ClipboardList, CheckCircle, ArrowRight, Shield, Clock, Sparkles } from 'lucide-react';
+import { User, Briefcase, UserCheck, ClipboardList, CheckCircle, ArrowRight, Smartphone, Clock, ShieldCheck } from 'lucide-react';
 import { motion } from 'framer-motion';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import heroImg from '@/assets/hero-illustration.png';
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { opacity: 0, y: 24 },
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { delay: i * 0.15, duration: 0.5, ease: 'easeOut' as const },
+    transition: { delay: i * 0.12, duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] },
   }),
 };
+
+/* Abstract SVG element — unique identity, not a stock illustration */
+const HeroGraphic = () => (
+  <div className="relative w-full max-w-[460px] aspect-square">
+    <svg viewBox="0 0 460 460" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+      {/* Large teal circle */}
+      <circle cx="230" cy="230" r="200" fill="hsl(184, 78%, 22%)" fillOpacity="0.08" />
+      <circle cx="230" cy="230" r="160" fill="hsl(184, 78%, 22%)" fillOpacity="0.06" />
+      
+      {/* Organic arc shapes */}
+      <path d="M120 320 Q230 100 340 320" stroke="hsl(184, 75%, 34%)" strokeWidth="2.5" strokeOpacity="0.3" fill="none" />
+      <path d="M100 280 Q230 80 360 280" stroke="hsl(184, 78%, 22%)" strokeWidth="1.5" strokeOpacity="0.15" fill="none" />
+      
+      {/* Central cluster — represents connection */}
+      <circle cx="190" cy="200" r="55" fill="hsl(184, 78%, 22%)" fillOpacity="0.12" />
+      <circle cx="270" cy="200" r="55" fill="hsl(25, 76%, 63%)" fillOpacity="0.15" />
+      <circle cx="230" cy="260" r="55" fill="hsl(184, 75%, 34%)" fillOpacity="0.10" />
+      
+      {/* Intersection highlight */}
+      <circle cx="230" cy="220" r="28" fill="hsl(184, 78%, 22%)" fillOpacity="0.20" />
+      
+      {/* Small accent dots */}
+      <circle cx="150" cy="140" r="6" fill="hsl(25, 76%, 63%)" fillOpacity="0.5" />
+      <circle cx="320" cy="150" r="4" fill="hsl(184, 78%, 22%)" fillOpacity="0.4" />
+      <circle cx="340" cy="320" r="5" fill="hsl(25, 76%, 63%)" fillOpacity="0.35" />
+      <circle cx="130" cy="300" r="3.5" fill="hsl(184, 75%, 34%)" fillOpacity="0.3" />
+      
+      {/* Decorative arcs */}
+      <path d="M160 160 A80 80 0 0 1 300 160" stroke="hsl(25, 76%, 63%)" strokeWidth="1.5" strokeOpacity="0.25" fill="none" />
+      <path d="M180 310 A60 60 0 0 0 280 310" stroke="hsl(184, 78%, 22%)" strokeWidth="1.5" strokeOpacity="0.2" fill="none" />
+      
+      {/* Central icon area — abstract person silhouette via geometric shapes */}
+      <rect x="218" y="190" width="24" height="24" rx="12" fill="white" fillOpacity="0.9" />
+      <rect x="210" y="220" width="40" height="3" rx="1.5" fill="white" fillOpacity="0.7" />
+      <rect x="215" y="228" width="30" height="3" rx="1.5" fill="white" fillOpacity="0.5" />
+    </svg>
+  </div>
+);
 
 const Index = () => {
   return (
@@ -20,9 +57,9 @@ const Index = () => {
       <Navbar />
 
       {/* Hero */}
-      <section className="hero-gradient py-16 md:py-24">
+      <section className="hero-gradient py-20 md:py-28">
         <div className="container relative z-10">
-          <div className="flex flex-col md:flex-row items-center gap-10 md:gap-16">
+          <div className="flex flex-col md:flex-row items-center gap-12 md:gap-8">
             <motion.div
               className="flex-1 text-center md:text-left"
               initial="hidden"
@@ -30,114 +67,126 @@ const Index = () => {
               variants={fadeUp}
               custom={0}
             >
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary-foreground/20 bg-primary-foreground/10 text-primary-foreground text-sm font-body mb-6">
-                <Shield size={14} />
-                Clínicas-escola UFPE/NUTES
-              </div>
-
-              <h1 className="text-3xl md:text-5xl lg:text-6xl font-display font-800 text-primary-foreground leading-tight tracking-tight">
-                Faça seu cadastro antes de chegar na clínica<span className="text-highlight">.</span>
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[3.5rem] font-display font-800 text-primary-foreground leading-[1.1] tracking-tight">
+                Seus dados prontos
+                <br />
+                <span className="text-highlight">antes</span> da consulta.
               </h1>
-              <p className="text-primary-foreground/80 mt-4 text-lg max-w-lg mx-auto md:mx-0 font-body">
-                Com o Cadus, você preenche seus dados pelo celular, no seu tempo.
-                Quando chegar na consulta, o profissional já sabe quem você é.
+              <p className="text-primary-foreground/80 mt-5 text-lg md:text-xl max-w-lg mx-auto md:mx-0 font-body leading-relaxed">
+                Preencha seu cadastro pelo celular, no seu tempo. Quando chegar
+                na clínica, já sabem quem você é.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 mt-8 justify-center md:justify-start">
-                <Link to="/cadastro?role=paciente" className="inline-flex items-center justify-center gap-2 px-8 py-3 rounded-full bg-card text-primary font-display font-700 text-base transition-all duration-200 hover:shadow-lg">
+              <div className="flex flex-col sm:flex-row gap-3 mt-10 justify-center md:justify-start">
+                <Link
+                  to="/cadastro?role=paciente"
+                  className="inline-flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-full bg-card text-primary font-display font-700 text-base transition-all duration-200 hover:shadow-lg hover:scale-[1.02]"
+                >
                   <User size={20} />
                   Sou Paciente
                 </Link>
-                <Link to="/cadastro?role=profissional" className="inline-flex items-center justify-center gap-2 px-8 py-3 rounded-full border-2 border-primary-foreground/30 text-primary-foreground font-display font-700 text-base transition-all duration-200 hover:bg-primary-foreground/10">
-                  <Stethoscope size={20} />
+                <Link
+                  to="/cadastro?role=profissional"
+                  className="inline-flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-full border-2 border-primary-foreground/30 text-primary-foreground font-display font-700 text-base transition-all duration-200 hover:bg-primary-foreground/10"
+                >
+                  <Briefcase size={20} />
                   Sou Profissional
                 </Link>
               </div>
 
-              <div className="flex items-center justify-center md:justify-start gap-6 mt-8 text-primary-foreground/70 text-sm font-body">
-                <span className="flex items-center gap-1.5"><Sparkles size={14} /> 100% gratuito</span>
-                <span className="flex items-center gap-1.5"><Clock size={14} /> Cadastro em 5 min</span>
-                <span className="flex items-center gap-1.5"><Shield size={14} /> Dados seguros</span>
+              <div className="flex items-center justify-center md:justify-start gap-6 mt-8 text-primary-foreground/60 text-sm font-body">
+                <span className="flex items-center gap-1.5"><Smartphone size={14} /> Pelo celular</span>
+                <span className="flex items-center gap-1.5"><Clock size={14} /> 5 minutos</span>
+                <span className="flex items-center gap-1.5"><ShieldCheck size={14} /> Dados seguros</span>
               </div>
             </motion.div>
+
             <motion.div
               className="flex-1 flex justify-center"
-              initial={{ opacity: 0, scale: 0.9 }}
+              initial={{ opacity: 0, scale: 0.85 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
+              transition={{ duration: 0.7, delay: 0.25, ease: [0.25, 0.46, 0.45, 0.94] }}
             >
-              <img
-                src={heroImg}
-                alt="Pessoas usando o Cadus no celular"
-                width={400}
-                height={400}
-                className="max-w-[320px] md:max-w-[420px] w-full h-auto drop-shadow-2xl"
-              />
+              <HeroGraphic />
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Como funciona */}
-      <section className="py-20">
-        <div className="container">
+      {/* Como funciona — vertical staggered layout */}
+      <section className="py-20 md:py-28">
+        <div className="container max-w-3xl">
           <motion.div
-            className="text-center"
+            className="text-center mb-16"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeUp}
             custom={0}
           >
-            <h2 className="section-title">É muito simples. Veja como:</h2>
-            <p className="section-subtitle max-w-xl mx-auto">Três passos para deixar tudo pronto antes da consulta.</p>
+            <h2 className="section-title">Como funciona</h2>
+            <p className="section-subtitle max-w-md mx-auto">Três passos simples. Sem complicação.</p>
           </motion.div>
-          <div className="grid md:grid-cols-3 gap-8 mt-14">
+
+          <div className="relative">
+            {/* Vertical connector line */}
+            <div className="absolute left-6 md:left-8 top-0 bottom-0 w-px bg-border hidden sm:block" />
+
             {[
               {
                 num: '01',
-                icon: <UserCheck size={24} className="text-primary" />,
+                icon: <UserCheck size={22} className="text-primary-foreground" />,
                 title: 'Escolha seu perfil',
-                desc: 'Diga se você é paciente ou profissional de saúde.',
+                desc: 'Paciente, profissional de saúde, gestor ou aluno — cada um tem seu caminho.',
               },
               {
                 num: '02',
-                icon: <ClipboardList size={24} className="text-primary" />,
+                icon: <ClipboardList size={22} className="text-primary-foreground" />,
                 title: 'Preencha seus dados',
-                desc: 'Responda as perguntas no seu celular, no seu ritmo. Salva automaticamente.',
+                desc: 'Responda no seu ritmo, pelo celular. Se parar no meio, seus dados ficam salvos.',
               },
               {
                 num: '03',
-                icon: <CheckCircle size={24} className="text-primary" />,
-                title: 'Pronto! Acesse sua área',
-                desc: 'Seus dados ficam salvos. O profissional já pode te atender melhor.',
+                icon: <CheckCircle size={22} className="text-primary-foreground" />,
+                title: 'Tudo pronto',
+                desc: 'Seus dados já estão no sistema. É só chegar na clínica e ser atendido.',
               },
             ].map((step, i) => (
               <motion.div
                 key={i}
-                className="card-cadus relative overflow-hidden"
+                className="relative flex items-start gap-5 md:gap-6 mb-12 last:mb-0 group"
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true }}
                 variants={fadeUp}
                 custom={i}
               >
-                <span className="absolute top-4 right-4 text-5xl font-display font-800 text-primary/8 select-none">{step.num}</span>
-                <div className="w-12 h-12 rounded-xl bg-accent flex items-center justify-center mb-4">
+                {/* Step number circle */}
+                <div className="relative z-10 w-12 h-12 md:w-16 md:h-16 rounded-2xl bg-primary flex items-center justify-center shrink-0 shadow-md transition-transform duration-200 group-hover:scale-105">
                   {step.icon}
                 </div>
-                <h3 className="font-display font-700 text-lg text-foreground">{step.title}</h3>
-                <p className="text-muted-foreground text-sm mt-2">{step.desc}</p>
+
+                <div className="pt-1 md:pt-3">
+                  <span className="text-xs font-display font-700 text-muted-foreground tracking-widest uppercase">Passo {step.num}</span>
+                  <h3 className="font-display font-700 text-lg md:text-xl text-foreground mt-1">{step.title}</h3>
+                  <p className="text-muted-foreground text-sm md:text-base mt-1.5 leading-relaxed max-w-md">{step.desc}</p>
+                </div>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Para quem */}
-      <section className="py-20 bg-muted/50">
-        <div className="container">
+      {/* Para quem — visual chips layout */}
+      <section className="py-20 md:py-28 bg-muted/40 relative overflow-hidden">
+        {/* Decorative background shape */}
+        <svg className="absolute -right-40 -top-40 w-[600px] h-[600px] opacity-[0.03]" viewBox="0 0 600 600" fill="none">
+          <circle cx="300" cy="300" r="280" stroke="currentColor" strokeWidth="40" className="text-primary" />
+          <circle cx="300" cy="300" r="180" stroke="currentColor" strokeWidth="20" className="text-primary" />
+        </svg>
+
+        <div className="container relative z-10">
           <motion.h2
-            className="section-title text-center"
+            className="section-title text-center mb-16"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
@@ -146,65 +195,79 @@ const Index = () => {
           >
             Para quem é o Cadus
           </motion.h2>
-          <div className="grid md:grid-cols-2 gap-8 mt-14">
+
+          <div className="grid md:grid-cols-2 gap-6 md:gap-8">
+            {/* Paciente card */}
             <motion.div
-              className="card-cadus border-l-4 border-l-primary"
+              className="card-cadus relative overflow-hidden"
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
               variants={fadeUp}
               custom={0}
             >
-              <div className="w-12 h-12 rounded-xl bg-accent flex items-center justify-center mb-4">
-                <User size={24} className="text-primary" />
+              <div className="absolute top-0 left-0 w-1.5 h-full bg-primary rounded-l-2xl" />
+              <div className="pl-4">
+                <div className="w-14 h-14 rounded-2xl bg-accent flex items-center justify-center mb-5">
+                  <User size={26} className="text-primary" />
+                </div>
+                <h3 className="font-display font-700 text-xl text-foreground mb-2">Para você, paciente</h3>
+                <p className="text-muted-foreground text-sm mb-5 leading-relaxed">
+                  Preencha sua ficha pelo celular, antes de chegar na clínica. Sem papel, sem fila.
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {['Cadastro pelo celular', 'Dados sempre salvos', 'Atualiza quando quiser'].map((tag) => (
+                    <span key={tag} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-accent text-accent-foreground text-xs font-display font-600">
+                      <CheckCircle size={12} />
+                      {tag}
+                    </span>
+                  ))}
+                </div>
               </div>
-              <h3 className="font-display font-700 text-xl text-foreground mb-4">Para você, paciente</h3>
-              <ul className="space-y-3">
-                {[
-                  'Preencha sua ficha antes de chegar',
-                  'Seus dados ficam salvos com segurança',
-                  'Atualize quando precisar',
-                  'Tudo pelo celular, sem papel',
-                ].map((item, i) => (
-                  <li key={i} className="flex items-start gap-2.5 text-foreground text-sm">
-                    <CheckCircle size={18} className="text-primary mt-0.5 shrink-0" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
             </motion.div>
+
+            {/* Profissional card */}
             <motion.div
-              className="card-cadus border-l-4 border-l-secondary"
+              className="card-cadus relative overflow-hidden"
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
               variants={fadeUp}
               custom={1}
             >
-              <div className="w-12 h-12 rounded-xl bg-secondary/10 flex items-center justify-center mb-4">
-                <Stethoscope size={24} className="text-secondary" />
+              <div className="absolute top-0 left-0 w-1.5 h-full bg-secondary rounded-l-2xl" />
+              <div className="pl-4">
+                <div className="w-14 h-14 rounded-2xl bg-secondary/10 flex items-center justify-center mb-5">
+                  <Briefcase size={26} className="text-secondary" />
+                </div>
+                <h3 className="font-display font-700 text-xl text-foreground mb-2">Para profissionais e equipes</h3>
+                <p className="text-muted-foreground text-sm mb-5 leading-relaxed">
+                  Profissionais de saúde, gestores e alunos — acesse os dados antes do atendimento.
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {['Dados antes da consulta', 'Acesso em qualquer lugar', 'Sem retrabalho'].map((tag) => (
+                    <span key={tag} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-secondary/10 text-secondary text-xs font-display font-600">
+                      <CheckCircle size={12} />
+                      {tag}
+                    </span>
+                  ))}
+                </div>
               </div>
-              <h3 className="font-display font-700 text-xl text-foreground mb-4">Para profissionais de saúde</h3>
-              <ul className="space-y-3">
-                {[
-                  'Veja os dados dos seus pacientes antes da consulta',
-                  'Histórico completo de atualizações',
-                  'Acesse de qualquer dispositivo',
-                  'Sem papel, sem retrabalho',
-                ].map((item, i) => (
-                  <li key={i} className="flex items-start gap-2.5 text-foreground text-sm">
-                    <CheckCircle size={18} className="text-secondary mt-0.5 shrink-0" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
             </motion.div>
           </div>
         </div>
       </section>
 
       {/* CTA Final */}
-      <section className="cta-gradient py-20">
+      <section className="cta-gradient py-20 md:py-28 relative overflow-hidden">
+        {/* Decorative SVG */}
+        <svg className="absolute -left-20 -bottom-20 w-[300px] h-[300px] opacity-[0.06]" viewBox="0 0 300 300" fill="none">
+          <circle cx="150" cy="150" r="130" stroke="white" strokeWidth="30" />
+        </svg>
+        <svg className="absolute -right-16 -top-16 w-[200px] h-[200px] opacity-[0.04]" viewBox="0 0 200 200" fill="none">
+          <circle cx="100" cy="100" r="80" stroke="white" strokeWidth="20" />
+        </svg>
+
         <div className="container text-center relative z-10">
           <motion.div
             initial="hidden"
@@ -213,17 +276,28 @@ const Index = () => {
             variants={fadeUp}
             custom={0}
           >
-            <h2 className="text-2xl md:text-4xl font-display font-800 text-primary-foreground tracking-tight">
-              Pronto para começar?
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-display font-800 text-primary-foreground tracking-tight leading-tight">
+              Seus dados, antes da consulta<span className="text-highlight">.</span>
             </h2>
-            <p className="text-primary-foreground/70 mt-3 text-lg font-body">Leva menos de 5 minutos.</p>
-            <Link
-              to="/cadastro"
-              className="inline-flex items-center gap-2 mt-8 px-10 py-4 rounded-full bg-card text-primary font-display font-700 text-base transition-all duration-200 hover:shadow-xl"
-            >
-              Fazer meu cadastro agora
-              <ArrowRight size={20} />
-            </Link>
+            <p className="text-primary-foreground/70 mt-3 text-lg font-body max-w-md mx-auto">
+              Cadastre-se agora e chegue na clínica já conhecido.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-3 mt-10 justify-center">
+              <Link
+                to="/cadastro?role=paciente"
+                className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full bg-card text-primary font-display font-700 text-base transition-all duration-200 hover:shadow-xl hover:scale-[1.02]"
+              >
+                <User size={18} />
+                Cadastro de Paciente
+              </Link>
+              <Link
+                to="/cadastro?role=profissional"
+                className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full border-2 border-primary-foreground/30 text-primary-foreground font-display font-700 text-base transition-all duration-200 hover:bg-primary-foreground/10"
+              >
+                <Briefcase size={18} />
+                Cadastro de Profissional
+              </Link>
+            </div>
           </motion.div>
         </div>
       </section>
