@@ -240,30 +240,26 @@ const Index = () => {
       {/* Para quem — cards premium simétricos */}
       <section className="py-20 md:py-28 bg-muted/40 relative overflow-hidden">
         {/* Blob decorativo orgânico */}
-        <motion.svg
+        <svg
           className="absolute -right-32 -top-32 w-[500px] h-[500px] opacity-[0.04]"
           viewBox="0 0 500 500"
           fill="none"
-          animate={{ rotate: 360 }}
-          transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
         >
           <path
             d="M400,280Q370,460,200,400Q30,340,80,200Q130,60,300,80Q470,100,400,280Z"
             fill="hsl(var(--primary))"
           />
-        </motion.svg>
-        <motion.svg
+        </svg>
+        <svg
           className="absolute -left-24 -bottom-24 w-[350px] h-[350px] opacity-[0.03]"
           viewBox="0 0 500 500"
           fill="none"
-          animate={{ rotate: -360 }}
-          transition={{ duration: 35, repeat: Infinity, ease: "linear" }}
         >
           <path
             d="M420,300Q380,480,200,420Q20,360,60,200Q100,40,280,60Q460,80,420,300Z"
             fill="hsl(var(--secondary))"
           />
-        </motion.svg>
+        </svg>
 
         <div className="container relative z-10">
           <motion.div
