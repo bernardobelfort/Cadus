@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
 import { useRegistrationStore } from '@/store/registrationStore';
-import { formatCEP, fetchAddress } from '@/lib/masks';
+import { formatCEP, fetchAddress, getFirstName } from '@/lib/masks';
 import { MapPin, ArrowRight, ArrowLeft, Loader2 } from 'lucide-react';
 
 interface Props { onNext: () => void; onBack: () => void; }
@@ -9,6 +9,7 @@ const StepPatientAddress = ({ onNext, onBack }: Props) => {
   const { patientData, updatePatientData } = useRegistrationStore();
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [loadingCep, setLoadingCep] = useState(false);
+  const firstName = getFirstName(patientData.nome || '');
 
   const cepFilled = !!(patientData.rua && patientData.cidade);
 
@@ -33,15 +34,18 @@ const StepPatientAddress = ({ onNext, onBack }: Props) => {
   };
 
   return (
-    <div className="card-cadus p-8 md:p-10">
+    <div className="card-cadus">
       <div className="text-center mb-8">
-        <div className="w-16 h-16 rounded-2xl bg-accent flex items-center justify-center mx-auto mb-5">
-          <MapPin size={32} className="text-primary" />
+        <div className="w-20 h-20 rounded-3xl flex items-center justify-center mx-auto mb-6" style={{
+          background: 'linear-gradient(145deg, hsl(184, 40%, 92%), hsl(184, 40%, 86%))',
+          boxShadow: '0 8px 24px rgba(13, 92, 99, 0.1)'
+        }}>
+          <MapPin size={36} className="text-primary" />
         </div>
         <h2 className="text-2xl md:text-3xl font-display font-800 text-foreground tracking-tight">
-          Onde você mora?
+          {firstName ? `${firstName}, onde você mora?` : 'Onde você mora?'}
         </h2>
-        <p className="text-muted-foreground mt-2 font-body">Digite seu CEP e preenchemos o resto pra você.</p>
+        <p className="text-muted-foreground/80 mt-2 font-body">Digite seu CEP e preenchemos o resto.</p>
       </div>
 
       <div className="space-y-4">
@@ -54,47 +58,50 @@ const StepPatientAddress = ({ onNext, onBack }: Props) => {
               onChange={(e) => handleCep(e.target.value)}
               placeholder="00000-000"
               inputMode="numeric"
+              autoFocus
             />
-            {loadingCep && <Loader2 size={18} className="absolute right-3 top-1/2 -translate-y-1/2 animate-spin text-muted-foreground" />}
+            {loadingCep && <Loader2 size={18} className="absolute right-4 top-1/2 -translate-y-1/2 animate-spin text-primary" />}
           </div>
           {errors.cep && <p className="error-text">{errors.cep}</p>}
         </div>
 
         {cepFilled && (
-          <div className="rounded-xl border border-border bg-muted/50 p-4 space-y-1">
-            <p className="text-sm text-foreground">{patientData.rua}</p>
-            <p className="text-sm text-muted-foreground">{patientData.bairro} — {patientData.cidade}/{patientData.estado}</p>
+          <div className="animate-in fade-in slide-in-from-bottom-2 duration-300 space-y-4">
+            <div className="rounded-2xl border border-border/60 bg-muted/30 p-4 space-y-1">
+              <p className="text-sm font-body font-500 text-foreground">{patientData.rua}</p>
+              <p className="text-sm text-muted-foreground">{patientData.bairro} — {patientData.cidade}/{patientData.estado}</p>
+            </div>
+
+            <div className="grid grid-cols-2 gap-3">
+              <div>
+                <label className="label-cadus">Número *</label>
+                <input
+                  className="input-cadus"
+                  value={patientData.numero || ''}
+                  onChange={(e) => updatePatientData({ numero: e.target.value })}
+                  placeholder="Nº"
+                />
+                {errors.numero && <p className="error-text">{errors.numero}</p>}
+              </div>
+              <div>
+                <label className="label-cadus">Complemento</label>
+                <input
+                  className="input-cadus"
+                  value={patientData.complemento || ''}
+                  onChange={(e) => updatePatientData({ complemento: e.target.value })}
+                  placeholder="Apto, bloco..."
+                />
+              </div>
+            </div>
           </div>
         )}
-
-        <div className="grid grid-cols-2 gap-3">
-          <div>
-            <label className="label-cadus">Número *</label>
-            <input
-              className="input-cadus"
-              value={patientData.numero || ''}
-              onChange={(e) => updatePatientData({ numero: e.target.value })}
-              placeholder="Nº"
-            />
-            {errors.numero && <p className="error-text">{errors.numero}</p>}
-          </div>
-          <div>
-            <label className="label-cadus">Complemento</label>
-            <input
-              className="input-cadus"
-              value={patientData.complemento || ''}
-              onChange={(e) => updatePatientData({ complemento: e.target.value })}
-              placeholder="Apto, bloco..."
-            />
-          </div>
-        </div>
       </div>
 
-      <button onClick={() => { if (validate()) onNext(); }} className="btn-primary w-full mt-8">
-        Continuar <ArrowRight size={18} />
+      <button onClick={() => { if (validate()) onNext(); }} className="btn-primary w-full mt-8 group">
+        Continuar <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
       </button>
 
-      <button onClick={onBack} className="w-full mt-3 text-sm text-muted-foreground hover:text-foreground transition-colors flex items-center justify-center gap-1 font-body">
+      <button onClick={onBack} className="w-full mt-5 text-sm text-muted-foreground hover:text-foreground transition-colors flex items-center justify-center gap-1.5 font-body py-2">
         <ArrowLeft size={16} /> Voltar
       </button>
     </div>

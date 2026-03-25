@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useRegistrationStore } from '@/store/registrationStore';
-import { Heart, ArrowRight, ArrowLeft } from 'lucide-react';
+import { Heart, ArrowRight, ArrowLeft, Check } from 'lucide-react';
 
 interface Props { onNext: () => void; onBack: () => void; }
 
@@ -53,13 +53,16 @@ const StepPatientGender = ({ onNext, onBack }: Props) => {
   return (
     <div className="card-cadus">
       <div className="text-center mb-8">
-        <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-accent to-accent/60 flex items-center justify-center mx-auto mb-5">
-          <Heart size={32} className="text-primary" />
+        <div className="w-20 h-20 rounded-3xl flex items-center justify-center mx-auto mb-6" style={{
+          background: 'linear-gradient(145deg, hsl(184, 40%, 92%), hsl(184, 40%, 86%))',
+          boxShadow: '0 8px 24px rgba(13, 92, 99, 0.1)'
+        }}>
+          <Heart size={36} className="text-primary" />
         </div>
         <h2 className="text-2xl md:text-3xl font-display font-800 text-foreground tracking-tight">
           Como você se identifica?
         </h2>
-        <p className="text-muted-foreground mt-2 font-body">Selecione a opção que melhor te representa.</p>
+        <p className="text-muted-foreground/80 mt-2 font-body">Selecione a opção que melhor te representa.</p>
       </div>
 
       <div className="space-y-5">
@@ -70,12 +73,17 @@ const StepPatientGender = ({ onNext, onBack }: Props) => {
                 key={opt}
                 type="button"
                 onClick={() => handleSelectGenero(opt)}
-                className={`px-4 py-3 rounded-xl border-2 text-sm font-body font-500 transition-all duration-200 ${
+                className={`relative rounded-2xl border-2 py-4 px-4 text-center font-display font-600 text-[15px] transition-all duration-300 hover:scale-[1.02] ${
                   selectedGenero === opt
-                    ? 'border-primary bg-accent text-foreground shadow-sm'
-                    : 'border-border text-muted-foreground hover:border-primary/30 hover:bg-accent/50'
+                    ? 'border-primary bg-accent shadow-md'
+                    : 'border-border/60 hover:border-primary/30 hover:shadow-md bg-card'
                 }`}
               >
+                {selectedGenero === opt && (
+                  <div className="absolute top-2.5 right-2.5 w-5 h-5 rounded-full bg-primary flex items-center justify-center">
+                    <Check size={12} className="text-primary-foreground" />
+                  </div>
+                )}
                 {opt}
               </button>
             ))}
@@ -86,17 +94,22 @@ const StepPatientGender = ({ onNext, onBack }: Props) => {
                 key={opt}
                 type="button"
                 onClick={() => handleSelectGenero(opt)}
-                className={`px-4 py-3 rounded-xl border-2 text-sm font-body font-500 transition-all duration-200 ${
+                className={`relative rounded-2xl border-2 py-4 px-4 text-center font-display font-600 text-[15px] transition-all duration-300 hover:scale-[1.02] ${
                   selectedGenero === opt || (opt === 'Outro' && selectedGenero.startsWith('Outro'))
-                    ? 'border-primary bg-accent text-foreground shadow-sm'
-                    : 'border-border text-muted-foreground hover:border-primary/30 hover:bg-accent/50'
+                    ? 'border-primary bg-accent shadow-md'
+                    : 'border-border/60 hover:border-primary/30 hover:shadow-md bg-card'
                 }`}
               >
+                {(selectedGenero === opt || (opt === 'Outro' && selectedGenero.startsWith('Outro'))) && (
+                  <div className="absolute top-2.5 right-2.5 w-5 h-5 rounded-full bg-primary flex items-center justify-center">
+                    <Check size={12} className="text-primary-foreground" />
+                  </div>
+                )}
                 {opt}
               </button>
             ))}
           </div>
-          {error && <p className="error-text mt-2">{error}</p>}
+          {error && <p className="error-text mt-3">{error}</p>}
         </div>
 
         {showGenderInput && (
@@ -115,16 +128,16 @@ const StepPatientGender = ({ onNext, onBack }: Props) => {
           <div className="animate-in fade-in slide-in-from-top-2 duration-300 space-y-5">
             <div>
               <label className="label-cadus">Qual pronome você prefere? (opcional)</label>
-              <div className="grid grid-cols-2 gap-2">
+              <div className="grid grid-cols-2 gap-2.5">
                 {pronomeOptions.map((opt) => (
                   <button
                     key={opt}
                     type="button"
                     onClick={() => updatePatientData({ pronome: opt })}
-                    className={`px-4 py-2.5 rounded-xl border-2 text-sm font-body font-500 transition-all duration-200 ${
+                    className={`rounded-xl border-2 py-3 px-3 text-sm font-body font-500 transition-all duration-200 ${
                       patientData.pronome === opt
-                        ? 'border-primary bg-accent text-foreground shadow-sm'
-                        : 'border-border text-muted-foreground hover:border-primary/30 hover:bg-accent/50'
+                        ? 'border-primary bg-accent text-primary'
+                        : 'border-border/60 hover:border-primary/30 bg-card text-foreground'
                     }`}
                   >
                     {opt}
@@ -133,7 +146,7 @@ const StepPatientGender = ({ onNext, onBack }: Props) => {
               </div>
               {patientData.pronome === 'Outro' && (
                 <input
-                  className="input-cadus mt-2"
+                  className="input-cadus mt-2.5"
                   value={pronomeOutro}
                   onChange={(e) => setPronomeOutro(e.target.value)}
                   placeholder="Qual pronome?"
@@ -149,17 +162,17 @@ const StepPatientGender = ({ onNext, onBack }: Props) => {
                 onChange={(e) => updatePatientData({ nomeSocial: e.target.value })}
                 placeholder="Como prefere ser chamado?"
               />
-              <p className="text-xs text-muted-foreground mt-1">Se preferir ser chamado de outro nome, informe aqui.</p>
+              <p className="text-xs text-muted-foreground/70 mt-1.5">Se preferir ser chamado de outro nome, informe aqui.</p>
             </div>
           </div>
         )}
       </div>
 
-      <button onClick={handleNext} className="btn-primary w-full mt-8">
-        Continuar <ArrowRight size={18} />
+      <button onClick={handleNext} className="btn-primary w-full mt-8 group">
+        Continuar <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
       </button>
 
-      <button onClick={onBack} className="w-full mt-3 text-sm text-muted-foreground hover:text-foreground transition-colors flex items-center justify-center gap-1 font-body">
+      <button onClick={onBack} className="w-full mt-5 text-sm text-muted-foreground hover:text-foreground transition-colors flex items-center justify-center gap-1.5 font-body py-2">
         <ArrowLeft size={16} /> Voltar
       </button>
     </div>

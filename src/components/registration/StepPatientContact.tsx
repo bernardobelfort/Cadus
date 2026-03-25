@@ -7,43 +7,48 @@ interface Props { onNext: () => void; onBack: () => void; }
 
 const StepPatientContact = ({ onNext, onBack }: Props) => {
   const { patientData, updatePatientData } = useRegistrationStore();
-  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [error, setError] = useState('');
+  const firstName = getFirstName(patientData.nome || '');
 
-  const validate = () => {
-    const e: Record<string, string> = {};
-    if (!patientData.telefone || patientData.telefone.replace(/\D/g, '').length < 10)
-      e.telefone = 'Por favor, informe um telefone válido.';
-    setErrors(e);
-    return Object.keys(e).length === 0;
+  const handleSubmit = () => {
+    const digits = (patientData.telefone || '').replace(/\D/g, '');
+    if (digits.length < 10) {
+      setError('Por favor, informe um telefone válido.');
+      return;
+    }
+    setError('');
+    onNext();
   };
 
   return (
-    <div className="card-cadus p-8 md:p-10">
+    <div className="card-cadus">
       <div className="text-center mb-8">
-        <div className="w-16 h-16 rounded-2xl bg-accent flex items-center justify-center mx-auto mb-5">
-          <Phone size={32} className="text-primary" />
+        <div className="w-20 h-20 rounded-3xl flex items-center justify-center mx-auto mb-6" style={{
+          background: 'linear-gradient(145deg, hsl(184, 40%, 92%), hsl(184, 40%, 86%))',
+          boxShadow: '0 8px 24px rgba(13, 92, 99, 0.1)'
+        }}>
+          <Phone size={36} className="text-primary" />
         </div>
         <h2 className="text-2xl md:text-3xl font-display font-800 text-foreground tracking-tight">
-          Como falar com você?
+          {firstName ? `${firstName}, como falar com você?` : 'Como falar com você?'}
         </h2>
-        <p className="text-muted-foreground mt-2 font-body">Para a clínica entrar em contato, se precisar.</p>
+        <p className="text-muted-foreground/80 mt-2 font-body">Para entrarmos em contato quando necessário.</p>
       </div>
 
-      <div className="space-y-4">
+      <div className="space-y-5">
         <div>
-          <label className="label-cadus">Seu celular ou telefone *</label>
+          <label className="label-cadus">Telefone / WhatsApp *</label>
           <input
             className="input-cadus"
             value={patientData.telefone || ''}
             onChange={(e) => updatePatientData({ telefone: formatPhone(e.target.value) })}
             placeholder="(00) 00000-0000"
             inputMode="tel"
+            autoFocus
           />
-          {errors.telefone && <p className="error-text">{errors.telefone}</p>}
         </div>
-
         <div>
-          <label className="label-cadus">Seu e-mail (opcional)</label>
+          <label className="label-cadus">E-mail (opcional)</label>
           <input
             type="email"
             className="input-cadus"
@@ -51,17 +56,18 @@ const StepPatientContact = ({ onNext, onBack }: Props) => {
             onChange={(e) => updatePatientData({ email: e.target.value })}
             placeholder="seu@email.com"
           />
-          <p className="text-xs text-muted-foreground mt-1">
+          <p className="text-xs text-muted-foreground/70 mt-1.5">
             Se não tiver e-mail, tudo bem. Você pode usar só o CPF para entrar.
           </p>
         </div>
+        {error && <p className="error-text">{error}</p>}
       </div>
 
-      <button onClick={() => { if (validate()) onNext(); }} className="btn-primary w-full mt-8">
-        Continuar <ArrowRight size={18} />
+      <button onClick={handleSubmit} className="btn-primary w-full mt-8 group">
+        Continuar <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
       </button>
 
-      <button onClick={onBack} className="w-full mt-3 text-sm text-muted-foreground hover:text-foreground transition-colors flex items-center justify-center gap-1 font-body">
+      <button onClick={onBack} className="w-full mt-5 text-sm text-muted-foreground hover:text-foreground transition-colors flex items-center justify-center gap-1.5 font-body py-2">
         <ArrowLeft size={16} /> Voltar
       </button>
     </div>
