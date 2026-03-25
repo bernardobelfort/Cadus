@@ -90,7 +90,7 @@ const Registration = () => {
             <ArrowLeft size={18} />
             Voltar
           </button>
-          <Link to="/" className="font-display font-800 text-primary text-lg">cadus</Link>
+          <Link to="/" className="font-display font-800 text-primary text-lg tracking-tight">cadus<span className="text-highlight">.</span></Link>
           <span className="text-sm text-muted-foreground font-body">
             {currentStep}/{totalSteps}
           </span>
