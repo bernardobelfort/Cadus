@@ -1,36 +1,31 @@
 
 
-## Ilustracao Premium Estilo Startup para o Hero do Cadus
+## Adicionar formas orgânicas atrás da ilustração do hero
 
-### Referencia
+### O que fazer
 
-As imagens enviadas mostram o padrao: **personagens flat design com estilo proprio** — proporcoes estilizadas, paleta reduzida, poses dinamicas, personalidade visual forte. Tipo iFood, Nubank, Rappi — ilustracoes que voce reconhece a marca so pelo estilo.
+O hero atual ainda usa o SVG inline genérico (`HeroGraphic`). Vamos substituí-lo pela ilustração real (`src/assets/hero-illustration.png`) e adicionar formas orgânicas animadas atrás dela para criar profundidade e identidade visual premium.
 
-### Abordagem
+### Implementação em `src/pages/Index.tsx`
 
-Criar a ilustracao via **AI image generation** (Nano banana pro) no estilo flat illustration com a paleta teal + amber do Cadus. A cena vai representar o conceito central: **pessoas diversas (paciente idoso, mae com crianca, profissional, estudante) conectadas digitalmente** — todas em volta de um smartphone/tablet estilizado.
+**Substituir o componente `HeroGraphic` por um novo `HeroIllustration`** que contém:
 
-O estilo sera: flat design com proporcoes levemente exageradas (cabecas maiores, corpos simplificados), sem contorno preto, cores solidas, fundo transparente/limpo. Inspirado nas referencias mas com identidade propria usando a paleta teal (#0D5C63), amber (#E8985A), e tons complementares.
+1. **Container relativo** com a imagem centralizada
+2. **Formas orgânicas SVG atrás da imagem** — blobs fluidos usando `<path>` com curvas Bezier:
+   - Um blob grande teal claro (`hsl(184, 78%, 22%)` com 10-15% opacidade) deslocado para a esquerda-abaixo
+   - Um blob médio amber (`hsl(25, 76%, 63%)` com 8-12% opacidade) deslocado para a direita-acima
+   - Um blob menor teal vibrante (`#14919B` com 10% opacidade) sobrepondo parcialmente
+3. **Animações sutis com framer-motion**:
+   - Blobs com `animate` de rotação lenta (0→360° em 20-30s, infinite) e scale pulsante (0.95→1.05)
+   - Cada blob com delay diferente para movimento orgânico assíncrono
+4. **Imagem** importada de `@/assets/hero-illustration.png` renderizada com `<img>` sobre os blobs, com `max-w-[480px] w-full h-auto relative z-10`
 
-### Execucao
+### Detalhes técnicos
 
-1. **Gerar a ilustracao** usando AI image generation com prompt detalhado descrevendo:
-   - Estilo flat/vetorial moderno tipo startup brasileira
-   - Personagens diversos: idoso com celular, mae com crianca, profissional com jaleco, estudante com mochila
-   - Elemento central: smartphone grande com formulario simplificado e checkmark
-   - Paleta: teal profundo, amber, branco, cinzas suaves
-   - Fundo transparente/neutro
-   - Proporcoes estilizadas, sem contorno, cores chapadas
-
-2. **Salvar como asset** em `src/assets/hero-illustration.png`
-
-3. **Atualizar `src/pages/Index.tsx`**:
-   - Remover o componente `HeroGraphic` SVG atual (linhas 16-64)
-   - Importar a nova ilustracao como modulo ES6
-   - Renderizar com `<img>` dentro do mesmo container com animacao framer-motion
-   - Manter o layout hero existente (texto esquerda, ilustracao direita)
+- Blobs gerados com paths SVG tipo: `M400,300Q350,500,200,400Q50,300,200,200Q350,100,400,300Z`
+- Usar `motion.div` com `animate={{ rotate: 360 }}` e `transition={{ duration: 25, repeat: Infinity, ease: "linear" }}`
+- Manter a animação de entrada existente (`opacity: 0, scale: 0.85 → 1`)
 
 ### Arquivo a editar
-
-- `src/pages/Index.tsx` — substituir HeroGraphic por imagem gerada
+- `src/pages/Index.tsx` — substituir `HeroGraphic` por `HeroIllustration` com blobs orgânicos + imagem real
 
