@@ -310,7 +310,7 @@ const Index = () => {
               Seus dados, antes da consulta<span className="text-highlight">.</span>
             </h2>
             <p className="text-primary-foreground/70 mt-3 text-lg font-body max-w-md mx-auto">
-              Cadastre-se agora e chegue na clínica já conhecido.
+              Cadastre-se agora e chegue na clínica pronto para ser atendido.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 mt-10 justify-center">
               <Link
