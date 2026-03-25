@@ -30,19 +30,17 @@ const HeroIllustration = () => (
     </svg>
 
     {/* Blob 2 — amber accent, bottom-right */}
-    <motion.svg
+    <svg
       className="absolute -right-10 -bottom-4 w-[380px] h-[380px] z-0"
       viewBox="0 0 500 500"
       fill="none"
-      animate={{ rotate: -360 }}
-      transition={{ duration: 28, repeat: Infinity, ease: "linear" }}
     >
       <path
         d="M420,300Q380,480,200,420Q20,360,60,200Q100,40,280,60Q460,80,420,300Z"
         fill="hsl(25, 76%, 63%)"
         fillOpacity="0.25"
       />
-    </motion.svg>
+    </svg>
 
     {/* Blob 3 — teal vibrante, top-left */}
     <motion.svg
