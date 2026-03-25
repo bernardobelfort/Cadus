@@ -1,70 +1,74 @@
 
 
-## Upgrade Visual Premium do Sistema de Cadastro
+## Upgrade Visual Premium do Cadastro
 
-### Problemas identificados
-- Cards com visual genérico: ícones pequenos, sombras fracas, pouco contraste
-- StepProfile: botões de Paciente/Profissional esticados e sem impacto visual
-- Todos os steps seguem o mesmo template básico sem diferenciação visual
-- Header do cadastro sem personalidade
-- Inputs e botões sem refinamento premium
-- Fundo muito plano e sem profundidade
+### Problemas atuais
+- **StepProfile**: cards de Paciente/Profissional são caixinhas básicas sem impacto, ícone do topo genérico
+- **Steps do paciente**: todos idênticos visualmente — mesma caixinha teal com ícone, sem variação, sem personalidade
+- **Steps do profissional**: completamente sem estilo — sem ícone no topo, sem header visual, layout bruto com h2 simples
+- **Inputs/botões**: funcionais mas sem refinamento premium (sem micro-interações, sem estados visuais ricos)
+- **Success screen**: básica, sem celebração real
+- **Card base**: sombras fracas, sem profundidade visual convincente
 
-### Mudanças
+### Plano de mudanças
 
-**1. CSS global — `src/index.css`**
-- Melhorar `.card-cadus`: sombra mais premium com múltiplas camadas, `backdrop-blur`, borda sutil `border border-white/60`
-- Melhorar `.input-cadus`: height maior (52px), sombra interna sutil `shadow-inner`, foco com glow teal suave
-- Melhorar `.btn-primary`: sombra glow mais forte, efeito hover com `translateY(-1px)`, gradiente mais vibrante
-- Adicionar `.btn-back`: classe específica para o botão voltar (mais espaçamento, hover suave)
+**1. CSS Global (`src/index.css`)**
+- Upgrade `.card-cadus`: sombra mais dramática com 4 camadas, borda `border border-white/50`, inner glow sutil
+- Novo `.input-cadus:hover`: borda muda de cor suavemente antes do foco
+- Novo `.selection-card`: classe base para botões de seleção (gênero, SUS, profile) com hover elevation, borda animada, checkmark consistente
+- Novo `.icon-hero`: classe para o ícone circular do topo de cada step, com gradiente e glow padronizado
 
-**2. Registration.tsx — Layout da página**
-- Fundo mais rico: gradiente radial com duas camadas (teal suave no topo + padrão sutil de pontos ou mesh gradient)
-- Header com glass morphism mais pronunciado (`bg-white/70 backdrop-blur-lg`)
-- Progress bar com gradiente animado em vez de cor sólida
-- Aumentar `max-w` do container de `480px` para `520px`
+**2. StepProfile — Redesign completo**
+- Cards maiores com `min-h-[220px]`, layout vertical com ícone hero grande (`w-18 h-18`), título bold, descrição, e indicador visual de hover (seta ou glow)
+- Borda com gradiente sutil quando hover
+- Seleção com background gradiente suave + checkmark animado
+- Remover ícone genérico "Users" do topo — substituir por título direto com emoji ou ilustração inline
+- Auto-advance mantido
 
-**3. StepProfile — Redesign completo**
-- Ícone do topo maior (`w-20 h-20`) com gradiente teal vibrante e sombra glow
-- Cards de Paciente/Profissional: layout vertical centralizado (ícone grande no centro, título abaixo, descrição abaixo), `aspect-square` ou pelo menos altura fixa para ficarem quadrados e não esticados
-- Hover com scale sutil (`hover:scale-[1.02]`) e sombra elevada
-- Quando selecionado: borda mais grossa, checkmark animado, background com gradiente suave
-- Remover botão "Continuar" separado — clicar no card já avança (auto-advance após 300ms)
+**3. Steps do paciente — Elevar a qualidade**
+- Variar as cores dos ícones hero por step (teal, blue, violet, amber) para quebrar monotonia — cada step tem uma "cor de acento" sutil diferente mantendo o teal como base
+- Títulos com gradiente text em `text-foreground` mais impactante
+- Botão "Continuar" com ícone animado (seta pulsa levemente)
+- Botão "Voltar" com estilo mais integrado (rounded-full com bg-muted/40 no hover)
+- Inputs com transição de borda mais suave e placeholder mais estilizado
 
-**4. Todos os steps do paciente — Upgrade visual**
-- Ícone do topo: círculo maior (`w-20 h-20`) com gradiente `from-primary/20 to-primary/5` e borda sutil
-- Títulos: tamanho `text-3xl` consistente, tracking mais tight
-- Subtítulos: `text-muted-foreground/80` mais sutil
-- Inputs: cantos mais arredondados (`rounded-2xl`), padding maior, placeholder mais sutil
-- Botão Continuar: gradiente mais vibrante, ícone de seta animado no hover (translateX)
-- Botão Voltar: mais espaçamento do botão principal (`mt-5`), texto um pouco maior
+**4. StepPatientGender — Refinar seleção**
+- Reduzir mt-14 para mt-6 com um separador visual sutil (linha fina + "ou" centralizado) entre opções primárias e secundárias
+- Botões de seleção com ícones inline (lucide: `Mars`, `Venus`, `CircleDot`, `MinusCircle`)
 
-**5. StepPatientGender — Melhorar botões de seleção**
-- Botões de gênero com ícone pequeno ao lado (♀ ♂ etc via lucide ou emoji)
-- Padding maior, rounded-2xl, hover com elevação
-- Quando selecionado: background gradiente suave, borda primary, checkmark
+**5. Steps do profissional — Upgrade completo**
+- Adicionar header visual com ícone hero (como os steps do paciente)
+- `StepProfPersonal`: ícone Stethoscope, título "Seus dados profissionais"
+- `StepProfClinic`: ícone Building2, título "Sua clínica"
+- `StepProfAccess`: ícone Lock, título "Crie seu acesso"
+- Layout de botões Voltar/Continuar: mudar de flex row para stack vertical (como paciente) para consistência
+- Nota de validação com ícone e estilo mais premium (não apenas bg-accent plano)
 
-**6. StepPatientAccess — Tela final mais impactante**
-- Indicadores de força de senha com barrinhas coloridas em vez de apenas checks
-- Checkbox de termos mais estilizado
+**6. StepPatientAccess — Mais impactante**
+- Strength bar com animação de preenchimento suave
+- Checkbox de termos como toggle card (não checkbox nativo)
 
-**7. SuccessScreen — Mais celebratória**
-- Background com gradiente ou confetti sutil
-- Ícone de sucesso maior com animação de pulse
-- Tipografia maior e mais impactante
+**7. SuccessScreen — Celebratória**
+- Confetti particles animados (CSS puro, 6-8 partículas com keyframes)
+- Ícone de sucesso com pulse ring animado
+- Gradiente de fundo mais vibrante
+- Badge "Tudo certo!" com shimmer animation
 
 ### Arquivos a editar
-- `src/index.css` — upgrade das classes globais
-- `src/pages/Registration.tsx` — layout premium
-- `src/components/registration/StepProfile.tsx` — redesign cards
-- `src/components/registration/StepPatientName.tsx` — upgrade visual
-- `src/components/registration/StepPatientCPF.tsx` — upgrade visual
-- `src/components/registration/StepPatientBirthdate.tsx` — upgrade visual
-- `src/components/registration/StepPatientGender.tsx` — upgrade botões
-- `src/components/registration/StepPatientContact.tsx` — upgrade visual
-- `src/components/registration/StepPatientAddress.tsx` — upgrade visual
-- `src/components/registration/StepPatientSus.tsx` — upgrade visual
-- `src/components/registration/StepPatientComplaint.tsx` — upgrade visual
-- `src/components/registration/StepPatientAccess.tsx` — upgrade visual
-- `src/components/registration/SuccessScreen.tsx` — mais celebratória
+- `src/index.css`
+- `src/pages/Registration.tsx`
+- `src/components/registration/StepProfile.tsx`
+- `src/components/registration/StepPatientName.tsx`
+- `src/components/registration/StepPatientCPF.tsx`
+- `src/components/registration/StepPatientBirthdate.tsx`
+- `src/components/registration/StepPatientGender.tsx`
+- `src/components/registration/StepPatientContact.tsx`
+- `src/components/registration/StepPatientAddress.tsx`
+- `src/components/registration/StepPatientSus.tsx`
+- `src/components/registration/StepPatientComplaint.tsx`
+- `src/components/registration/StepPatientAccess.tsx`
+- `src/components/registration/StepProfPersonal.tsx`
+- `src/components/registration/StepProfClinic.tsx`
+- `src/components/registration/StepProfAccess.tsx`
+- `src/components/registration/SuccessScreen.tsx`
 
