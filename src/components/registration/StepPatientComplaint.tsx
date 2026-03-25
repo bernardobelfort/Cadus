@@ -24,7 +24,8 @@ const StepPatientComplaint = ({ onNext, onBack, stepNumber, totalSteps }: Props)
     <div className="card-cadus">
       <div className="step-header">
         <div className="icon-hero">
-          <MessageCircle size={26} />
+          <MessageCircle size={22} className="md:hidden" />
+          <MessageCircle size={26} className="hidden md:block" />
         </div>
         <h2>{firstName ? `${firstName}, por que busca atendimento?` : 'Por que busca atendimento?'}</h2>
         <p>Ajuda o profissional a se preparar para você</p>
@@ -37,7 +38,7 @@ const StepPatientComplaint = ({ onNext, onBack, stepNumber, totalSteps }: Props)
 
       <div>
         <textarea
-          className="input-cadus min-h-[140px] resize-none"
+          className="input-cadus min-h-[120px] md:min-h-[140px] resize-none"
           value={patientData.queixa || ''}
           onChange={(e) => updatePatientData({ queixa: e.target.value })}
           placeholder="Descreva aqui sua queixa principal..."
@@ -45,13 +46,13 @@ const StepPatientComplaint = ({ onNext, onBack, stepNumber, totalSteps }: Props)
           rows={5}
         />
         <div className="flex justify-between mt-2">
-          <p className="text-xs text-muted-foreground/50">Escreva com suas palavras, sem termos técnicos.</p>
-          <span className="text-xs text-muted-foreground/40">{charCount}/2000</span>
+          <p className="text-[11px] md:text-xs text-muted-foreground/50">Escreva com suas palavras, sem termos técnicos.</p>
+          <span className="text-[11px] md:text-xs text-muted-foreground/40">{charCount}/2000</span>
         </div>
         {error && <p className="error-text mt-2">{error}</p>}
       </div>
 
-      <button onClick={handleSubmit} className="btn-primary w-full mt-8 group">
+      <button onClick={handleSubmit} className="btn-primary w-full mt-6 md:mt-8 group">
         Continuar <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
       </button>
 

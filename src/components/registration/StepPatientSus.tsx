@@ -28,7 +28,8 @@ const StepPatientSus = ({ onNext, onBack, stepNumber, totalSteps }: Props) => {
     <div className="card-cadus">
       <div className="step-header">
         <div className="icon-hero">
-          <FileHeart size={26} />
+          <FileHeart size={22} className="md:hidden" />
+          <FileHeart size={26} className="hidden md:block" />
         </div>
         <h2>Informações do SUS</h2>
         <p>Dados opcionais para pacientes do sistema público</p>
@@ -39,7 +40,7 @@ const StepPatientSus = ({ onNext, onBack, stepNumber, totalSteps }: Props) => {
 
       <div className="step-divider" />
 
-      <div className="space-y-5">
+      <div className="space-y-4 md:space-y-5">
         <div>
           <label className="label-cadus">Cartão SUS (opcional)</label>
           <div className="relative">
@@ -56,13 +57,13 @@ const StepPatientSus = ({ onNext, onBack, stepNumber, totalSteps }: Props) => {
 
         <div>
           <label className="label-cadus">Como chegou até nós? *</label>
-          <div className="grid grid-cols-2 gap-2.5">
+          <div className="grid grid-cols-2 gap-2 md:gap-2.5">
             {comoChegouOptions.map((opt) => (
               <button
                 key={opt}
                 type="button"
                 onClick={() => updatePatientData({ comoChegou: opt })}
-                className={`selection-card text-sm !py-3 ${patientData.comoChegou === opt ? 'selection-card-active' : ''}`}
+                className={`selection-card text-[13px] md:text-sm !py-2.5 md:!py-3 ${patientData.comoChegou === opt ? 'selection-card-active' : ''}`}
               >
                 {patientData.comoChegou === opt && (
                   <div className="absolute top-2 right-2 w-4 h-4 rounded-full bg-primary flex items-center justify-center">
@@ -98,7 +99,7 @@ const StepPatientSus = ({ onNext, onBack, stepNumber, totalSteps }: Props) => {
         {error && <p className="error-text">{error}</p>}
       </div>
 
-      <button onClick={handleSubmit} className="btn-primary w-full mt-8 group">
+      <button onClick={handleSubmit} className="btn-primary w-full mt-6 md:mt-8 group">
         Continuar <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
       </button>
 

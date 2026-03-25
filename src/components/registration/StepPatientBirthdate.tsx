@@ -23,7 +23,8 @@ const StepPatientBirthdate = ({ onNext, onBack, stepNumber, totalSteps }: Props)
     <div className="card-cadus">
       <div className="step-header">
         <div className="icon-hero">
-          <Calendar size={26} />
+          <Calendar size={22} className="md:hidden" />
+          <Calendar size={26} className="hidden md:block" />
         </div>
         <h2>{firstName ? `${firstName}, quando você nasceu?` : 'Quando você nasceu?'}</h2>
         <p>Necessário para o prontuário clínico</p>
@@ -48,7 +49,7 @@ const StepPatientBirthdate = ({ onNext, onBack, stepNumber, totalSteps }: Props)
         {error && <p className="error-text mt-2">{error}</p>}
       </div>
 
-      <button onClick={() => { if (validate()) onNext(); }} className="btn-primary w-full mt-8 group">
+      <button onClick={() => { if (validate()) onNext(); }} className="btn-primary w-full mt-6 md:mt-8 group">
         Continuar <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
       </button>
 

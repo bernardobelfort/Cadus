@@ -27,10 +27,11 @@ const StepProfPersonal = ({ onNext, onBack, stepNumber, totalSteps }: Props) => 
     <div className="card-cadus">
       <div className="step-header">
         <div className="icon-hero">
-          <Stethoscope size={26} />
+          <Stethoscope size={22} className="md:hidden" />
+          <Stethoscope size={26} className="hidden md:block" />
         </div>
         <h2>Seus dados profissionais</h2>
-        <p>Dados para validação do seu registro profissional</p>
+        <p>Dados para validação do seu registro</p>
         {stepNumber && totalSteps && (
           <div className="step-badge">Etapa {stepNumber} de {totalSteps}</div>
         )}
@@ -38,7 +39,7 @@ const StepProfPersonal = ({ onNext, onBack, stepNumber, totalSteps }: Props) => 
 
       <div className="step-divider" />
 
-      <div className="space-y-4">
+      <div className="space-y-3 md:space-y-4">
         <div>
           <label className="label-cadus">Nome completo *</label>
           <div className="relative">
@@ -90,7 +91,7 @@ const StepProfPersonal = ({ onNext, onBack, stepNumber, totalSteps }: Props) => 
         </div>
       </div>
 
-      <button onClick={() => { if (validate()) onNext(); }} className="btn-primary w-full mt-8 group">
+      <button onClick={() => { if (validate()) onNext(); }} className="btn-primary w-full mt-6 md:mt-8 group">
         Continuar <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
       </button>
 

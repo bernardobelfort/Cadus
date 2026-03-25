@@ -18,26 +18,39 @@ const SuccessScreen = () => {
   const isPatient = registeredRole === 'paciente';
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 relative overflow-hidden">
+    <div className="min-h-screen flex items-center justify-center p-3 md:p-4 relative overflow-hidden">
       {/* Celebratory background */}
       <div className="fixed inset-0 -z-10" style={{
         background: 'radial-gradient(ellipse at 50% 20%, hsl(184 45% 92%) 0%, hsl(184 20% 96%) 40%, hsl(210 11% 97%) 70%)'
       }} />
 
-      {/* Confetti particles */}
-      {confettiColors.map((color, i) => (
+      {/* Confetti particles — fewer on mobile */}
+      {confettiColors.slice(0, 4).map((color, i) => (
         <div
           key={i}
           className="confetti-particle"
           style={{
             background: color,
-            left: `${15 + i * 13}%`,
+            left: `${15 + i * 18}%`,
             top: '-10px',
             animationDelay: `${i * 0.3}s`,
             animationDuration: `${2.5 + i * 0.3}s`,
             borderRadius: i % 2 === 0 ? '50%' : '2px',
-            width: i % 3 === 0 ? '10px' : '7px',
-            height: i % 3 === 0 ? '10px' : '7px',
+          }}
+        />
+      ))}
+      {/* Extra particles on desktop */}
+      {confettiColors.slice(4).map((color, i) => (
+        <div
+          key={`desktop-${i}`}
+          className="confetti-particle hidden md:block"
+          style={{
+            background: color,
+            left: `${75 + i * 10}%`,
+            top: '-10px',
+            animationDelay: `${(i + 4) * 0.3}s`,
+            animationDuration: `${3 + i * 0.3}s`,
+            borderRadius: i % 2 === 0 ? '50%' : '2px',
           }}
         />
       ))}
@@ -52,7 +65,7 @@ const SuccessScreen = () => {
           initial={{ scale: 0, rotate: -20 }}
           animate={{ scale: 1, rotate: 0 }}
           transition={{ delay: 0.2, type: 'spring', stiffness: 200 }}
-          className="relative mx-auto w-24 h-24 flex items-center justify-center mb-7"
+          className="relative mx-auto w-20 h-20 md:w-24 md:h-24 flex items-center justify-center mb-5 md:mb-7"
         >
           {/* Pulse ring */}
           <div className="absolute inset-0 rounded-full pulse-ring" style={{
@@ -62,11 +75,12 @@ const SuccessScreen = () => {
             background: 'hsl(184, 40%, 92%)',
             animationDelay: '0.5s',
           }} />
-          <div className="w-24 h-24 rounded-full flex items-center justify-center relative z-10" style={{
+          <div className="w-20 h-20 md:w-24 md:h-24 rounded-full flex items-center justify-center relative z-10" style={{
             background: 'linear-gradient(145deg, hsl(184, 40%, 90%), hsl(184, 40%, 82%))',
             boxShadow: '0 8px 32px rgba(13, 92, 99, 0.2)'
           }}>
-            <CheckCircle size={52} className="text-primary" />
+            <CheckCircle size={40} className="text-primary md:hidden" />
+            <CheckCircle size={52} className="text-primary hidden md:block" />
           </div>
         </motion.div>
 
@@ -76,21 +90,19 @@ const SuccessScreen = () => {
           transition={{ delay: 0.4 }}
         >
           <div className="flex items-center justify-center gap-2 mb-3">
-            <Sparkles size={18} className="text-secondary" />
-            <span className="text-sm font-display font-600 text-secondary uppercase tracking-wider shimmer-text" style={{
-              WebkitTextFillColor: 'unset',
-              background: 'none',
-              color: 'hsl(25, 76%, 63%)',
-            }}>Tudo certo!</span>
-            <Sparkles size={18} className="text-secondary" />
+            <Sparkles size={16} className="text-secondary md:hidden" />
+            <Sparkles size={18} className="text-secondary hidden md:block" />
+            <span className="text-[13px] md:text-sm font-display font-600 text-secondary uppercase tracking-wider">Tudo certo!</span>
+            <Sparkles size={16} className="text-secondary md:hidden" />
+            <Sparkles size={18} className="text-secondary hidden md:block" />
           </div>
-          <h1 className="text-3xl font-display font-800 text-foreground tracking-tight">
+          <h1 className="text-2xl md:text-3xl font-display font-800 text-foreground tracking-tight">
             {isPatient ? 'Cadastro concluído!' : 'Cadastro enviado!'}
           </h1>
-          <p className="text-muted-foreground mt-4 font-body leading-relaxed text-base">
+          <p className="text-muted-foreground mt-3 md:mt-4 font-body leading-relaxed text-sm md:text-base">
             {isPatient
               ? 'Seus dados foram salvos com sucesso. Agora você pode acessar sua área.'
-              : 'Seus dados foram recebidos. A coordenação da sua clínica irá validar seu acesso em breve.'}
+              : 'Seus dados foram recebidos. A coordenação irá validar seu acesso em breve.'}
           </p>
         </motion.div>
 
@@ -100,7 +112,7 @@ const SuccessScreen = () => {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6 }}
             onClick={() => navigate('/paciente/inicio')}
-            className="btn-primary w-full mt-8 group"
+            className="btn-primary w-full mt-6 md:mt-8 group"
           >
             Acessar minha área <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
           </motion.button>
@@ -110,7 +122,7 @@ const SuccessScreen = () => {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6 }}
             onClick={() => navigate('/')}
-            className="btn-outline w-full mt-8"
+            className="btn-outline w-full mt-6 md:mt-8"
           >
             Voltar para o início
           </motion.button>

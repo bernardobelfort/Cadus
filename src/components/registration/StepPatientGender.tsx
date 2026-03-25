@@ -63,7 +63,8 @@ const StepPatientGender = ({ onNext, onBack, stepNumber, totalSteps }: Props) =>
     <div className="card-cadus">
       <div className="step-header">
         <div className="icon-hero">
-          <Heart size={26} />
+          <Heart size={22} className="md:hidden" />
+          <Heart size={26} className="hidden md:block" />
         </div>
         <h2>Como você se identifica?</h2>
         <p>Informação importante para seu atendimento</p>
@@ -74,9 +75,9 @@ const StepPatientGender = ({ onNext, onBack, stepNumber, totalSteps }: Props) =>
 
       <div className="step-divider" />
 
-      <div className="space-y-5">
+      <div className="space-y-4 md:space-y-5">
         <div>
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-2 gap-2.5 md:gap-3">
             {genderOptions.map((opt) => (
               <button
                 key={opt.label}
@@ -85,31 +86,31 @@ const StepPatientGender = ({ onNext, onBack, stepNumber, totalSteps }: Props) =>
                 className={`selection-card ${isActive(opt.label) ? 'selection-card-active' : ''}`}
               >
                 {isActive(opt.label) && (
-                  <div className="absolute top-2.5 right-2.5 w-5 h-5 rounded-full bg-primary flex items-center justify-center">
+                  <div className="absolute top-2 right-2 md:top-2.5 md:right-2.5 w-5 h-5 rounded-full bg-primary flex items-center justify-center">
                     <Check size={12} className="text-primary-foreground" />
                   </div>
                 )}
-                <span className="mr-1.5 text-lg">{opt.icon}</span> {opt.label}
+                <span className="mr-1.5 text-base md:text-lg">{opt.icon}</span> {opt.label}
               </button>
             ))}
           </div>
 
-          <div className="flex items-center gap-3 my-5">
+          <div className="flex items-center gap-3 my-4 md:my-5">
             <div className="flex-1 h-px bg-border/60" />
-            <span className="text-xs text-muted-foreground/50 font-body">ou</span>
+            <span className="text-[11px] md:text-xs text-muted-foreground/50 font-body">ou</span>
             <div className="flex-1 h-px bg-border/60" />
           </div>
 
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-2 gap-2.5 md:gap-3">
             {genderSecondary.map((opt) => (
               <button
                 key={opt.label}
                 type="button"
                 onClick={() => handleSelectGenero(opt.label)}
-                className={`selection-card text-[13px] ${isActive(opt.label) ? 'selection-card-active' : ''}`}
+                className={`selection-card text-[12px] md:text-[13px] ${isActive(opt.label) ? 'selection-card-active' : ''}`}
               >
                 {isActive(opt.label) && (
-                  <div className="absolute top-2.5 right-2.5 w-5 h-5 rounded-full bg-primary flex items-center justify-center">
+                  <div className="absolute top-2 right-2 md:top-2.5 md:right-2.5 w-5 h-5 rounded-full bg-primary flex items-center justify-center">
                     <Check size={12} className="text-primary-foreground" />
                   </div>
                 )}
@@ -128,13 +129,13 @@ const StepPatientGender = ({ onNext, onBack, stepNumber, totalSteps }: Props) =>
         )}
 
         {showExtras && (
-          <div className="animate-in fade-in slide-in-from-top-2 duration-300 space-y-5">
+          <div className="animate-in fade-in slide-in-from-top-2 duration-300 space-y-4 md:space-y-5">
             <div>
               <label className="label-cadus">Qual pronome você prefere? (opcional)</label>
-              <div className="grid grid-cols-2 gap-2.5">
+              <div className="grid grid-cols-2 gap-2 md:gap-2.5">
                 {pronomeOptions.map((opt) => (
                   <button key={opt} type="button" onClick={() => updatePatientData({ pronome: opt })}
-                    className={`selection-card text-sm !py-3 ${patientData.pronome === opt ? 'selection-card-active' : ''}`}>
+                    className={`selection-card text-[13px] md:text-sm !py-2.5 md:!py-3 ${patientData.pronome === opt ? 'selection-card-active' : ''}`}>
                     {opt}
                   </button>
                 ))}
@@ -146,13 +147,13 @@ const StepPatientGender = ({ onNext, onBack, stepNumber, totalSteps }: Props) =>
             <div>
               <label className="label-cadus">Nome social (opcional)</label>
               <input className="input-cadus" value={patientData.nomeSocial || ''} onChange={(e) => updatePatientData({ nomeSocial: e.target.value })} placeholder="Como prefere ser chamado?" />
-              <p className="text-xs text-muted-foreground/60 mt-1.5">Se preferir ser chamado de outro nome, informe aqui.</p>
+              <p className="text-[11px] md:text-xs text-muted-foreground/60 mt-1.5">Se preferir ser chamado de outro nome, informe aqui.</p>
             </div>
           </div>
         )}
       </div>
 
-      <button onClick={handleNext} className="btn-primary w-full mt-8 group">
+      <button onClick={handleNext} className="btn-primary w-full mt-6 md:mt-8 group">
         Continuar <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
       </button>
 
