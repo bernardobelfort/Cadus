@@ -56,15 +56,13 @@ const HeroIllustration = () => (
     </svg>
 
     {/* Blob 4 — small teal dot, accent */}
-    <motion.svg
+    <svg
       className="absolute right-4 top-2 w-[140px] h-[140px] z-0"
       viewBox="0 0 500 500"
       fill="none"
-      animate={{ scale: [1, 1.15, 1], rotate: 180 }}
-      transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
     >
       <circle cx="250" cy="250" r="200" fill="hsl(184, 78%, 22%)" fillOpacity="0.14" />
-    </motion.svg>
+    </svg>
 
     {/* Illustration */}
     <img
