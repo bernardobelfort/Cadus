@@ -1,93 +1,72 @@
 
 
-## Redesign Completo do Cadastro — Estilo Ticko Premium
+## Melhorias Visuais do Cadastro + Inclusão de Gênero
 
-### Problemas atuais
-- Header do cadastro é o mesmo da landing page (Voltar/cadus./contador) — parece continuação, não uma experiência dedicada
-- Footer da landing aparece no cadastro — desnecessário
-- Nome e CPF juntos na mesma tela — devem ser separados
-- Cards sem ícone centralizado no topo — visual genérico
-- Textos e campos alinhados à esquerda sem centralização — não tem a elegância do Ticko
-- Sistema não trata o paciente pelo nome após digitar
+### Mudanças
 
-### Nova experiência de cadastro
+**1. Remover contador "1/9" do header** (Registration.tsx, linha 103-105)
+- Substituir o `{currentStep}/{totalSteps}` por espaço vazio (para manter simetria do header)
 
-**1. Layout da página de cadastro (Registration.tsx)**
-- Remover Footer da landing page
-- Header minimalista: apenas "Voltar" à esquerda, logo "cadus." centralizado, "X/Y" à direita
-- Fundo com gradiente sutil teal (como Ticko) em vez de `bg-background` plano
-- Progress bar mais fina e elegante, sem labels (apenas barrinhas)
+**2. Melhorar visual geral dos cards** (Registration.tsx + cada step)
+- Card com `rounded-3xl` e sombra mais premium
+- Atualizar `.card-cadus` no `index.css` para `rounded-3xl`, padding `p-8 md:p-10`, sombra mais refinada
+- Ícones no topo com círculo maior (`w-18 h-18`) e gradiente suave em vez de `bg-accent` plano
 
-**2. Novo step: StepPatientName (só o nome)**
-- Ícone `UserRound` centralizado no topo em círculo teal suave (como Ticko)
-- Título: "Como você se chama?"
-- Subtítulo: "Queremos saber como te chamar."
-- Um único campo: nome completo, centralizado, input grande e clean
-- Botão "Continuar" full-width estilo Ticko (gradiente teal, arredondado)
+**3. Redesign do StepPatientAbout — Inclusão de gênero**
 
-**3. Função de formatação do nome**
-- `formatName("joao neto frederico")` → `"Joao Neto Frederico"` (capitalize first letter of each word)
-- Aplicar ao salvar e ao exibir
-- Extrair primeiro nome: `nome.split(' ')[0]`
+Substituir a abordagem atual (4 opções fixas de "Sexo") por uma experiência mais inclusiva e sensível:
 
-**4. Novo step: StepPatientCPF (só CPF)**
-- Ícone `ShieldCheck` centralizado no topo
-- Título: "Olá, {primeiroNome}!" (usando o nome formatado)
-- Subtítulo: "Agora precisamos do seu CPF para sua segurança."
-- Um único campo: CPF com máscara, centralizado
-- Mensagem de confiança: "Seus dados estão protegidos" com ícone shield pequeno
-- Botão "Continuar" full-width
+- **Label**: "Como você se identifica?" em vez de "Sexo"
+- **Opções principais** (grid 2 colunas): Feminino, Masculino, Não-binário, Prefiro não informar
+- **Se selecionar "Não-binário"**: aparece campo opcional "Qual pronome você prefere?" (Ela/Dela, Ele/Dele, Elu/Delu, Outro)
+- **Campo adicional opcional** (para qualquer opção): "Tem um nome social? (opcional)" com input de texto — permite que a pessoa indique como prefere ser chamada se diferente do nome de registro
+- Armazenar campos novos: `genero` (renomear `sexo`), `pronome`, `nomeSocial` no store
 
-**5. Redesign visual de TODOS os steps do paciente**
-Cada step seguirá o padrão Ticko:
-- Ícone grande centralizado no topo (em círculo com fundo accent)
-- Título centralizado, bold, `text-2xl`
-- Subtítulo centralizado, `text-muted-foreground`
-- Campos com estilo mais limpo (bordas sutis, sem label pesado, placeholders claros)
-- Botão "Continuar →" full-width no final
-- Botão "Voltar" mais discreto (apenas texto com seta, sem borda)
+**4. Atualizar store** (registrationStore.ts)
+- Renomear `sexo` → `genero` na interface `PatientData`
+- Adicionar `pronome: string` e `nomeSocial: string`
 
-**6. Novo fluxo de steps (paciente): 9 etapas**
+**5. Melhorar estilo dos botões em todos os steps**
+- Botão "Continuar" com leve gradiente teal e sombra glow sutil
+- Botão "Voltar" apenas texto com ícone, sem borda (como já está nos novos steps)
+- Garantir que steps antigos (About, StepProfile) sigam o mesmo padrão visual dos novos (ícone centralizado, título centrado, botão voltar discreto)
 
-| # | Componente | Ícone | Título |
-|---|---|---|---|
-| 1 | StepProfile | — | Como você vai usar o Cadus? |
-| 2 | StepPatientName | UserRound | Como você se chama? |
-| 3 | StepPatientCPF | ShieldCheck | Olá, {nome}! |
-| 4 | StepPatientAbout | Heart | Um pouco mais sobre você |
-| 5 | StepPatientContact | Phone | Como falar com você? |
-| 6 | StepPatientAddress | MapPin | Onde você mora? |
-| 7 | StepPatientSus | FileHeart | Informações do SUS |
-| 8 | StepPatientComplaint | MessageCircle | Por que você busca atendimento? |
-| 9 | StepPatientAccess | Lock | Crie seu acesso |
+**6. StepProfile visual upgrade**
+- Adicionar ícone centralizado no topo (como os outros steps)
+- Card com `p-8 md:p-10` e `rounded-3xl`
 
-**7. Card styling (todas as telas)**
-- Card centralizado com `text-center` para ícone, título e subtítulo
-- Campos alinhados à esquerda dentro do card (natural para inputs)
-- Card com `rounded-3xl` e sombra premium
-- Padding mais generoso (`p-8 md:p-10`)
+### Arquivos a editar
+- `src/index.css` — melhorar `.card-cadus` com `rounded-3xl` e sombra refinada
+- `src/pages/Registration.tsx` — remover contador textual
+- `src/components/registration/StepPatientAbout.tsx` — redesign completo com gênero inclusivo, pronomes, nome social
+- `src/components/registration/StepProfile.tsx` — upgrade visual
+- `src/store/registrationStore.ts` — renomear `sexo`→`genero`, adicionar `pronome`, `nomeSocial`
 
-### Arquivos a editar/criar
-- **Criar** `src/components/registration/StepPatientName.tsx` — apenas nome
-- **Criar** `src/components/registration/StepPatientCPF.tsx` — apenas CPF, com saudação pelo nome
-- **Remover** `StepPatientIdentity.tsx` (substituído pelos dois novos)
-- **Editar** `src/pages/Registration.tsx` — novo layout, fundo gradiente, remover Footer, atualizar steps 2→9
-- **Editar** todos os steps existentes — adicionar ícone centralizado no topo, centralizar título/subtítulo, botão Voltar discreto
-- **Adicionar** `formatName()` em `src/lib/masks.ts`
-- **Editar** `src/index.css` — adicionar fundo gradiente sutil para a página de cadastro
+### Fluxo de gênero no StepPatientAbout
 
-### Detalhes técnicos
-
-Função `formatName`:
-```ts
-export const formatName = (name: string): string =>
-  name.replace(/\b\w/g, c => c.toUpperCase()).replace(/\B\w/g, c => c.toLowerCase());
+```text
+┌─────────────────────────────┐
+│        ❤️ (ícone)           │
+│  Um pouco mais sobre você   │
+│  Essas informações ajudam   │
+│                             │
+│  Data de nascimento         │
+│  [____/____/________]       │
+│                             │
+│  Como você se identifica?   │
+│  [Feminino] [Masculino]     │
+│  [Não-binário] [Prefiro não]│
+│                             │
+│  ← se Não-binário:          │
+│  Qual pronome você prefere? │
+│  [Ela] [Ele] [Elu] [Outro] │
+│                             │
+│  Nome social (opcional)     │
+│  [________________]         │
+│  Como prefere ser chamado?  │
+│                             │
+│  [     Continuar →     ]    │
+│       ← Voltar              │
+└─────────────────────────────┘
 ```
-
-Extração do primeiro nome nos steps:
-```ts
-const firstName = (patientData.nome || '').split(' ')[0];
-```
-
-Background do cadastro: gradiente radial sutil tipo Ticko (branco no centro, teal/cinza muito claro nas bordas).
 
