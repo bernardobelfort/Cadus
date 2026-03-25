@@ -34,16 +34,16 @@ const Footer = () => (
             </a>
           </div>
 
-          {/* Coluna 3 — Navegação */}
+          {/* Coluna 3 — Clínicas */}
           <div className="flex flex-col items-center md:items-start gap-3">
             <span className="font-display font-700 text-xs text-foreground tracking-[0.15em] uppercase mb-1">
-              Navegação
+              Clínicas
             </span>
             <a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
               Clínicas Parceiras
             </a>
-            <a href="/cadastro" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-              Criar Cadastro
+            <a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+              Contatos das Clínicas
             </a>
           </div>
 
