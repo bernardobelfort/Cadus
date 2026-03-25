@@ -311,7 +311,7 @@ const Index = () => {
                 </div>
                 <h3 className="font-display font-700 text-xl text-foreground mb-2">Para profissionais e equipes</h3>
                 <p className="text-muted-foreground text-sm mb-5 leading-relaxed">
-                  Profissionais de saúde, gestores e alunos — acesse os dados antes do atendimento.
+                  Profissionais de saúde, gestores e alunos, acesse os dados antes do atendimento.
                 </p>
                 <div className="flex flex-wrap gap-2">
                   {['Dados antes da consulta', 'Acesso em qualquer lugar', 'Sem retrabalho'].map((tag) => (
