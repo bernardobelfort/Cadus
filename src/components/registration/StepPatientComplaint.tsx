@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useRegistrationStore } from '@/store/registrationStore';
-import { ArrowLeft, ArrowRight } from 'lucide-react';
+import { MessageCircle, ArrowRight, ArrowLeft } from 'lucide-react';
 
 interface Props { onNext: () => void; onBack: () => void; }
 
@@ -20,11 +20,18 @@ const StepPatientComplaint = ({ onNext, onBack }: Props) => {
   const charCount = patientData.queixa?.length || 0;
 
   return (
-    <div className="card-cadus">
-      <h2 className="text-xl font-display font-800 text-foreground">Por que você está buscando atendimento?</h2>
-      <p className="text-muted-foreground text-sm mt-1 mb-6">
-        Escreva com suas próprias palavras. Não precisa usar termos médicos.
-      </p>
+    <div className="card-cadus p-8 md:p-10">
+      <div className="text-center mb-8">
+        <div className="w-16 h-16 rounded-2xl bg-accent flex items-center justify-center mx-auto mb-5">
+          <MessageCircle size={32} className="text-primary" />
+        </div>
+        <h2 className="text-2xl md:text-3xl font-display font-800 text-foreground tracking-tight">
+          Por que você busca atendimento?
+        </h2>
+        <p className="text-muted-foreground mt-2 font-body">
+          Escreva com suas próprias palavras. Não precisa usar termos médicos.
+        </p>
+      </div>
 
       <div>
         <label className="label-cadus">Descreva sua queixa principal *</label>
@@ -42,10 +49,13 @@ const StepPatientComplaint = ({ onNext, onBack }: Props) => {
         {error && <p className="error-text">{error}</p>}
       </div>
 
-      <div className="flex gap-3 mt-8">
-        <button onClick={onBack} className="btn-outline flex-1"><ArrowLeft size={18} /> Voltar</button>
-        <button onClick={handleSubmit} className="btn-primary flex-1">Continuar <ArrowRight size={18} /></button>
-      </div>
+      <button onClick={handleSubmit} className="btn-primary w-full mt-8">
+        Continuar <ArrowRight size={18} />
+      </button>
+
+      <button onClick={onBack} className="w-full mt-3 text-sm text-muted-foreground hover:text-foreground transition-colors flex items-center justify-center gap-1 font-body">
+        <ArrowLeft size={16} /> Voltar
+      </button>
     </div>
   );
 };

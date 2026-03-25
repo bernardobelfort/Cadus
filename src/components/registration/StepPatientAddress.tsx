@@ -1,7 +1,7 @@
 import { useState, useCallback } from 'react';
 import { useRegistrationStore } from '@/store/registrationStore';
 import { formatCEP, fetchAddress } from '@/lib/masks';
-import { ArrowLeft, ArrowRight, Loader2 } from 'lucide-react';
+import { MapPin, ArrowRight, ArrowLeft, Loader2 } from 'lucide-react';
 
 interface Props { onNext: () => void; onBack: () => void; }
 
@@ -33,9 +33,16 @@ const StepPatientAddress = ({ onNext, onBack }: Props) => {
   };
 
   return (
-    <div className="card-cadus">
-      <h2 className="text-xl font-display font-800 text-foreground">Onde você mora?</h2>
-      <p className="text-muted-foreground text-sm mt-1 mb-6">Digite seu CEP e preenchemos o resto pra você.</p>
+    <div className="card-cadus p-8 md:p-10">
+      <div className="text-center mb-8">
+        <div className="w-16 h-16 rounded-2xl bg-accent flex items-center justify-center mx-auto mb-5">
+          <MapPin size={32} className="text-primary" />
+        </div>
+        <h2 className="text-2xl md:text-3xl font-display font-800 text-foreground tracking-tight">
+          Onde você mora?
+        </h2>
+        <p className="text-muted-foreground mt-2 font-body">Digite seu CEP e preenchemos o resto pra você.</p>
+      </div>
 
       <div className="space-y-4">
         <div>
@@ -83,10 +90,13 @@ const StepPatientAddress = ({ onNext, onBack }: Props) => {
         </div>
       </div>
 
-      <div className="flex gap-3 mt-8">
-        <button onClick={onBack} className="btn-outline flex-1"><ArrowLeft size={18} /> Voltar</button>
-        <button onClick={() => { if (validate()) onNext(); }} className="btn-primary flex-1">Continuar <ArrowRight size={18} /></button>
-      </div>
+      <button onClick={() => { if (validate()) onNext(); }} className="btn-primary w-full mt-8">
+        Continuar <ArrowRight size={18} />
+      </button>
+
+      <button onClick={onBack} className="w-full mt-3 text-sm text-muted-foreground hover:text-foreground transition-colors flex items-center justify-center gap-1 font-body">
+        <ArrowLeft size={16} /> Voltar
+      </button>
     </div>
   );
 };
