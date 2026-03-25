@@ -4,24 +4,8 @@ import { Heart, ArrowRight, ArrowLeft } from 'lucide-react';
 
 interface Props { onNext: () => void; onBack: () => void; }
 
-const genderOptions = [
-  'Mulher cisgênero',
-  'Homem cisgênero',
-  'Mulher transgênero',
-  'Homem transgênero',
-  'Não-binário',
-  'Genderqueer',
-  'Genderfluid',
-  'Agênero',
-  'Intersexo',
-  'Dois-espíritos',
-  'Prefiro não informar',
-  'Outro',
-];
-
+const genderOptions = ['Masculino', 'Feminino', 'Outro', 'Prefiro não informar'];
 const pronomeOptions = ['Ela/Dela', 'Ele/Dele', 'Elu/Delu', 'Outro'];
-
-const cisOptions = ['Mulher cisgênero', 'Homem cisgênero', 'Prefiro não informar'];
 
 const StepPatientGender = ({ onNext, onBack }: Props) => {
   const { patientData, updatePatientData } = useRegistrationStore();
@@ -30,12 +14,15 @@ const StepPatientGender = ({ onNext, onBack }: Props) => {
   const [pronomeOutro, setPronomeOutro] = useState('');
 
   const selectedGenero = patientData.genero || '';
-  const showExtras = selectedGenero && !cisOptions.includes(selectedGenero);
+  const showGenderInput = selectedGenero === 'Outro';
+  const showExtras = selectedGenero === 'Outro' || selectedGenero === 'Prefiro não informar';
 
   const handleSelectGenero = (opt: string) => {
     updatePatientData({ genero: opt });
-    if (cisOptions.includes(opt)) {
+    if (!['Outro', 'Prefiro não informar'].includes(opt)) {
       updatePatientData({ pronome: '', nomeSocial: '' });
+      setGeneroOutro('');
+      setPronomeOutro('');
     }
     setError('');
   };
@@ -72,7 +59,6 @@ const StepPatientGender = ({ onNext, onBack }: Props) => {
         <h2 className="text-2xl md:text-3xl font-display font-800 text-foreground tracking-tight">
           Como você se identifica?
         </h2>
-        <p className="text-muted-foreground mt-2 font-body">Queremos que você se sinta acolhido(a) aqui.</p>
       </div>
 
       <div className="space-y-5">
@@ -96,7 +82,7 @@ const StepPatientGender = ({ onNext, onBack }: Props) => {
           {error && <p className="error-text mt-2">{error}</p>}
         </div>
 
-        {(selectedGenero === 'Outro' || selectedGenero.startsWith('Outro:')) && (
+        {showGenderInput && (
           <div className="animate-in fade-in slide-in-from-top-2 duration-300">
             <label className="label-cadus">Como você se identifica?</label>
             <input
