@@ -338,16 +338,86 @@ const Index = () => {
       </section>
 
       {/* CTA Final */}
-      <section className="cta-gradient py-20 md:py-28 relative overflow-hidden">
-        {/* Decorative SVG */}
-        <svg className="absolute -left-20 -bottom-20 w-[300px] h-[300px] opacity-[0.06]" viewBox="0 0 300 300" fill="none">
-          <circle cx="150" cy="150" r="130" stroke="white" strokeWidth="30" />
-        </svg>
-        <svg className="absolute -right-16 -top-16 w-[200px] h-[200px] opacity-[0.04]" viewBox="0 0 200 200" fill="none">
-          <circle cx="100" cy="100" r="80" stroke="white" strokeWidth="20" />
-        </svg>
+      <section className="cta-gradient py-24 md:py-32 relative overflow-hidden">
+        {/* Blob orgânico 1 — teal grande */}
+        <motion.svg
+          className="absolute -left-20 -bottom-20 w-[450px] h-[450px] z-0"
+          viewBox="0 0 500 500"
+          fill="none"
+          animate={{ rotate: 360 }}
+          transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+        >
+          <path
+            d="M400,280Q370,460,200,400Q30,340,80,200Q130,60,300,80Q470,100,400,280Z"
+            fill="white"
+            fillOpacity="0.07"
+          />
+        </motion.svg>
 
-        <div className="container text-center relative z-10">
+        {/* Blob orgânico 2 — amber direita */}
+        <motion.svg
+          className="absolute -right-16 -top-16 w-[380px] h-[380px] z-0"
+          viewBox="0 0 500 500"
+          fill="none"
+          animate={{ rotate: -360 }}
+          transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+        >
+          <path
+            d="M420,300Q380,480,200,420Q20,360,60,200Q100,40,280,60Q460,80,420,300Z"
+            fill="hsl(25, 76%, 63%)"
+            fillOpacity="0.12"
+          />
+        </motion.svg>
+
+        {/* Blob orgânico 3 — teal pequeno */}
+        <motion.svg
+          className="absolute left-1/3 -top-10 w-[200px] h-[200px] z-0"
+          viewBox="0 0 500 500"
+          fill="none"
+          animate={{ scale: [0.9, 1.1, 0.9] }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+        >
+          <circle cx="250" cy="250" r="200" fill="white" fillOpacity="0.05" />
+        </motion.svg>
+
+        {/* Floating cards */}
+        <motion.div
+          className="absolute left-[5%] top-[20%] md:left-[8%] md:top-[25%] z-10 hidden md:flex items-center gap-2 bg-white/10 backdrop-blur-md rounded-xl px-4 py-3 border border-white/20 shadow-lg"
+          animate={{ y: [0, -8, 0] }}
+          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+          initial={{ opacity: 0, scale: 0.8 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+        >
+          <Clock size={18} className="text-primary-foreground/90" />
+          <span className="text-primary-foreground font-display font-700 text-sm">5 min</span>
+        </motion.div>
+
+        <motion.div
+          className="absolute right-[5%] bottom-[22%] md:right-[10%] md:bottom-[28%] z-10 hidden md:flex items-center gap-2 bg-white/10 backdrop-blur-md rounded-xl px-4 py-3 border border-white/20 shadow-lg"
+          animate={{ y: [0, -10, 0] }}
+          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
+          initial={{ opacity: 0, scale: 0.8 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+        >
+          <Smartphone size={18} className="text-primary-foreground/90" />
+          <span className="text-primary-foreground font-display font-700 text-sm">100% digital</span>
+        </motion.div>
+
+        <motion.div
+          className="absolute left-[12%] bottom-[15%] md:left-[15%] md:bottom-[20%] z-10 hidden md:flex items-center gap-2 bg-white/10 backdrop-blur-md rounded-xl px-4 py-3 border border-white/20 shadow-lg"
+          animate={{ y: [0, -6, 0] }}
+          transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 0.8 }}
+          initial={{ opacity: 0, scale: 0.8 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+        >
+          <CheckCircle size={18} className="text-primary-foreground/90" />
+          <span className="text-primary-foreground font-display font-700 text-sm">Dados prontos</span>
+        </motion.div>
+
+        <div className="container text-center relative z-20">
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -355,28 +425,43 @@ const Index = () => {
             variants={fadeUp}
             custom={0}
           >
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-display font-800 text-primary-foreground tracking-tight leading-tight">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-800 text-primary-foreground tracking-tight leading-tight">
               Seus dados, antes da consulta<span className="text-highlight">.</span>
             </h2>
-            <p className="text-primary-foreground/70 mt-3 text-base font-body max-w-lg mx-auto">
+          </motion.div>
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeUp}
+            custom={1}
+          >
+            <p className="text-primary-foreground/70 mt-4 text-lg font-body max-w-lg mx-auto">
               Cadastre-se agora e chegue na clínica pronto para ser atendido.
             </p>
-            <div className="flex flex-col sm:flex-row gap-3 mt-10 justify-center">
-              <Link
-                to="/cadastro?role=paciente"
-                className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full bg-card text-primary font-display font-700 text-base transition-all duration-200 hover:shadow-xl hover:scale-[1.02]"
-              >
-                <User size={18} />
-                Cadastro de Paciente
-              </Link>
-              <Link
-                to="/cadastro?role=profissional"
-                className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full border-2 border-primary-foreground/30 text-primary-foreground font-display font-700 text-base transition-all duration-200 hover:bg-primary-foreground/10"
-              >
-                <Briefcase size={18} />
-                Cadastro de Profissional
-              </Link>
-            </div>
+          </motion.div>
+          <motion.div
+            className="flex flex-col sm:flex-row gap-3 mt-10 justify-center"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeUp}
+            custom={2}
+          >
+            <Link
+              to="/cadastro?role=paciente"
+              className="inline-flex items-center justify-center gap-2 px-9 py-4 rounded-full bg-card text-primary font-display font-700 text-base transition-all duration-200 hover:scale-[1.02] shadow-[0_0_30px_rgba(255,255,255,0.12)] hover:shadow-[0_0_40px_rgba(255,255,255,0.2)]"
+            >
+              <User size={18} />
+              Cadastro de Paciente
+            </Link>
+            <Link
+              to="/cadastro?role=profissional"
+              className="inline-flex items-center justify-center gap-2 px-9 py-4 rounded-full border-2 border-primary-foreground/30 text-primary-foreground font-display font-700 text-base transition-all duration-200 hover:bg-primary-foreground/10"
+            >
+              <Briefcase size={18} />
+              Cadastro de Profissional
+            </Link>
           </motion.div>
         </div>
       </section>
