@@ -1,4 +1,4 @@
-import { User, Stethoscope, Check } from 'lucide-react';
+import { User, Briefcase, Check } from 'lucide-react';
 import { useRegistrationStore } from '@/store/registrationStore';
 
 interface Props {
@@ -23,7 +23,7 @@ const StepProfile = ({ onNext }: Props) => {
     <div className="card-cadus">
       <div className="text-center mb-8">
         <h2 className="text-xl md:text-2xl font-display font-800 text-foreground tracking-tight">
-          Você é paciente ou profissional?
+          Como você vai usar o Cadus?
         </h2>
         <p className="text-muted-foreground mt-2 font-body">Escolha uma opção para começar.</p>
       </div>
@@ -65,11 +65,11 @@ const StepProfile = ({ onNext }: Props) => {
             </div>
           )}
           <div className="w-14 h-14 rounded-xl bg-secondary/10 flex items-center justify-center mb-4">
-            <Stethoscope size={28} className="text-secondary" />
+            <Briefcase size={28} className="text-secondary" />
           </div>
-          <h3 className="font-display font-700 text-foreground text-lg">Sou Profissional de Saúde</h3>
+          <h3 className="font-display font-700 text-foreground text-lg">Sou Profissional</h3>
           <p className="text-sm text-muted-foreground mt-1.5 leading-relaxed">
-            Sou médico, fonoaudiólogo, fisioterapeuta ou outro profissional.
+            Profissional de saúde, gestor ou aluno de clínica-escola.
           </p>
         </button>
       </div>
