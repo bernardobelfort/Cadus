@@ -37,7 +37,8 @@ const StepPatientAddress = ({ onNext, onBack, stepNumber, totalSteps }: Props) =
     <div className="card-cadus">
       <div className="step-header">
         <div className="icon-hero">
-          <MapPin size={26} />
+          <MapPin size={22} className="md:hidden" />
+          <MapPin size={26} className="hidden md:block" />
         </div>
         <h2>{firstName ? `${firstName}, onde você mora?` : 'Onde você mora?'}</h2>
         <p>O CEP preenche automaticamente rua e bairro</p>
@@ -48,7 +49,7 @@ const StepPatientAddress = ({ onNext, onBack, stepNumber, totalSteps }: Props) =
 
       <div className="step-divider" />
 
-      <div className="space-y-4">
+      <div className="space-y-3 md:space-y-4">
         <div>
           <label className="label-cadus">CEP *</label>
           <div className="relative">
@@ -67,13 +68,13 @@ const StepPatientAddress = ({ onNext, onBack, stepNumber, totalSteps }: Props) =
         </div>
 
         {cepFilled && (
-          <div className="animate-in fade-in slide-in-from-bottom-2 duration-300 space-y-4">
+          <div className="animate-in fade-in slide-in-from-bottom-2 duration-300 space-y-3 md:space-y-4">
             <div className="info-note">
               <p className="font-500 text-foreground">{patientData.rua}</p>
               <p className="text-muted-foreground mt-0.5">{patientData.bairro} — {patientData.cidade}/{patientData.estado}</p>
             </div>
 
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-2 gap-2.5 md:gap-3">
               <div>
                 <label className="label-cadus">Número *</label>
                 <input className="input-cadus" value={patientData.numero || ''} onChange={(e) => updatePatientData({ numero: e.target.value })} placeholder="Nº" />
@@ -88,7 +89,7 @@ const StepPatientAddress = ({ onNext, onBack, stepNumber, totalSteps }: Props) =
         )}
       </div>
 
-      <button onClick={() => { if (validate()) onNext(); }} className="btn-primary w-full mt-8 group">
+      <button onClick={() => { if (validate()) onNext(); }} className="btn-primary w-full mt-6 md:mt-8 group">
         Continuar <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
       </button>
 

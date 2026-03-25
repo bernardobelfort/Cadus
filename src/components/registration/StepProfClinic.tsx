@@ -29,7 +29,8 @@ const StepProfClinic = ({ onNext, onBack, stepNumber, totalSteps }: Props) => {
     <div className="card-cadus">
       <div className="step-header">
         <div className="icon-hero">
-          <Building2 size={26} />
+          <Building2 size={22} className="md:hidden" />
+          <Building2 size={26} className="hidden md:block" />
         </div>
         <h2>Sua clínica</h2>
         <p>Selecione onde você atuará no Cadus</p>
@@ -40,7 +41,7 @@ const StepProfClinic = ({ onNext, onBack, stepNumber, totalSteps }: Props) => {
 
       <div className="step-divider" />
 
-      <div className="space-y-4">
+      <div className="space-y-3 md:space-y-4">
         <div>
           <label className="label-cadus">Clínica *</label>
           <select className="input-cadus" value={professionalData.clinica || ''} onChange={(e) => updateProfessionalData({ clinica: e.target.value })}>
@@ -64,11 +65,11 @@ const StepProfClinic = ({ onNext, onBack, stepNumber, totalSteps }: Props) => {
 
         <div className="info-note flex items-start gap-3">
           <Info size={16} className="text-primary flex-shrink-0 mt-0.5" />
-          <span className="text-foreground"><strong>Nota:</strong> Seu acesso será ativado após validação pela coordenação da clínica.</span>
+          <span className="text-foreground"><strong>Nota:</strong> Seu acesso será ativado após validação pela coordenação.</span>
         </div>
       </div>
 
-      <button onClick={() => { if (validate()) onNext(); }} className="btn-primary w-full mt-8 group">
+      <button onClick={() => { if (validate()) onNext(); }} className="btn-primary w-full mt-6 md:mt-8 group">
         Continuar <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
       </button>
 

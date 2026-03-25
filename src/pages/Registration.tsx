@@ -38,7 +38,6 @@ const Registration = () => {
   }, []);
 
   const totalSteps = role === 'profissional' ? profSteps : patientSteps;
-  // stepNumber is 1-indexed relative to form steps (excluding profile selection)
   const stepNumber = currentStep;
 
   const goNext = () => {
@@ -107,20 +106,20 @@ const Registration = () => {
         }} />
       </div>
 
-      {/* Glass header */}
+      {/* Glass header — mobile-first */}
       <div className="sticky top-0 z-50 border-b border-border/30" style={{
         background: 'rgba(255,255,255,0.7)',
         backdropFilter: 'blur(20px)',
         WebkitBackdropFilter: 'blur(20px)'
       }}>
-        <div className="container flex items-center justify-between h-14">
-          <button onClick={goBack} className="text-muted-foreground hover:text-foreground transition-colors p-2 -ml-2 rounded-xl hover:bg-muted/50">
+        <div className="container flex items-center justify-between h-12 md:h-14">
+          <button onClick={goBack} className="text-muted-foreground hover:text-foreground transition-colors p-2 -ml-2 rounded-xl hover:bg-muted/50 min-w-[44px] min-h-[44px] flex items-center justify-center">
             <ArrowLeft size={20} />
           </button>
-          <Link to="/" className="font-display font-800 text-primary text-xl tracking-tight">
+          <Link to="/" className="font-display font-800 text-primary text-lg md:text-xl tracking-tight">
             cadus<span className="text-highlight">.</span>
           </Link>
-          <span className="w-9" />
+          <span className="w-[44px]" />
         </div>
         {/* Gradient progress bar */}
         <div className="h-1 bg-border/30">
@@ -134,9 +133,9 @@ const Registration = () => {
         </div>
       </div>
 
-      {/* Content */}
-      <div className="flex-1 flex items-start md:items-center justify-center py-8 md:py-12 px-4">
-        <div className="w-full max-w-[520px]">
+      {/* Content — mobile-first: top-aligned, compact padding */}
+      <div className="flex-1 flex items-start justify-center py-4 px-3 md:items-center md:py-8 md:px-4 lg:py-12">
+        <div className="w-full max-w-full md:max-w-[520px]">
           <AnimatePresence mode="wait" custom={direction}>
             <motion.div
               key={`${role}-${currentStep}`}

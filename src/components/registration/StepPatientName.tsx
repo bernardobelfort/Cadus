@@ -26,10 +26,11 @@ const StepPatientName = ({ onNext, onBack, stepNumber, totalSteps }: Props) => {
     <div className="card-cadus">
       <div className="step-header">
         <div className="icon-hero">
-          <UserRound size={26} />
+          <UserRound size={22} className="md:hidden" />
+          <UserRound size={26} className="hidden md:block" />
         </div>
         <h2>Como você se chama?</h2>
-        <p>Nome e sobrenome como no documento de identidade</p>
+        <p>Nome e sobrenome como no documento</p>
         {stepNumber && totalSteps && (
           <div className="step-badge">Etapa {stepNumber} de {totalSteps}</div>
         )}
@@ -41,7 +42,7 @@ const StepPatientName = ({ onNext, onBack, stepNumber, totalSteps }: Props) => {
         <div className="relative">
           <UserRound size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground/40" />
           <input
-            className="input-cadus pl-12 text-center text-lg"
+            className="input-cadus pl-12 text-center text-base md:text-lg"
             value={patientData.nome || ''}
             onChange={(e) => handleChange(e.target.value)}
             placeholder="Seu nome completo"
@@ -51,7 +52,7 @@ const StepPatientName = ({ onNext, onBack, stepNumber, totalSteps }: Props) => {
         {error && <p className="error-text text-center mt-2">{error}</p>}
       </div>
 
-      <button onClick={handleSubmit} className="btn-primary w-full mt-8 group">
+      <button onClick={handleSubmit} className="btn-primary w-full mt-6 md:mt-8 group">
         Continuar <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
       </button>
 

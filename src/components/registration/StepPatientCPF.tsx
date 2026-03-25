@@ -23,7 +23,8 @@ const StepPatientCPF = ({ onNext, onBack, stepNumber, totalSteps }: Props) => {
     <div className="card-cadus">
       <div className="step-header">
         <div className="icon-hero">
-          <ShieldCheck size={26} />
+          <ShieldCheck size={22} className="md:hidden" />
+          <ShieldCheck size={26} className="hidden md:block" />
         </div>
         <h2>{firstName ? `${firstName}, informe seu CPF` : 'Informe seu CPF'}</h2>
         <p>Será usado como login seguro na plataforma</p>
@@ -38,7 +39,7 @@ const StepPatientCPF = ({ onNext, onBack, stepNumber, totalSteps }: Props) => {
         <div className="relative">
           <Hash size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground/40" />
           <input
-            className="input-cadus pl-12 text-center text-lg tracking-wide"
+            className="input-cadus pl-12 text-center text-base md:text-lg tracking-wide"
             value={patientData.cpf || ''}
             onChange={(e) => updatePatientData({ cpf: formatCPF(e.target.value) })}
             placeholder="000.000.000-00"
@@ -47,13 +48,13 @@ const StepPatientCPF = ({ onNext, onBack, stepNumber, totalSteps }: Props) => {
           />
         </div>
         {error && <p className="error-text text-center mt-2">{error}</p>}
-        <div className="flex items-center justify-center gap-1.5 mt-4 text-xs text-muted-foreground/50">
+        <div className="flex items-center justify-center gap-1.5 mt-3 md:mt-4 text-[11px] md:text-xs text-muted-foreground/50">
           <Lock size={12} />
           <span>Seus dados estão protegidos</span>
         </div>
       </div>
 
-      <button onClick={handleSubmit} className="btn-primary w-full mt-8 group">
+      <button onClick={handleSubmit} className="btn-primary w-full mt-6 md:mt-8 group">
         Continuar <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
       </button>
 

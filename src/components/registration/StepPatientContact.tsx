@@ -24,7 +24,8 @@ const StepPatientContact = ({ onNext, onBack, stepNumber, totalSteps }: Props) =
     <div className="card-cadus">
       <div className="step-header">
         <div className="icon-hero">
-          <Phone size={26} />
+          <Phone size={22} className="md:hidden" />
+          <Phone size={26} className="hidden md:block" />
         </div>
         <h2>{firstName ? `${firstName}, como falar com você?` : 'Como falar com você?'}</h2>
         <p>Enviaremos lembretes de consulta por WhatsApp</p>
@@ -35,7 +36,7 @@ const StepPatientContact = ({ onNext, onBack, stepNumber, totalSteps }: Props) =
 
       <div className="step-divider" />
 
-      <div className="space-y-5">
+      <div className="space-y-4 md:space-y-5">
         <div>
           <label className="label-cadus">Telefone / WhatsApp *</label>
           <div className="relative">
@@ -62,14 +63,14 @@ const StepPatientContact = ({ onNext, onBack, stepNumber, totalSteps }: Props) =
               placeholder="seu@email.com"
             />
           </div>
-          <p className="text-xs text-muted-foreground/50 mt-1.5">
+          <p className="text-[11px] md:text-xs text-muted-foreground/50 mt-1.5">
             Sem e-mail? Sem problema — use o CPF para entrar.
           </p>
         </div>
         {error && <p className="error-text">{error}</p>}
       </div>
 
-      <button onClick={handleSubmit} className="btn-primary w-full mt-8 group">
+      <button onClick={handleSubmit} className="btn-primary w-full mt-6 md:mt-8 group">
         Continuar <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
       </button>
 

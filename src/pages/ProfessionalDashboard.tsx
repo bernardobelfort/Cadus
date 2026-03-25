@@ -22,17 +22,17 @@ const ProfessionalDashboard = () => {
     <div className="min-h-screen flex flex-col bg-background">
       {/* Nav */}
       <nav className="sticky top-0 z-50 bg-card/95 backdrop-blur-md border-b border-border">
-        <div className="container flex items-center justify-between h-14">
-          <div className="flex items-center gap-4">
+        <div className="container flex items-center justify-between h-12 md:h-14">
+          <div className="flex items-center gap-3 md:gap-4">
             <span className="font-display font-800 text-primary text-lg tracking-tight">cadus<span className="text-highlight">.</span></span>
             <span className="hidden md:inline-flex items-center px-2.5 py-0.5 rounded-full bg-primary/10 text-primary text-xs font-body font-600">Profissional</span>
           </div>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 md:gap-3">
             <div className="hidden sm:block text-right">
-              <p className="text-sm font-body font-600 text-foreground">{nome}</p>
-              <p className="text-xs text-muted-foreground">{professionalData.especialidade || 'Profissional'}</p>
+              <p className="text-[13px] md:text-sm font-body font-600 text-foreground">{nome}</p>
+              <p className="text-[11px] md:text-xs text-muted-foreground">{professionalData.especialidade || 'Profissional'}</p>
             </div>
-            <button onClick={handleLogout} className="btn-ghost text-sm py-1 px-3 text-muted-foreground"><LogOut size={18} /></button>
+            <button onClick={handleLogout} className="btn-ghost text-sm py-1 px-2 md:px-3 text-muted-foreground min-h-[44px] min-w-[44px]"><LogOut size={18} /></button>
           </div>
         </div>
       </nav>
@@ -58,20 +58,20 @@ const ProfessionalDashboard = () => {
         </aside>
 
         {/* Main content */}
-        <main className="flex-1 py-6 px-4 md:px-8">
+        <main className="flex-1 py-4 px-3 md:py-6 md:px-8">
           <div className="max-w-4xl mx-auto">
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between gap-3">
               <div>
-                <h1 className="text-xl md:text-2xl font-display font-800 text-foreground tracking-tight">Pacientes cadastrados</h1>
-                <p className="text-sm text-muted-foreground mt-1 font-body">{professionalData.clinica || 'Clínica de Fonoaudiologia UFPE'}</p>
+                <h1 className="text-lg md:text-2xl font-display font-800 text-foreground tracking-tight">Pacientes cadastrados</h1>
+                <p className="text-[13px] md:text-sm text-muted-foreground mt-0.5 md:mt-1 font-body">{professionalData.clinica || 'Clínica de Fonoaudiologia UFPE'}</p>
               </div>
-              <span className="inline-flex items-center px-3 py-1 rounded-full bg-accent text-primary text-sm font-body font-600">
+              <span className="inline-flex items-center px-2.5 md:px-3 py-1 rounded-full bg-accent text-primary text-[13px] md:text-sm font-body font-600 shrink-0">
                 {mockPatients.length} pacientes
               </span>
             </div>
 
             {/* Search */}
-            <div className="relative mt-6 mb-6">
+            <div className="relative mt-4 md:mt-6 mb-4 md:mb-6">
               <Search size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground" />
               <input
                 className="input-cadus pl-11"
@@ -82,23 +82,23 @@ const ProfessionalDashboard = () => {
             </div>
 
             {/* Patient list */}
-            <div className="space-y-3">
+            <div className="space-y-2.5 md:space-y-3">
               {filtered.map((patient) => (
-                <div key={patient.id} className="card-cadus-hover p-4">
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div key={patient.id} className="card-cadus-hover p-3.5 md:p-4">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 md:gap-3">
                     <div className="flex items-start gap-3 flex-1">
                       <div className="w-10 h-10 rounded-full bg-accent flex items-center justify-center shrink-0 mt-0.5">
                         <User size={18} className="text-primary" />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <h3 className="font-display font-700 text-foreground">{patient.nome}</h3>
-                        <p className="text-sm text-muted-foreground">CPF: {patient.cpfMasked} · Cadastro: {patient.dataCadastro}</p>
-                        <p className="text-sm text-foreground mt-1 line-clamp-1">{patient.queixa}</p>
+                        <h3 className="font-display font-700 text-foreground text-[15px] md:text-base">{patient.nome}</h3>
+                        <p className="text-[12px] md:text-sm text-muted-foreground">CPF: {patient.cpfMasked} · {patient.dataCadastro}</p>
+                        <p className="text-[13px] md:text-sm text-foreground mt-0.5 md:mt-1 line-clamp-1">{patient.queixa}</p>
                       </div>
                     </div>
                     <button
                       onClick={() => setSelectedPatient(patient)}
-                      className="btn-outline text-sm py-2 px-4 shrink-0"
+                      className="btn-outline text-[13px] md:text-sm py-2 px-4 shrink-0 min-h-[44px] w-full sm:w-auto"
                     >
                       Ver perfil <ChevronRight size={16} />
                     </button>
@@ -106,7 +106,7 @@ const ProfessionalDashboard = () => {
                 </div>
               ))}
               {filtered.length === 0 && (
-                <p className="text-center text-muted-foreground py-8 font-body">Nenhum paciente encontrado.</p>
+                <p className="text-center text-muted-foreground py-8 font-body text-[13px] md:text-base">Nenhum paciente encontrado.</p>
               )}
             </div>
           </div>
@@ -114,7 +114,7 @@ const ProfessionalDashboard = () => {
       </div>
 
       {/* Bottom nav mobile */}
-      <div className="md:hidden fixed bottom-0 left-0 right-0 bg-card border-t border-border flex justify-around py-2 z-50">
+      <div className="md:hidden fixed bottom-0 left-0 right-0 bg-card border-t border-border flex justify-around py-1.5 z-50 safe-area-bottom">
         {[
           { id: 'dashboard' as const, icon: LayoutDashboard, label: 'Dashboard' },
           { id: 'patients' as const, icon: User, label: 'Pacientes' },
@@ -123,7 +123,7 @@ const ProfessionalDashboard = () => {
           <button
             key={item.id}
             onClick={() => setActiveTab(item.id)}
-            className={`flex flex-col items-center gap-0.5 text-xs py-1 px-3 transition-colors ${
+            className={`flex flex-col items-center gap-0.5 text-[11px] py-1.5 px-4 transition-colors min-h-[48px] justify-center ${
               activeTab === item.id ? 'text-primary font-600' : 'text-muted-foreground'
             }`}
           >
@@ -134,14 +134,14 @@ const ProfessionalDashboard = () => {
 
       {/* Patient detail modal */}
       {selectedPatient && (
-        <div className="fixed inset-0 z-[60] bg-foreground/40 backdrop-blur-sm flex items-center justify-center p-4" onClick={() => setSelectedPatient(null)}>
-          <div className="bg-card rounded-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto p-6" onClick={(e) => e.stopPropagation()} style={{ boxShadow: 'var(--shadow-card-hover)' }}>
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-xl font-display font-800 text-foreground tracking-tight">Perfil do paciente</h2>
-              <button onClick={() => setSelectedPatient(null)} className="btn-ghost p-1"><X size={20} /></button>
+        <div className="fixed inset-0 z-[60] bg-foreground/40 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-4" onClick={() => setSelectedPatient(null)}>
+          <div className="bg-card rounded-t-2xl sm:rounded-2xl w-full sm:max-w-lg max-h-[85vh] overflow-y-auto p-5 md:p-6" onClick={(e) => e.stopPropagation()} style={{ boxShadow: 'var(--shadow-card-hover)' }}>
+            <div className="flex items-center justify-between mb-4 md:mb-6">
+              <h2 className="text-lg md:text-xl font-display font-800 text-foreground tracking-tight">Perfil do paciente</h2>
+              <button onClick={() => setSelectedPatient(null)} className="p-2 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-xl hover:bg-muted transition-colors"><X size={20} /></button>
             </div>
 
-            <div className="space-y-5">
+            <div className="space-y-4 md:space-y-5">
               <Section icon={<User size={18} className="text-primary" />} title="Dados pessoais">
                 <DRow label="Nome" value={selectedPatient.nome} />
                 <DRow label="CPF" value={selectedPatient.cpf} />
@@ -159,10 +159,10 @@ const ProfessionalDashboard = () => {
               </Section>
 
               <Section icon={<FileText size={18} className="text-primary" />} title="Queixa principal">
-                <p className="text-sm text-foreground bg-muted rounded-xl p-4 leading-relaxed">{selectedPatient.queixa}</p>
+                <p className="text-[13px] md:text-sm text-foreground bg-muted rounded-xl p-3.5 md:p-4 leading-relaxed">{selectedPatient.queixa}</p>
               </Section>
 
-              <div className="flex items-center gap-2 text-xs text-muted-foreground pt-2">
+              <div className="flex items-center gap-2 text-[11px] md:text-xs text-muted-foreground pt-2">
                 <CalendarDays size={14} />
                 Última atualização: {selectedPatient.ultimaAtualizacao}
               </div>
@@ -179,13 +179,13 @@ const ProfessionalDashboard = () => {
 
 const Section = ({ icon, title, children }: { icon: React.ReactNode; title: string; children: React.ReactNode }) => (
   <div>
-    <h3 className="font-display font-700 text-foreground flex items-center gap-2 mb-3">{icon} {title}</h3>
+    <h3 className="font-display font-700 text-foreground text-[15px] md:text-base flex items-center gap-2 mb-2.5 md:mb-3">{icon} {title}</h3>
     <div className="space-y-0">{children}</div>
   </div>
 );
 
 const DRow = ({ label, value }: { label: string; value: string }) => (
-  <div className="flex justify-between text-sm py-2.5 border-b border-border last:border-0">
+  <div className="flex justify-between text-[13px] md:text-sm py-2 md:py-2.5 border-b border-border last:border-0">
     <span className="text-muted-foreground">{label}</span>
     <span className="text-foreground font-500">{value}</span>
   </div>
