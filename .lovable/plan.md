@@ -1,20 +1,22 @@
 
 
-## Substituir ilustração do hero + formas orgânicas
+## Blobs mais visíveis + correção de texto
 
-### O que fazer
+### Mudanças
 
-1. **Copiar a nova imagem** `user-uploads://image-7.png` para `src/assets/hero-illustration.png` (substituindo a atual)
+**1. Blobs orgânicos com mais contraste (`src/pages/Index.tsx`, linhas 17-81)**
 
-2. **Manter o componente `HeroIllustration`** em `src/pages/Index.tsx` que já tem os blobs orgânicos animados — apenas garantir que a imagem importada é a nova e que os blobs estão bem posicionados para esta ilustração específica (dois personagens em cards fazendo high-five)
+Os blobs atuais têm opacidade muito baixa (6-12%) e ficam quase invisíveis. Vou:
+- Aumentar opacidade de todos os blobs: 0.10→0.22, 0.12→0.25, 0.09→0.18, 0.06→0.14
+- Aumentar tamanho dos blobs para envolver melhor a imagem: blob principal de 420px→520px, amber de 300px→380px
+- Manter as animações e posicionamentos atuais — só contraste e escala
 
-3. **Ajustar os blobs orgânicos** para complementar melhor a composição desta imagem:
-   - Blob teal grande mais centralizado (a imagem tem dois cards lado a lado)
-   - Blob amber deslocado para baixo-direita como contraponto
-   - Blob teal vibrante menor entre os dois personagens
-   - Manter as animações de rotação e pulsação já implementadas
+**2. Texto do CTA (linha 313)**
+
+Trocar:
+- `Cadastre-se agora e chegue na clínica já conhecido.`
+- → `Cadastre-se agora e chegue na clínica pronto para ser atendido.`
 
 ### Arquivo a editar
-- `src/assets/hero-illustration.png` — substituir pelo novo asset
-- `src/pages/Index.tsx` — ajustar posicionamento/tamanho dos blobs para a nova composição
+- `src/pages/Index.tsx`
 
