@@ -134,7 +134,7 @@ const Registration = () => {
       </div>
 
       {/* Content — mobile-first: top-aligned, compact padding */}
-      <div className="flex-1 flex items-start justify-center <div className="flex-1 flex items-start justify-center py-3 px-3 md:items-center md:py-8 md:px-4 lg:py-12"> md:items-center md:py-8 md:px-4 lg:py-12">
+      <div className="flex-1 flex items-start justify-center py-3 px-3 md:items-center md:py-8 md:px-4 lg:py-12">
         <div className="w-full max-w-full md:max-w-[520px]">
           <AnimatePresence mode="wait" custom={direction}>
             <motion.div
