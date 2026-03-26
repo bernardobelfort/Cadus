@@ -100,7 +100,7 @@ const Index = () => {
 
 
       {/* Como funciona — section label + title pattern */}
-      <section className="py-14 sm:py-16 md:py-20 lg:py-28">
+      <section className="py-10 sm:py-14 md:py-20 lg:py-28">
         <div className="container max-w-5xl">
           <motion.div
             className="text-center mb-10 md:mb-16"
@@ -204,7 +204,7 @@ const Index = () => {
       </section>
 
       {/* CTA Final */}
-      <section className="cta-gradient py-16 sm:py-20 md:py-24 lg:py-32 relative overflow-hidden">
+      <section className="cta-gradient py-12 sm:py-16 md:py-24 lg:py-32 relative overflow-hidden">
         <svg className="absolute -left-10 md:-left-20 -bottom-10 md:-bottom-20 w-[250px] md:w-[450px] h-[250px] md:h-[450px] z-0" viewBox="0 0 500 500" fill="none">
           <path d="M400,280Q370,460,200,400Q30,340,80,200Q130,60,300,80Q470,100,400,280Z" fill="white" fillOpacity="0.07" />
         </svg>
