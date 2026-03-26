@@ -53,6 +53,15 @@
     font-size: 16px;
     line-height: 1.6;
     -webkit-tap-highlight-color: transparent;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    touch-action: manipulation;
+    overscroll-behavior: none;
+  }
+
+  html {
+    overflow-x: hidden;
+    overscroll-behavior: none;
   }
 
   h1, h2, h3, h4, h5, h6 {
