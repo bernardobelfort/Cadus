@@ -52,7 +52,7 @@ const StepPatientName = ({ onNext, onBack, stepNumber, totalSteps }: Props) => {
         {error && <p className="error-text text-center mt-2">{error}</p>}
       </div>
 
-      <button onClick={handleSubmit} className="btn-primary w-full mt-6 md:mt-8 group">
+      <button onClick={handleSubmit} className="btn-primary w-full mt-4 md:mt-8 group">
         Continuar <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
       </button>
 
