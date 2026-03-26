@@ -89,7 +89,7 @@ const StepPatientAddress = ({ onNext, onBack, stepNumber, totalSteps }: Props) =
         )}
       </div>
 
-      <button onClick={() => { if (validate()) onNext(); }} className="btn-primary w-full <button onClick={() => { if (validate()) onNext(); }} className="btn-primary w-full mt-4 md:mt-8 group"> group">
+      <button onClick={() => { if (validate()) onNext(); }} className="btn-primary w-full mt-4 md:mt-8 group">
         Continuar <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
       </button>
 

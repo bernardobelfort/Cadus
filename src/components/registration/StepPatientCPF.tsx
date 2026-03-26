@@ -54,7 +54,7 @@ const StepPatientCPF = ({ onNext, onBack, stepNumber, totalSteps }: Props) => {
         </div>
       </div>
 
-      <button onClick={handleSubmit} className="btn-primary w-full <button onClick={handleSubmit} className="btn-primary w-full mt-4 md:mt-8 group"> group">
+      <button onClick={handleSubmit} className="btn-primary w-full mt-4 md:mt-8 group">
         Continuar <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
       </button>
 
