@@ -63,7 +63,7 @@
 @layer components {
   /* ===== CARD — mobile-first ===== */
   .card-cadus {
-    @apply bg-card rounded-2xl p-5 relative;
+    @apply bg-card rounded-2xl p-4 relative;
     @apply md:rounded-3xl md:p-8;
     border: 1px solid hsl(220 13% 91% / 0.8);
     box-shadow:
@@ -109,7 +109,7 @@
 
   /* ===== ICON HERO — mobile-first ===== */
   .icon-hero {
-    @apply w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-4 relative;
+    @apply w-10 h-10 rounded-xl flex items-center justify-center mx-auto mb-3 relative;
     @apply md:w-14 md:h-14 md:rounded-2xl md:mb-5;
     background: linear-gradient(145deg, hsl(184, 78%, 28%), hsl(184, 78%, 18%));
     box-shadow: 0 6px 20px rgba(13, 92, 99, 0.25), inset 0 1px 0 rgba(255,255,255,0.15);
@@ -122,7 +122,7 @@
 
   /* ===== STEP HEADER — mobile-first ===== */
   .step-header {
-    @apply text-center mb-4 md:mb-6;
+    @apply text-center mb-3 md:mb-6;
   }
 
   .step-header h2 {
@@ -131,19 +131,19 @@
   }
 
   .step-header p {
-    @apply text-[13px] text-muted-foreground mt-1.5 font-body;
+    @apply text-[13px] text-muted-foreground mt-1 font-body;
     @apply md:text-sm;
   }
 
   .step-badge {
-    @apply inline-flex items-center gap-1.5 text-[11px] font-display font-600 text-primary/60 mt-2.5;
+    @apply inline-flex items-center gap-1.5 text-[11px] font-display font-600 text-primary/60 mt-2;
     @apply md:text-xs md:mt-3;
     letter-spacing: 0.02em;
   }
 
   /* ===== DIVIDER — mobile-first ===== */
   .step-divider {
-    @apply w-10 h-0.5 mx-auto mb-4 rounded-full;
+    @apply w-10 h-0.5 mx-auto mb-3 rounded-full;
     @apply md:w-12 md:mb-6;
     background: linear-gradient(90deg, hsl(184, 78%, 28%), hsl(184, 60%, 50%));
     opacity: 0.3;
@@ -197,11 +197,11 @@
 
   /* ===== BUTTONS — mobile-first ===== */
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full text-primary-foreground font-display font-700 text-[15px] transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:opacity-40 disabled:cursor-not-allowed;
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full text-primary-foreground font-display font-700 text-[15px] transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:opacity-40 disabled:cursor-not-allowed;
     @apply md:gap-2.5 md:px-8 md:py-4 md:text-base;
     background: linear-gradient(145deg, hsl(184, 78%, 28%) 0%, hsl(184, 78%, 18%) 100%);
     box-shadow: 0 4px 14px rgba(13, 92, 99, 0.3), 0 1px 3px rgba(13, 92, 99, 0.2);
-    min-height: 50px;
+    min-height: 46px;
   }
 
   @media (min-width: 768px) {
@@ -241,9 +241,9 @@
 
   /* ===== BACK BUTTON — mobile-first ===== */
   .btn-back {
-    @apply w-full mt-3 text-[13px] text-muted-foreground hover:text-foreground transition-all duration-200 flex items-center justify-center gap-2 font-body font-500 py-2.5 rounded-full;
+    @apply w-full mt-2 text-[13px] text-muted-foreground hover:text-foreground transition-all duration-200 flex items-center justify-center gap-2 font-body font-500 py-2 rounded-full;
     @apply md:mt-5 md:text-sm;
-    min-height: 44px;
+    min-height: 40px;
   }
 
   .btn-back:hover {

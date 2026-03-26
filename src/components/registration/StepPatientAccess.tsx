@@ -119,7 +119,7 @@ const StepPatientAccess = ({ onNext, onBack, stepNumber, totalSteps }: Props) =>
         {errors.terms && <p className="error-text">{errors.terms}</p>}
       </div>
 
-      <button onClick={handleSubmit} disabled={loading} className="btn-primary w-full mt-6 md:mt-8 group">
+      <button onClick={handleSubmit} disabled={loading} className="btn-primary w-full <button onClick={handleSubmit} disabled={loading} className="btn-primary w-full mt-4 md:mt-8 group"> group">
         {loading ? <><Loader2 size={18} className="animate-spin" /> Criando seu cadastro...</> : <><ShieldCheck size={18} /> Criar minha conta</>}
       </button>
 

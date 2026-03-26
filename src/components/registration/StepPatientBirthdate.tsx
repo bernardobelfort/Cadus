@@ -49,7 +49,7 @@ const StepPatientBirthdate = ({ onNext, onBack, stepNumber, totalSteps }: Props)
         {error && <p className="error-text mt-2">{error}</p>}
       </div>
 
-      <button onClick={() => { if (validate()) onNext(); }} className="btn-primary w-full mt-6 md:mt-8 group">
+      <button onClick={() => { if (validate()) onNext(); }} className="btn-primary w-full <button onClick={() => { if (validate()) onNext(); }} className="btn-primary w-full mt-4 md:mt-8 group"> group">
         Continuar <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
       </button>
 
