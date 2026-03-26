@@ -55,7 +55,7 @@ const Index = () => {
                 <br />
                 <span className="text-highlight">antes</span> da consulta.
               </h1>
-              <p className="text-primary-foreground/80 mt-3 text-[13px] md:text-lg lg:text-xl max-w-[280px] sm:max-w-sm md:max-w-lg mx-auto md:mx-0 font-body leading-relaxed">
+              <p className="text-primary-foreground/80 mt-3 text-[12px] md:text-lg lg:text-xl max-w-[320px] sm:max-w-sm md:max-w-lg mx-auto md:mx-0 font-body leading-relaxed">
                 Preencha seu cadastro pelo celular, no seu tempo. Quando chegar na clínica, já sabem quem você é.
               </p>
 
