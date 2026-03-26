@@ -55,9 +55,8 @@ const Index = () => {
                 <br />
                 <span className="text-highlight">antes</span> da consulta.
               </h1>
-              <p className="text-primary-foreground/80 mt-4 text-[15px] md:text-lg lg:text-xl max-w-lg mx-auto md:mx-0 font-body leading-relaxed">
-                Preencha seu cadastro pelo celular, no seu tempo. Quando chegar
-                na clínica, já sabem quem você é.
+              <p className="text-primary-foreground/80 mt-3 text-[13px] md:text-lg lg:text-xl max-w-[280px] sm:max-w-sm md:max-w-lg mx-auto md:mx-0 font-body leading-relaxed">
+                Preencha seu cadastro pelo celular, no seu tempo. Quando chegar na clínica, já sabem quem você é.
               </p>
 
               {/* CTAs — stacked on mobile, prominent */}
@@ -231,7 +230,7 @@ const Index = () => {
             variants={fadeUp}
             custom={1}
           >
-            <p className="text-primary-foreground/70 mt-3 md:mt-4 text-[15px] md:text-lg font-body max-w-2xl mx-auto">
+            <p className="text-primary-foreground/70 mt-2 md:mt-4 text-[13px] md:text-lg font-body max-w-[280px] sm:max-w-sm md:max-w-2xl mx-auto">
               Cadastre-se agora e chegue na clínica pronto para ser atendido.
             </p>
           </motion.div>
