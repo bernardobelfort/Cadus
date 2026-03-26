@@ -1,4 +1,4 @@
-import { Plus, Shield, Lock, FileCheck, Mail, Phone, MapPin } from 'lucide-react';
+import { Plus, Shield, Lock, FileCheck } from 'lucide-react';
 
 const Footer = () => (
   <footer className="bg-card mt-auto">
