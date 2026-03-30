@@ -38,7 +38,17 @@ export const validateCPF = (cpf: string): boolean => {
 };
 
 export const formatName = (name: string): string =>
-  name.replace(/\b\w/g, c => c.toUpperCase()).replace(/\B\w/g, c => c.toLowerCase());
+  name
+    .split(/(\s+)/)
+    .map((part) => {
+      if (!part.trim()) return part;
+
+      const characters = Array.from(part);
+      const [first = '', ...rest] = characters;
+
+      return `${first.toLocaleUpperCase('pt-BR')}${rest.join('').toLocaleLowerCase('pt-BR')}`;
+    })
+    .join('');
 
 export const getFirstName = (name: string): string =>
   formatName((name || '').trim().split(' ')[0]);
