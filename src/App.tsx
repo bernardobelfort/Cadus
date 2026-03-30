@@ -8,6 +8,7 @@ import NotFound from "./pages/NotFound.tsx";
 import Registration from "./pages/Registration.tsx";
 import PatientDashboard from "./pages/PatientDashboard.tsx";
 import ProfessionalDashboard from "./pages/ProfessionalDashboard.tsx";
+import Login from "./pages/Login.tsx";
 
 const queryClient = new QueryClient();
 
@@ -19,6 +20,7 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/entrar" element={<Login />} />
           <Route path="/cadastro" element={<Registration />} />
           <Route path="/paciente/inicio" element={<PatientDashboard />} />
           <Route path="/profissional/painel" element={<ProfessionalDashboard />} />
