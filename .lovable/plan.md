@@ -1,22 +1,50 @@
 
 
-## Dois problemas para corrigir
+## Problema
 
-### 1. Validação de CPF relaxada (modo teste)
+Os botões "Entrar" e "Cadastrar" da navbar apontam ambos para `/cadastro`. Não existe página de login dedicada para quem já tem conta.
 
-Atualmente `validateCPF` faz validação matemática completa. Substituir por uma validação simples que aceita qualquer sequência de 11 digitos.
+## Plano
 
-**Arquivo:** `src/lib/masks.ts`
-- `validateCPF`: mudar para apenas verificar se tem 11 digitos (sem checagem de digitos verificadores nem rejeição de sequências repetidas)
+### 1. Criar página de Login (`src/pages/Login.tsx`)
 
-Isso afeta automaticamente `StepPatientCPF.tsx`, `StepProfPersonal.tsx` e `StepPatientPersonal.tsx`.
+Página inspirada no layout da Ticko mas com a identidade visual Cadus:
 
-### 2. Bug do `formatName` com acentos
+**Layout Desktop**: Duas colunas — esquerda com branding/proposta de valor Cadus, direita com card de login.
+**Layout Mobile**: Card de login centralizado com logo Cadus acima.
 
-O problema: `\b\w` e `\B\w` em regex JS não tratam caracteres acentuados como "word characters". Então após "ã" em "João", o "O" é tratado como início de palavra e fica maiúsculo → "JoãO".
+**Componentes do card de login**:
+- Título "Entrar na conta" + subtexto de boas-vindas
+- Toggle "Entrar / Criar conta" (dois botões pill lado a lado, o ativo com fundo teal)
+- Campo Email com ícone inline (Mail)
+- Campo Senha com ícone inline (Lock) + botão toggle visibilidade (Eye/EyeOff)
+- Botão "Entrar" com gradiente teal (btn-primary estilo)
+- Divisor "ou continue com"
+- Botão "Entrar sem senha" (magic link placeholder)
+- Texto legal "Ao continuar, você concorda com os Termos de Uso e Política de Privacidade"
 
-**Arquivo:** `src/lib/masks.ts`
-- Reescrever `formatName` sem usar `\b\w` / `\B\w`. Usar split por espaço, capitalizar apenas o primeiro caractere de cada palavra e lowercase o restante.
+**Lado esquerdo (desktop only)**:
+- Logo "cadus."
+- Título com destaque: "A forma mais segura de **cuidar da sua saúde**"
+- Subtexto da proposta de valor
+- 3 cards de benefício (ícone + título + descrição) como na Ticko
 
-**Arquivos editados:** `src/lib/masks.ts` (apenas)
+**Comportamento**:
+- Toggle "Criar conta" redireciona para `/cadastro`
+- Botão "Entrar" por enquanto mostra toast de "em breve" (sem backend ainda)
+- Background com gradiente sutil teal como na registration page
+
+### 2. Atualizar Navbar (`src/components/Navbar.tsx`)
+
+- "Entrar" → link para `/entrar`
+- "Cadastrar" → link para `/cadastro` (mantém)
+
+### 3. Adicionar rota (`src/App.tsx`)
+
+- Nova rota `/entrar` → componente `Login`
+
+### Arquivos editados
+- `src/pages/Login.tsx` (novo)
+- `src/components/Navbar.tsx`
+- `src/App.tsx`
 
