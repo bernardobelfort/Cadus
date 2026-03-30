@@ -9,7 +9,7 @@ const Navbar = () => {
         </Link>
 
         <div className="flex items-center gap-2 md:gap-3">
-          <Link to="/cadastro" className="btn-ghost text-[13px] md:text-sm py-1.5 px-3 md:py-2 md:px-4">
+          <Link to="/entrar" className="btn-ghost text-[13px] md:text-sm py-1.5 px-3 md:py-2 md:px-4">
             Entrar
           </Link>
           <Link to="/cadastro" className="btn-primary text-[13px] md:text-sm py-1.5 px-4 md:py-2 md:px-5 min-h-[36px] md:min-h-[40px]">
