@@ -378,7 +378,7 @@ Nunca o inverso. Um `repository` jamais chama um `service`, e um `service` jamai
 
 ---
 
-## 🙅🏽‍♂️ Colaboradores
+## Colaboradores
 
 <table> 
     <tr>
